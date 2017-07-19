@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TDMediaPickerDelegate:class{
+public protocol TDMediaPickerDelegate: class{
     func mediaPicker(_ picker: TDMediaPicker, didSelectMedia media:[TDMedia])
     func mediaPickerDidCancel(_ picker: TDMediaPicker)
 }
@@ -22,7 +22,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     }
     
     
-    weak var delegate:  TDMediaPickerDelegate?
+    open weak var delegate:  TDMediaPickerDelegate?
     var maxSelections = 300
     
     var permissionVC: TDMediaPermissionViewController?

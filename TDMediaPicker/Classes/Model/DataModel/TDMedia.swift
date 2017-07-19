@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-class TDMedia{
+open class TDMedia{
     let asset: PHAsset
     
     // MARK: - Initialization
