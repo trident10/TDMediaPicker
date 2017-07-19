@@ -17,7 +17,7 @@ TDMediaPicker is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "TDMediaPicker"
+  pod 'TDMediaPicker', :git =>  'https://github.com/abhimanyujindal10/TDMediaPicker.git'
 ```
 
 ## Author
