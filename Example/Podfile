@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'TDMediaPicker_Example' do
+    pod 'TDMediaPicker', :path => '../'
+
+  target 'TDMediaPicker_Tests' do
+    inherit! :search_paths
+  end
+end

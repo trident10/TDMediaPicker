@@ -1,0 +1,33 @@
+{
+  "name": "TDMediaPicker",
+  "version": "0.1.0",
+  "summary": "Reusable picker component",
+  "description": "Media Picker Controller. Major Features -\n* Multiple Selection\n* Preview Option\n* Caption Option\n* Themes Option",
+  "homepage": "https://github.com/abhimanyujindal10/TDMediaPicker",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Abhimanyu Jindal": "abhimanyujindal10@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/abhimanyujindal10/TDMediaPicker.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "TDMediaPicker/Classes/**/*",
+  "resource_bundles": {
+    "TDMediaPickerXIB": [
+      "TDMediaPicker/Resources/**/*.xib"
+    ],
+    "TDMediaPickerPNG": [
+      "TDMediaPicker/Resources/**/*.png"
+    ],
+    "TDMediaPickerPDF": [
+      "TDMediaPicker/Resources/**/*.pdf"
+    ]
+  }
+}
