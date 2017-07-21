@@ -11,13 +11,17 @@ import Photos
 
 extension (TDMediaUtil){
  
-    static func fetchImage(_ asset:PHAsset, targetSize: CGSize , completionHandler: @escaping (UIImage?, Error?) -> Void){
+    static func fetchImage(_ asset:PHAsset, targetSize: CGSize , completionHandler: @escaping (UIImage?, Error?) -> Void)->PHImageRequestID{
         let handler = completionHandler
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
-        _ = PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: { (image, options) in
+        return PHImageManager.default().requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFill, options: options, resultHandler: { (image, options) in
             handler(image,nil)
         })
+    }
+    
+    static func cancelImageRequest(requestID: PHImageRequestID){
+        PHImageManager.default().cancelImageRequest(requestID)
     }
     
     static func fetchDuration(_ asset: PHAsset, completionHandler: @escaping (Double) -> Void) {

@@ -75,7 +75,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     func reload(toIndex: Int){
         selectedIndex = toIndex
         let indexPath = IndexPath(row: selectedIndex, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: false)
+        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
     }
     
     // MARK: - Private Method(s)
@@ -101,7 +101,15 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
             return UICollectionViewCell()
         }
         
-        cell?.configure(media.asset)
+        if media.image != nil{
+            cell?.configure(media.image!)
+        }
+        else{
+            cell?.configure(media.asset, completionHandler: { (image) in
+                media.image = image
+            })
+        }
+        
         return cell!
     }
     
@@ -150,12 +158,16 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
         
         let mediaCell = cell as! TDMediaCell
-        mediaCell.willInitiateDisplay()
+        //mediaCell.willInitiateDisplay()
     }
 
     
     
     // MARK: - ScrollView Delegate Method(s)
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+    }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         var visibleRect = CGRect()

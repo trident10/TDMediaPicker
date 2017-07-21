@@ -86,4 +86,9 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
         let album = albums[(indexPath as NSIndexPath).row]
         self.delegate?.albumListView(self, didSelectAlbum: album)
     }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = cell as! TDAlbumCell
+        cell.purgeCell()
+    }
 }

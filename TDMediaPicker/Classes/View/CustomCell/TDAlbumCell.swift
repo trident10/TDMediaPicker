@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class TDAlbumCell: UITableViewCell{
     
@@ -15,6 +16,8 @@ class TDAlbumCell: UITableViewCell{
     @IBOutlet var albumImageView: UIImageView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var countLabel: UILabel!
+    
+    private var requestID: PHImageRequestID?
     
     // MARK: - Initialization
     
@@ -38,11 +41,17 @@ class TDAlbumCell: UITableViewCell{
         
         if let item = album.albumMedia {
             
-            TDMediaUtil.fetchImage(item.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
+            requestID = TDMediaUtil.fetchImage(item.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
                 if image != nil{
                     self.albumImageView.image = image
                 }
             })
+        }
+    }
+    
+    func purgeCell(){
+        if requestID != nil{
+            TDMediaUtil.cancelImageRequest(requestID: requestID!)
         }
     }
 }

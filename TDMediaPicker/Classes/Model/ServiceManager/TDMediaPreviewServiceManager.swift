@@ -51,11 +51,16 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
     
     func cartServiceManager(_ cart: TDCartServiceManager, cartDidUpdate totalMedia: [TDMedia], updateType: TDCart.UpdateType) {
         
-        if cartServiceManager.getConfig() > totalMedia.count{
-            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: true)
+        if updateType == .reload{
+            if cartServiceManager.getConfig() > totalMedia.count{
+                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: true)
+                return
+            }
+            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: false)
             return
         }
-        self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: false)
+        
+        print("this updateType of TDCart is not supported \(updateType)")
     }
     
 }

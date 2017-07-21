@@ -125,7 +125,15 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
             print("ERROR IN GENERATING CORRECT CELL")
             return UICollectionViewCell()
         }
-        cell?.configure(media.asset)
+        
+        if media.imageThumb != nil{
+            cell?.configure(media.imageThumb!)
+        }
+        else{
+            cell?.configure(media.asset, completionHandler: { (image) in
+                media.imageThumb = image
+            })
+        }
         configureFrameView(cell!, indexPath: indexPath)
         
         return cell!
@@ -180,6 +188,7 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
         
         // Just to avoid reload on tap of selected cell
         if selectedIndex == indexPath.item{
+            collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
             return
         }
         

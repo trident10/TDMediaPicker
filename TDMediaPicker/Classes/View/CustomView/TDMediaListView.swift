@@ -133,7 +133,15 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
         
-        cell?.configure(item.asset)
+        if item.imageThumb != nil{
+            cell?.configure(item.imageThumb!)
+        }
+        else{
+            cell?.configure(item.asset, completionHandler: { (image) in
+                item.imageThumb = image
+            })
+        }
+        
         configureFrameView(cell!, indexPath: indexPath)
 
         return cell!
@@ -163,6 +171,11 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         else {
             self.delegate?.mediaListView(self, didSelectMedia: media, shouldRemoveFromCart: false)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let mediaCell = cell as! TDMediaCell
+        mediaCell.didEndDisplay()
     }
 
     

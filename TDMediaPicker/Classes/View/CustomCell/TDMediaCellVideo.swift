@@ -18,6 +18,7 @@ class TDMediaCellVideo: TDMediaCell{
     private var avPlayer: AVPlayer?
     private var mediaURL: URL?
     private var asset: PHAsset?
+
     
     // MARK: - Initialization
     
@@ -102,14 +103,24 @@ class TDMediaCellVideo: TDMediaCell{
     
     // MARK: - Config
     
-    override func configure(_ asset: PHAsset) {
+    override func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
         imageView.layoutIfNeeded()
         self.asset = asset
-        TDMediaUtil.fetchImage(asset, targetSize: self.frame.size, completionHandler: { (image, error) in
+        _ = TDMediaUtil.fetchImage(asset, targetSize: self.frame.size, completionHandler: { (image, error) in
             if image != nil{
                 self.imageView.image = image
+                let heightInPoints = image!.size.height
+                let widthInPoints = image!.size.width
+                if heightInPoints >= self.imageView.frame.size.height && widthInPoints >= self.imageView.frame.size.width {
+                    completionHandler?(image!)
+                }
             }
         })
+    }
+    
+    override func configure(_ image: UIImage) {
+        imageView.layoutIfNeeded()
+        imageView.image = image
     }
     
     override func didEndDisplay() {

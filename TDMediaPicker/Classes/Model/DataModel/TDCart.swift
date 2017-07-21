@@ -14,6 +14,7 @@ class TDCart{
         case add
         case delete
         case reload
+        case purgeCache
     }
     
     public var media: [TDMedia] = []

@@ -61,7 +61,11 @@ class TDMediaCell: UICollectionViewCell{
         }
     }
     
-    func configure(_ asset: PHAsset) {
+    func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
+        fatalError("This should be implemented by concrete class")
+    }
+    
+    func configure(_ image: UIImage) {
         fatalError("This should be implemented by concrete class")
     }
     
