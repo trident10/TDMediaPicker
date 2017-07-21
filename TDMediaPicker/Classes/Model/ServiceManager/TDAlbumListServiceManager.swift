@@ -68,4 +68,16 @@ class TDAlbumListServiceManager {
             albums.insert(item, at: 0)
         }
     }
+    
+    
+    func fetchAlbum(_ id:String, completion:(TDAlbum?) -> Void){
+        let matchedAlbum = albums.filter { (album) -> Bool in
+            return album.id == id
+        }
+        if matchedAlbum.count > 0{
+            completion(matchedAlbum[0])
+            return
+        }
+        completion(nil)
+    }
 }

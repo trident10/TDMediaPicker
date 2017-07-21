@@ -13,11 +13,13 @@ class TDAlbum{
     let collection: PHAssetCollection
     var itemsCount: Int = 0
     var albumMedia: TDMedia?
+    var id: String
     
     // MARK: - Initialization
     
     init(collection: PHAssetCollection) {
         self.collection = collection
+        self.id = collection.localIdentifier
     }
     
     // MARK: - Public Method(s)

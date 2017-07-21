@@ -33,20 +33,16 @@ class TDAlbumCell: UITableViewCell{
     
     // MARK: - Config
     
-    func configure(_ album: TDAlbum) {
+    func configure(_ album: TDAlbumViewModel) {
         
-        titleLabel.text = album.collection.localizedTitle
-        countLabel.text = "\(album.itemsCount)"
-        
-        
-        if let item = album.albumMedia {
+        titleLabel.text = album.title
+        countLabel.text = album.countTitle
             
-            requestID = TDMediaUtil.fetchImage(item.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
-                if image != nil{
-                    self.albumImageView.image = image
-                }
-            })
-        }
+        requestID = TDMediaUtil.fetchImage(album.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
+            if image != nil{
+                self.albumImageView.image = image
+            }
+        })
     }
     
     func purgeCell(){

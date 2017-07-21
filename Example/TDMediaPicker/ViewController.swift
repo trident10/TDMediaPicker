@@ -20,23 +20,43 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        present(mediaPicker, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func showPickerButtonTapped(sender: UIButton){
+        present(mediaPicker, animated: true, completion: nil)
+    }
 
 }
 
 extension ViewController: TDMediaPickerDelegate{
     func mediaPicker(_ picker: TDMediaPicker, didSelectMedia media: [TDMedia]) {
-        
+        mediaPicker.dismiss(animated: true) {
+            self.displayAlert(title: "\(media.count) media selected")
+        }
     }
     
     func mediaPickerDidCancel(_ picker: TDMediaPicker) {
-        
+        print("Media Picker Cancelled")
+        mediaPicker.dismiss(animated: true){
+            self.displayAlert(title: "Media Selection Cancelled")
+
+        }
+    }
+}
+
+extension ViewController{
+    
+    fileprivate func displayAlert(title: String){
+        let alertController = UIAlertController.init(title: "Message", message: title, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Ok", style: .cancel, handler: { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }))
+        self.present(alertController, animated: true, completion: nil)
     }
 }
 
