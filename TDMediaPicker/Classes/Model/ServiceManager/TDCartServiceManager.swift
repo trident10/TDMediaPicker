@@ -9,7 +9,7 @@
 import Foundation
 
 protocol TDCartServiceManagerDelegate: class {
-    func cartServiceManager(_ cart: TDCartServiceManager, cartDidUpdate totalMedia: [TDMedia], updateType: TDCart.UpdateType)
+    func cartServiceManager(_ manager: TDCartServiceManager, cartDidUpdate cart: TDCart, updateType: TDCart.UpdateType)
 }
 
 
@@ -74,7 +74,7 @@ class TDCartServiceManager{
         cart.media.append(media)
         
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
-            delegate.cartServiceManager(self, cartDidUpdate: cart.media, updateType: .add)
+            delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .add)
         }
     }
     
@@ -92,7 +92,7 @@ class TDCartServiceManager{
         }
         
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
-            delegate.cartServiceManager(self, cartDidUpdate: cart.media, updateType: .delete)
+            delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .delete)
         }
     }
     
@@ -101,13 +101,13 @@ class TDCartServiceManager{
             media.image = nil
         }
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
-            delegate.cartServiceManager(self, cartDidUpdate: cart.media, updateType: .purgeCache)
+            delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .purgeCache)
         }
     }
     
     func refresh(){
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
-            delegate.cartServiceManager(self, cartDidUpdate: cart.media, updateType: .reload)
+            delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .reload)
         }
     }
     
@@ -115,7 +115,7 @@ class TDCartServiceManager{
         cart.media = media
         
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
-            delegate.cartServiceManager(self, cartDidUpdate: cart.media, updateType: .reload)
+            delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .reload)
         }
     }
     

@@ -10,6 +10,7 @@ import Foundation
 import Photos
 
 open class TDMedia{
+    var id: String
     let asset: PHAsset
     var image: UIImage?
     var imageThumb: UIImage?
@@ -17,6 +18,7 @@ open class TDMedia{
     
     init(asset: PHAsset) {
         self.asset = asset
+        id = asset.localIdentifier
     }
 }
 

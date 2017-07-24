@@ -10,8 +10,7 @@ import Foundation
 import Photos
 
 protocol TDMediaListServiceManagerDelegate:class {
-    func mediaListServiceManager(_ manager: TDMediaListServiceManager, didFetchMedia media: [TDMedia])
-    func mediaListServiceManager(_ manager: TDMediaListServiceManager, didUpdateCart media: [TDMedia], updateType: TDCart.UpdateType)
+    func mediaListServiceManager(_ manager: TDMediaListServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType)
 }
 
 class TDMediaListServiceManager: TDCartServiceManagerDelegate {
@@ -30,14 +29,25 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     
     // MARK: - Public Method(s)
     
-    func fetchMediaItems(album: TDAlbum){
+    func fetchMediaItems(album: TDAlbum, completion:@escaping ([TDMedia]) -> Void){
         DispatchQueue.global().async {
             self.fetchMediaItemsFromLibrary(album: album)
             DispatchQueue.main.async {
-                self.delegate?.mediaListServiceManager(self, didFetchMedia: self.mediaItems)
+                completion(self.mediaItems)
                 self.cartServiceManager.refresh()
             }
         }
+    }
+    
+    func fetchMedia(_ id:String, completion:(TDMedia?) -> Void){
+        let matchedMedia = mediaItems.filter { (media) -> Bool in
+            return media.id == id
+        }
+        if matchedMedia.count > 0{
+            completion(matchedMedia[0])
+            return
+        }
+        completion(nil)
     }
     
     func purgeData(){
@@ -46,12 +56,13 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     
     // MARK: ... Cart Method(s)
     
-    func addMediaToCart(_ media: TDMedia){
-        cartServiceManager.add(media)
-    }
-    
-    func removeMediaFromCart(_ media: TDMedia){
-        cartServiceManager.remove(media)
+    func updateCart(_ media: TDMedia, updateType: TDCart.UpdateType){
+        if updateType == .add{
+            cartServiceManager.add(media)
+        }
+        if updateType == .delete{
+            cartServiceManager.remove(media)
+        }
     }
     
     // MARK: - Private Method (s)
@@ -71,8 +82,8 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     
     // MARK: - CartService Manager Delegate Method(s)
     
-    func cartServiceManager(_ cart: TDCartServiceManager, cartDidUpdate totalMedia: [TDMedia], updateType: TDCart.UpdateType) {
-        self.delegate?.mediaListServiceManager(self, didUpdateCart: totalMedia, updateType: updateType)
+    func cartServiceManager(_ manager: TDCartServiceManager, cartDidUpdate cart: TDCart, updateType: TDCart.UpdateType) {
+        self.delegate?.mediaListServiceManager(self, didUpdateCart: cart, updateType: updateType)
     }
     
 }

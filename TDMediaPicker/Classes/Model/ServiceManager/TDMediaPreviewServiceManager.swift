@@ -49,14 +49,14 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
     // MARK: - CartService Manager Delegate Method(s)
     
     
-    func cartServiceManager(_ cart: TDCartServiceManager, cartDidUpdate totalMedia: [TDMedia], updateType: TDCart.UpdateType) {
+    func cartServiceManager(_ manager: TDCartServiceManager, cartDidUpdate cart: TDCart, updateType: TDCart.UpdateType) {
         
         if updateType == .reload{
-            if cartServiceManager.getConfig() > totalMedia.count{
-                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: true)
+            if cartServiceManager.getConfig() > cart.media.count{
+                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart.media, updateType: updateType, shouldDisplayAddMoreOption: true)
                 return
             }
-            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: false)
+            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart.media, updateType: updateType, shouldDisplayAddMoreOption: false)
             return
         }
         

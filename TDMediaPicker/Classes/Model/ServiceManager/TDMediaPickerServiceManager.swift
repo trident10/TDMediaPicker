@@ -12,7 +12,7 @@ protocol TDMediaPickerServiceManagerDelegate: class {
     
 }
 
-class TDMediaPickerServiceManager: TDCartServiceManagerDelegate{
+class TDMediaPickerServiceManager{
     
     // MARK: - Variable(s)
     
@@ -22,7 +22,6 @@ class TDMediaPickerServiceManager: TDCartServiceManagerDelegate{
     // MARK: - Init
     
     init() {
-        cartServiceManager.add(delegate: self)
     }
     
     // MARK: - Public Method(s)
@@ -37,12 +36,6 @@ class TDMediaPickerServiceManager: TDCartServiceManagerDelegate{
     
     func getSelectedMedia()-> [TDMedia]{
         return cartServiceManager.getSelectedMedia()
-    }
-    
-    // MARK: - Cart Service Manager Delegate Method(s)
-    
-    func cartServiceManager(_ cart: TDCartServiceManager, cartDidUpdate totalMedia: [TDMedia], updateType: TDCart.UpdateType) {
-        
     }
     
 }

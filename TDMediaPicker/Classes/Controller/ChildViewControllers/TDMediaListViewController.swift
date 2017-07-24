@@ -21,8 +21,6 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     private var selectedAlbum:TDAlbum?
 
     weak var delegate: TDMediaListViewControllerDelegate?
-
-    
     lazy private var seviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
     // MARK: - Init
@@ -40,14 +38,13 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        // 2. View Setup
+        // 1. View Setup
         
         let mediaView = self.view as! TDMediaListView
         mediaView.setupView()
         mediaView.delegate = self
         
-        // 3. Service Manager Setup
+        // 2. Service Manager Setup
 
         seviceManager.delegate = self
     }
@@ -57,7 +54,9 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         super.viewWillAppear(animated)
         
         if selectedAlbum != nil{
-            seviceManager.fetchMediaItems(album: selectedAlbum!)
+            seviceManager.fetchMediaItems(album: selectedAlbum!, completion: { (media) in
+                self.handleFetchedMedia(media)
+            })
         }
     }
     
@@ -78,16 +77,46 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     
     // MARK: - Private Method(s)
     
+    private func handleFetchedMedia(_ mediaList:[TDMedia]){
+        let mediaViewModels = mapMediaViewModels(mediaList: mediaList)
+        let mediaView = self.view as! TDMediaListView
+        mediaView.reload(media: mediaViewModels)
+    }
+    
+    private func mapMediaViewModels(mediaList:[TDMedia])->[TDMediaViewModel]{
+        var mediaViewModels: [TDMediaViewModel] = []
+        for(_,media) in mediaList.enumerated(){
+            let mediaViewModel = map(media)
+            if mediaViewModel != nil{
+                let mediaView = mediaViewModel as! TDMediaViewModel
+                mediaViewModels.append(mediaView)
+            }
+        }
+        return mediaViewModels
+    }
+    
+    private func map<T>(_ from: T) -> AnyObject?{
+        if from is TDMedia{
+            let media = from as! TDMedia
+            return TDMediaViewModel.init(id: media.id, asset: media.asset)
+        }
+        return nil
+    }
     
     
     // MARK: - View Delegate Method(s)
     
-    func mediaListView(_ view: TDMediaListView, didSelectMedia media: TDMedia, shouldRemoveFromCart value: Bool) {
-        if value{
-            seviceManager.removeMediaFromCart(media)
-            return
+    func mediaListView(_ view: TDMediaListView, didSelectMedia media: TDMediaViewModel, shouldRemoveFromCart value: Bool) {
+        seviceManager.fetchMedia(media.id) { (mediaDataModel) in
+            if mediaDataModel == nil{
+                return
+            }
+            if value{
+                seviceManager.updateCart(mediaDataModel!, updateType: .delete)
+                return
+            }
+            seviceManager.updateCart(mediaDataModel!, updateType: .add)
         }
-        seviceManager.addMediaToCart(media)
     }
     
     func mediaListViewDidTapBack(_ view: TDMediaListView) {
@@ -101,17 +130,26 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     
     // MARK: - Service Manager Delegate Method(s)
     
-    func mediaListServiceManager(_ manager: TDMediaListServiceManager, didFetchMedia media: [TDMedia]) {
-        let mediaView = self.view as! TDMediaListView
-        mediaView.reload(album: selectedAlbum!, mediaItems: media)
-    }
     
-    func mediaListServiceManager(_ manager: TDMediaListServiceManager, didUpdateCart cart: [TDMedia], updateType: TDCart.UpdateType) {
+    func mediaListServiceManager(_ manager: TDMediaListServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType) {
+        
+        let mediaViewModels = mapMediaViewModels(mediaList: cart.media)
+        let cartViewModel = TDCartViewModel.init(media: mediaViewModels)
+        
+        var cartViewUpdateType: TDCartViewModel.UpdateType = .none
+        
+        switch updateType {
+            case .add:
+                cartViewUpdateType = .add
+            case .delete:
+                cartViewUpdateType = .delete
+            case .purgeCache:
+                cartViewUpdateType = .purgeCache
+            case .reload:
+                cartViewUpdateType = .reload
+        }
         
         let mediaView = self.view as! TDMediaListView
-        mediaView.reload(album: selectedAlbum!, cartItems: cart, updateType: updateType)
-        
+        mediaView.reload(cart: cartViewModel, updateType: cartViewUpdateType)
     }
-    
-    
 }

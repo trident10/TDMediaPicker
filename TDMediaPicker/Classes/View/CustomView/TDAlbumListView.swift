@@ -77,7 +77,17 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
             as! TDAlbumCell
         
         let album = albumListViewModel.albums[(indexPath as NSIndexPath).row]
-        cell.configure(album)
+        
+        if album.image != nil{
+            cell.configure(album, image: album.image!)
+        }
+        else{
+            cell.configure(album) { (image) in
+                album.image = image
+            }
+        }
+        
+        
         cell.backgroundColor = UIColor.clear
         return cell
     }

@@ -37,7 +37,6 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         // 2. View Setup
         
         let albumView = self.view as! TDAlbumListView
@@ -50,7 +49,9 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        seviceManager.fetchAlbums()
+        seviceManager.fetchAlbums { (albums) in
+            self.handleFetchedAlbums(albums)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -61,6 +62,19 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     }
     
     // MARK: - Private Method(s)
+    
+    private func handleFetchedAlbums(_ albums:[TDAlbum]){
+        var albumViewModels: [TDAlbumViewModel] = []
+        for(_,album) in albums.enumerated(){
+            let albumViewModel = map(album)
+            if albumViewModel != nil{
+                let albumView = albumViewModel as! TDAlbumViewModel
+                albumViewModels.append(albumView)
+            }
+        }
+        let albumView = self.view as! TDAlbumListView
+        albumView.reload(albumViewModels)
+    }
     
     private func map<T>(_ from: T) -> AnyObject?{
         if from is TDAlbum{
@@ -102,20 +116,6 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     
     // MARK: - Service Manager Delegate Method(s)
-    
-    func albumServiceManager(_ manager: TDAlbumListServiceManager, didFetchAlbums albums: [TDAlbum]) {
-        
-        var albumViewModels: [TDAlbumViewModel] = []
-        for(_,album) in albums.enumerated(){
-            let albumViewModel = map(album)
-            if albumViewModel != nil{
-                let albumView = albumViewModel as! TDAlbumViewModel
-                albumViewModels.append(albumView)
-            }
-        }
-        let albumView = self.view as! TDAlbumListView
-        albumView.reload(albumViewModels)
-    }
     
 }
 

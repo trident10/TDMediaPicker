@@ -33,7 +33,7 @@ class TDAlbumCell: UITableViewCell{
     
     // MARK: - Config
     
-    func configure(_ album: TDAlbumViewModel) {
+    func configure(_ album: TDAlbumViewModel, completionHandler: ((_ image: UIImage)->Void)?) {
         
         titleLabel.text = album.title
         countLabel.text = album.countTitle
@@ -41,8 +41,22 @@ class TDAlbumCell: UITableViewCell{
         requestID = TDMediaUtil.fetchImage(album.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
             if image != nil{
                 self.albumImageView.image = image
+                let heightInPoints = image!.size.height
+                let widthInPoints = image!.size.width
+                if heightInPoints >= self.albumImageView.frame.size.height && widthInPoints >= self.albumImageView.frame.size.width {
+                    completionHandler?(image!)
+                }
             }
         })
+    }
+    
+    func configure(_ album: TDAlbumViewModel, image: UIImage) {
+        
+        titleLabel.text = album.title
+        countLabel.text = album.countTitle
+        
+        albumImageView.layoutIfNeeded()
+        albumImageView.image = image
     }
     
     func purgeCell(){
