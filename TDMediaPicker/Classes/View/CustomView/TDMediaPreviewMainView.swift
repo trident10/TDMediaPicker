@@ -38,6 +38,10 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     private let rows: CGFloat = 1
     private let cellSpacing: CGFloat = 2
     
+    // This logic is used to avoid multiple reload of thumpreview
+    private var isScrolledByUser: Bool = true
+    private var timer: Timer?
+    
     @IBOutlet var collectionView:  UICollectionView!
 
     
@@ -75,7 +79,17 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     func reload(toIndex: Int){
         selectedIndex = toIndex
         let indexPath = IndexPath(row: selectedIndex, section: 0)
+        isScrolledByUser = false
         collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
+        
+        //TEMP HACK TO AVOID MULTIPLE RELOAD OF THUMB PREVIEW VIEW.
+        if timer != nil{
+            timer?.invalidate()
+            timer = nil
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (timer) in
+            self.isScrolledByUser = true
+        })
     }
     
     // MARK: - Private Method(s)
@@ -113,6 +127,8 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         return cell!
     }
     
+    
+    
     // MARK: - Collection View Datasource Method(s)
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -139,14 +155,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     // MARK: - Collection View Delegate Method(s)
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let item = collectionItems[(indexPath as NSIndexPath).item]
-        
-        if item.type == .Media{
-            let index = indexPath.item
-            reload(toIndex: index)
-            return
-        }
+        isScrolledByUser = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
@@ -160,16 +169,15 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         let mediaCell = cell as! TDMediaCell
         //mediaCell.willInitiateDisplay()
     }
-
-    
     
     // MARK: - ScrollView Delegate Method(s)
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if !isScrolledByUser{
+            return
+        }
+        
         var visibleRect = CGRect()
         
         visibleRect.origin = collectionView.contentOffset
@@ -182,5 +190,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         self.delegate?.previewMainView(self, didDisplayViewAtIndex: visibleIndexPath.item)
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    }
 }
 

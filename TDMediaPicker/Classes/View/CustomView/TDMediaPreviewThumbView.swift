@@ -79,7 +79,8 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     func reload(toIndex: Int){
         selectedIndex = toIndex
-        collectionView.reloadData()
+        //collectionView.reloadData()
+        configureFrameViews()
         
         let indexPath = IndexPath(row: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
@@ -135,7 +136,6 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
             })
         }
         configureFrameView(cell!, indexPath: indexPath)
-        
         return cell!
     }
     
@@ -169,11 +169,11 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let item = collectionItems[(indexPath as NSIndexPath).item]
-
+        
         if item.type == .Media{
             return configureMediaCell(item: item, indexPath: indexPath)
         }
-        return configureAddOptionCell(item: item, indexPath: indexPath)        
+        return configureAddOptionCell(item: item, indexPath: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -210,6 +210,10 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
         }
     }
 
+    // MARK:- Scroll View Delegate Method(s)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        configureFrameViews()
+    }
     
 }
 
