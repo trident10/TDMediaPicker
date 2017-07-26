@@ -62,6 +62,28 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         previewView.purgeData()
     }
     
+    // MARK: - Private Method(s)
+    
+    private func mapMediaViewModels(mediaList:[TDMedia])->[TDPreviewViewModel]{
+        var mediaViewModels: [TDPreviewViewModel] = []
+        for(_,media) in mediaList.enumerated(){
+            let mediaViewModel = map(media)
+            if mediaViewModel != nil{
+                let mediaView = mediaViewModel as! TDPreviewViewModel
+                mediaViewModels.append(mediaView)
+            }
+        }
+        return mediaViewModels
+    }
+    
+    private func map<T>(_ from: T) -> AnyObject?{
+        if from is TDMedia{
+            let media = from as! TDMedia
+            return TDPreviewViewModel.init(id: media.id, asset: media.asset)
+        }
+        return nil
+    }
+    
     
     // MARK: - View Delegate Method(s)
     
@@ -79,9 +101,11 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     
     // MARK: - Service Manager Deleage Method(s)
     
-    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart media: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool) {
+    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool) {
+        
+        let mediaViewModels = mapMediaViewModels(mediaList: cart.media)
         let previewView = self.view as! TDMediaPreviewView
-        previewView.reload(cartItems: media, updateType: updateType, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
+        previewView.reload(media: mediaViewModels, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
     }
     
     

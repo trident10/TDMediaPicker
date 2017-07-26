@@ -10,7 +10,7 @@ import Foundation
 import Photos
 
 protocol TDMediaPreviewServiceManagerDelegate: class {
-    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart media: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption:Bool)
+    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool)
 }
 
 class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
@@ -53,10 +53,10 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
         
         if updateType == .reload{
             if cartServiceManager.getConfig() > cart.media.count{
-                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart.media, updateType: updateType, shouldDisplayAddMoreOption: true)
+                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart, updateType: updateType, shouldDisplayAddMoreOption: true)
                 return
             }
-            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart.media, updateType: updateType, shouldDisplayAddMoreOption: false)
+            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart, updateType: updateType, shouldDisplayAddMoreOption: false)
             return
         }
         

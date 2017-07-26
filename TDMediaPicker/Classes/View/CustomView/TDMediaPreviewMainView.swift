@@ -63,11 +63,11 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         collectionItems.removeAll()
     }
     
-    func reload(cartItems: [TDMedia], updateType: TDCart.UpdateType){
+    func reload(media: [TDPreviewViewModel]){
         
         collectionItems.removeAll()
         
-        for (_, media) in cartItems.enumerated(){
+        for (_, media) in media.enumerated(){
             let item = CollectionItem.init(type: .Media, data: media as AnyObject)
             collectionItems.append(item)
         }
@@ -94,7 +94,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     // MARK: - Private Method(s)
     
-    private func setUpMediaCell(mediaItem: TDMedia, indexPath: IndexPath) -> TDMediaCell?{
+    private func setUpMediaCell(mediaItem: TDPreviewViewModel, indexPath: IndexPath) -> TDMediaCell?{
         if mediaItem.asset.mediaType == .image{
             return TDMediaCell.mediaCellWithType(.Image, collectionView: collectionView, for: indexPath)
         }
@@ -107,7 +107,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     private func configureMediaCell(item: CollectionItem, indexPath: IndexPath)-> UICollectionViewCell{
         
         let cell: TDMediaCell?
-        let media = item.data as! TDMedia
+        let media = item.data as! TDPreviewViewModel
         cell = setUpMediaCell(mediaItem: media, indexPath: indexPath)
         
         if cell == nil{
@@ -115,12 +115,12 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
             return UICollectionViewCell()
         }
         
-        if media.image != nil{
-            cell?.configure(media.image!)
+        if media.mainImage != nil{
+            cell?.configure(media.mainImage!)
         }
         else{
             cell?.configure(media.asset, completionHandler: { (image) in
-                media.image = image
+                media.mainImage = image
             })
         }
         

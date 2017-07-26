@@ -37,9 +37,9 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     // MARK: - Public Method(s)
     
-    func reload(cartItems: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool){
-        bottomView.reload(cartItems: cartItems, updateType: updateType, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
-        previewView.reload(cartItems: cartItems, updateType: updateType)
+    func reload(media: [TDPreviewViewModel], shouldDisplayAddMoreOption: Bool){
+        bottomView.reload(media: media, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
+        previewView.reload(media: media)
     }
     
     func purgeData(){
@@ -65,7 +65,7 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     // MARK: - Thumb Preview View Delegate Method(s)
     
-    func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMedia media: TDMedia, index: Int) {
+    func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int) {
         previewView.reload(toIndex: index)
     }
     
