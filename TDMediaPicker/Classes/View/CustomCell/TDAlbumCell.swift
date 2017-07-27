@@ -41,9 +41,7 @@ class TDAlbumCell: UITableViewCell{
         requestID = TDMediaUtil.fetchImage(album.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
             if image != nil{
                 self.albumImageView.image = image
-                let heightInPoints = image!.size.height
-                let widthInPoints = image!.size.width
-                if heightInPoints >= self.albumImageView.frame.size.height && widthInPoints >= self.albumImageView.frame.size.width {
+                if TDMediaUtil.isImageResolutionValid(self.albumImageView, image: image!){
                     completionHandler?(image!)
                 }
             }

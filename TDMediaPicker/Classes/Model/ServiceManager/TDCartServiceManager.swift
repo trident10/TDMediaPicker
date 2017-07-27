@@ -97,9 +97,6 @@ class TDCartServiceManager{
     }
     
     func purgeCache(){
-        for (_,media) in cart.media.enumerated(){
-            media.image = nil
-        }
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
             delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .purgeCache)
         }

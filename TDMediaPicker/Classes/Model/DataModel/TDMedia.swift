@@ -12,8 +12,6 @@ import Photos
 open class TDMedia{
     var id: String
     let asset: PHAsset
-    var image: UIImage?
-    var imageThumb: UIImage?
     // MARK: - Initialization
     
     init(asset: PHAsset) {

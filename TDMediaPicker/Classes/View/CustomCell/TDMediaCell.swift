@@ -14,6 +14,8 @@ class TDMediaCell: UICollectionViewCell{
     
     // MARK: - Variable
     
+    @IBOutlet var imageView: UIImageView!
+    
     enum CellType{
         case Image, ImageThumb, Video, VideoThumb
     }
@@ -62,11 +64,20 @@ class TDMediaCell: UICollectionViewCell{
     }
     
     func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
-        fatalError("This should be implemented by concrete class")
+        imageView.layoutIfNeeded()
+        _ = TDMediaUtil.fetchImage(asset, targetSize: self.frame.size, completionHandler: { (image, error) in
+            if image != nil{
+                self.imageView.image = image
+                if TDMediaUtil.isImageResolutionValid(self.imageView, image: image!){
+                    completionHandler?(image!)
+                }
+            }
+        })
     }
     
     func configure(_ image: UIImage) {
-        fatalError("This should be implemented by concrete class")
+        imageView.layoutIfNeeded()
+        imageView.image = image
     }
     
     func willInitiateDisplay(){
