@@ -9,7 +9,6 @@
 import UIKit
 import Photos
 
-
 class TDMediaCell: UICollectionViewCell{
     
     // MARK: - Variable
@@ -18,6 +17,10 @@ class TDMediaCell: UICollectionViewCell{
     
     enum CellType{
         case Image, ImageThumb, Video, VideoThumb
+    }
+    
+    enum ButtonType{
+        case videoPlay
     }
     
     // MARK: - Initialization
@@ -62,6 +65,11 @@ class TDMediaCell: UICollectionViewCell{
             collectionView.register(UINib.init(nibName: String(describing: TDMediaCellVideoThumb.self), bundle: TDMediaUtil.xibBundle()), forCellWithReuseIdentifier: String(describing: TDMediaCellVideoThumb.self))
         }
     }
+    
+    func onButtonTap(handler: ((_ type: TDMediaCell.ButtonType)->Void)?){
+        fatalError("This should be implemented by concrete class")
+    }
+    
     
     func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
         imageView.layoutIfNeeded()

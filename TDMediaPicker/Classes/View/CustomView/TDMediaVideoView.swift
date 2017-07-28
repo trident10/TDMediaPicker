@@ -11,24 +11,53 @@ import Photos
 
 class TDMediaVideoView: UIView {
     
+    // MARK: - Variable(s)
+    
     private var avPlayerLayer: AVPlayerLayer?
     private var avPlayer: AVPlayer?
-    private var mediaURL: URL?
     private var asset: PHAsset?
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
     
-    @IBAction func playBtnTapped(sender: UIButton){
-        updateView(displayVideo: true)
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("Video Deinit")
+    }
+    // MARK: - Public Method(s)
+    
+    func playVideo(){
         self.avPlayer?.seek(to: kCMTimeZero)
         self.avPlayer?.play()
     }
-
-    private func setupVideoPlayer(_ completion: @escaping (Void) -> Void){
-        
+    
+    func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
         if self.avPlayerLayer != nil{
-            purgeVideoLayer()
+            self.purgeVideoLayer {
+                completion()
+                return
+            }
+            return
         }
-        
+        completion()
+    }
+    
+    func setupVideoPlayer(_ asset: PHAsset, completion: @escaping (Void) -> Void){
+        self.asset = asset
+        purgeVideoPlayer {
+            self.setupPlayer {
+                completion()
+            }
+        }
+    }
+    
+    // MARK: - Private Method(s)
+    
+    private func setupPlayer(_ completion: @escaping (Void) -> Void){
         TDMediaUtil.fetchPlayerItem(self.asset!) { (playerItem) in
             
             if playerItem != nil{
@@ -40,7 +69,6 @@ class TDMediaVideoView: UIView {
                 self.avPlayerLayer!.frame = self.bounds
                 self.avPlayerLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
                 self.layer.addSublayer(self.avPlayerLayer!)
-                self.avPlayerLayer?.isHidden = true
                 completion()
             }
         }
@@ -51,23 +79,17 @@ class TDMediaVideoView: UIView {
         avPlayer?.seek(to: kCMTimeZero)
     }
     
-    private func purgeVideoLayer(){
+    private func purgeVideoLayer(_ completion: @escaping (Void) -> Void){
         self.avPlayerLayer?.removeFromSuperlayer()
         avPlayerLayer = nil
-        mediaURL = nil
         stopPlayer()
         avPlayer = nil
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
+        completion()
     }
     
     @objc private func playerItemDidPlayToEndTime(){
         stopPlayer()
-        updateView(displayVideo: false)
-    }
-
-    
-    private func updateView(displayVideo: Bool){
-        self.avPlayerLayer?.isHidden = !displayVideo
     }
 
 }

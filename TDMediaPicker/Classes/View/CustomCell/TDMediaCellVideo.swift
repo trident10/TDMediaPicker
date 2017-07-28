@@ -14,7 +14,7 @@ class TDMediaCellVideo: TDMediaCell{
     @IBOutlet var btnPlay: UIButton!
     
     private var asset: PHAsset?
-
+    private var buttonTapHandler: ((_ type: TDMediaCell.ButtonType)->Void)?
     
     // MARK: - Initialization
     
@@ -27,7 +27,6 @@ class TDMediaCellVideo: TDMediaCell{
     }
     
     deinit {
-        
         print("Video CEll REMOVED")
     }
     
@@ -38,7 +37,7 @@ class TDMediaCellVideo: TDMediaCell{
     // MARK: - IBAction Method(s)
     
     @IBAction func playBtnTapped(sender: UIButton){
-        updateView(displayVideo: true)
+        buttonTapHandler?(.videoPlay)
     }
     
     // MARK: - Private Method(s)
@@ -52,11 +51,12 @@ class TDMediaCellVideo: TDMediaCell{
     
     override func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
         super.configure(asset, completionHandler: completionHandler)
-        btnPlay.setImage(UIImage.init(named: "ic_play", in: TDMediaUtil.pngBundle(), compatibleWith: nil), for: .normal)
+        self.btnPlay.setImage(UIImage.init(named: "ic_play", in: TDMediaUtil.pngBundle(), compatibleWith: nil), for: .normal)
     }
     
     override func configure(_ image: UIImage) {
         super.configure(image)
+        self.btnPlay.setImage(UIImage.init(named: "ic_play", in: TDMediaUtil.pngBundle(), compatibleWith: nil), for: .normal)
     }
     
     override func didEndDisplay() {
@@ -67,7 +67,11 @@ class TDMediaCellVideo: TDMediaCell{
         
     }
     
+    override func onButtonTap(handler: ((_ type: TDMediaCell.ButtonType)-> Void)?){
+        buttonTapHandler = handler
+    }
+    
     override func processHighlighting(shouldDisplay: Bool, count: Int = -1, text: String = ""){
-        fatalError("This should be implemented by concrete class")
+        
     }
 }

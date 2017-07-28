@@ -42,6 +42,11 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     private var isScrolledByUser: Bool = true
     private var timer: Timer?
     
+    private var currentVisibleIndex = -1
+    private var currentPlayerSetupIndex = -1
+    
+    private var videoPlayerView: TDMediaVideoView?
+    
     @IBOutlet var collectionView:  UICollectionView!
 
     
@@ -57,10 +62,13 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     func setupView(){
         TDMediaCell.registerCellWithType(.Image, collectionView: collectionView)
         TDMediaCell.registerCellWithType(.Video, collectionView: collectionView)
+        videoPlayerView = TDMediaVideoView(frame: self.bounds)
     }
     
     func purgeData(){
         collectionItems.removeAll()
+        videoPlayerView?.removeFromSuperview()
+        videoPlayerView = nil
     }
     
     func reload(media: [TDPreviewViewModel]){
@@ -71,16 +79,34 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
             let item = CollectionItem.init(type: .Media, data: media as AnyObject)
             collectionItems.append(item)
         }
-        
         collectionView.reloadData()
+        
+        currentVisibleIndex = 0
+        selectedIndex = 0
+        
+        DispatchQueue.main.async {
+            self.setupVideoPlayerView()
+        }
     }
     
     
     func reload(toIndex: Int){
+        var shouldScrollAnimated = true
+        if abs(selectedIndex - toIndex) > 3{
+            shouldScrollAnimated = false
+        }
         selectedIndex = toIndex
         let indexPath = IndexPath(row: selectedIndex, section: 0)
+        
         isScrolledByUser = false
-        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: true)
+        
+        collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.right, animated: shouldScrollAnimated)
+        
+        if !shouldScrollAnimated{
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+                self.setupVideoPlayerView()
+            })
+        }
         
         //TEMP HACK TO AVOID MULTIPLE RELOAD OF THUMB PREVIEW VIEW.
         if timer != nil{
@@ -94,12 +120,69 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     // MARK: - Private Method(s)
     
+    private func notifyScrolling(){
+        if !isScrolledByUser{
+            return
+        }
+        self.delegate?.previewMainView(self, didDisplayViewAtIndex: currentVisibleIndex)
+    }
+    
+    private func purgeVideoPlayer(){
+        videoPlayerView?.removeFromSuperview()
+        videoPlayerView?.purgeVideoPlayer {}
+    }
+    
+    private func setupVideoPlayerView(){
+        if currentVisibleIndex == -1 || (currentPlayerSetupIndex != -1 && currentPlayerSetupIndex == currentVisibleIndex){
+            // Stop Setup of player
+            return
+        }
+        let item = collectionItems[currentVisibleIndex]
+        let media = item.data as! TDPreviewViewModel
+        if media.asset.mediaType == .video{
+            let cell = collectionView.cellForItem(at: IndexPath(item: currentVisibleIndex, section: 0))
+            if cell != nil{
+                currentPlayerSetupIndex = currentVisibleIndex
+                videoPlayerView?.removeFromSuperview()
+                cell?.addSubview(videoPlayerView!)
+                videoPlayerView?.isHidden = true
+                videoPlayerView?.setupVideoPlayer(media.asset, completion: {})
+                return
+            }
+        }
+        currentPlayerSetupIndex = -1
+        videoPlayerView?.removeFromSuperview()
+        videoPlayerView?.purgeVideoPlayer {}
+    }
+    
+    private func updateCurrentVisibleIndex(){
+        var visibleRect = CGRect()
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
+        currentVisibleIndex = visibleIndexPath.item
+    }
+    
+    private func handleMediaCellActions(cell:TDMediaCell, indexPath: IndexPath){
+        cell.onButtonTap { (buttonType) in
+            if buttonType == .videoPlay{
+                self.videoPlayerView?.isHidden = false
+                self.videoPlayerView?.playVideo()
+            }
+        }
+        
+        
+    }
+    
     private func setUpMediaCell(mediaItem: TDPreviewViewModel, indexPath: IndexPath) -> TDMediaCell?{
         if mediaItem.asset.mediaType == .image{
             return TDMediaCell.mediaCellWithType(.Image, collectionView: collectionView, for: indexPath)
         }
         if mediaItem.asset.mediaType == .video{
-            return TDMediaCell.mediaCellWithType(.Video, collectionView: collectionView, for: indexPath)
+            let cell =  TDMediaCell.mediaCellWithType(.Video, collectionView: collectionView, for: indexPath)
+            handleMediaCellActions(cell: cell, indexPath: indexPath)
+            return cell
         }
         return nil
     }
@@ -158,39 +241,24 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         isScrolledByUser = true
     }
     
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
-        
-        let mediaCell = cell as! TDMediaCell
-        mediaCell.didEndDisplay()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath){
-        
-        let mediaCell = cell as! TDMediaCell
-        //mediaCell.willInitiateDisplay()
-    }
-    
     // MARK: - ScrollView Delegate Method(s)
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        if !isScrolledByUser{
-            return
-        }
-        
-        var visibleRect = CGRect()
-        
-        visibleRect.origin = collectionView.contentOffset
-        visibleRect.size = collectionView.bounds.size
-        
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        
-        let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
-        
-        self.delegate?.previewMainView(self, didDisplayViewAtIndex: visibleIndexPath.item)
+        updateCurrentVisibleIndex()
+        notifyScrolling()
+        setupVideoPlayerView()
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        setupVideoPlayerView()
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        setupVideoPlayerView()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        setupVideoPlayerView()
     }
 }
 
