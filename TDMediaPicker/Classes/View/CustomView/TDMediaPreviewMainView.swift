@@ -12,27 +12,13 @@ protocol TDMediaPreviewMainViewDelegate: class {
     func previewMainView(_ view: TDMediaPreviewMainView, didDisplayViewAtIndex index: Int)
 }
 
-private class CollectionItem{
-    enum ItemType{
-        case Media, AddOption
-    }
-    
-    var type:ItemType
-    var data:AnyObject
-    
-    init(type: ItemType, data: AnyObject) {
-        self.type = type
-        self.data = data
-    }
-}
-
 class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewMainViewDelegate?
     
-    private var collectionItems:[CollectionItem] = []
+    private var mediaItems: [TDPreviewViewModel] = []
     private var selectedIndex: Int = 0
     
     private let rows: CGFloat = 1
@@ -45,7 +31,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     private var currentVisibleIndex = -1
     private var currentPlayerSetupIndex = -1
     
-    private var videoPlayerView: TDMediaVideoView?
+    fileprivate var videoPlayerView: TDMediaVideoView?
     
     @IBOutlet var collectionView:  UICollectionView!
 
@@ -62,23 +48,22 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     func setupView(){
         TDMediaCell.registerCellWithType(.Image, collectionView: collectionView)
         TDMediaCell.registerCellWithType(.Video, collectionView: collectionView)
+        
         videoPlayerView = TDMediaVideoView(frame: self.bounds)
+        videoPlayerView?.delegate = self
     }
     
     func purgeData(){
-        collectionItems.removeAll()
+        mediaItems.removeAll()
         videoPlayerView?.removeFromSuperview()
         videoPlayerView = nil
     }
     
     func reload(media: [TDPreviewViewModel]){
         
-        collectionItems.removeAll()
+        mediaItems.removeAll()
+        mediaItems = media
         
-        for (_, media) in media.enumerated(){
-            let item = CollectionItem.init(type: .Media, data: media as AnyObject)
-            collectionItems.append(item)
-        }
         collectionView.reloadData()
         
         currentVisibleIndex = 0
@@ -91,10 +76,12 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     
     func reload(toIndex: Int){
+        
         var shouldScrollAnimated = true
         if abs(selectedIndex - toIndex) > 3{
             shouldScrollAnimated = false
         }
+        
         selectedIndex = toIndex
         let indexPath = IndexPath(row: selectedIndex, section: 0)
         
@@ -127,26 +114,28 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         self.delegate?.previewMainView(self, didDisplayViewAtIndex: currentVisibleIndex)
     }
     
-    private func purgeVideoPlayer(){
+    fileprivate func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
         videoPlayerView?.removeFromSuperview()
-        videoPlayerView?.purgeVideoPlayer {}
+        videoPlayerView?.purgeVideoPlayer {
+            completion()
+        }
     }
     
     private func setupVideoPlayerView(){
         if currentVisibleIndex == -1 || (currentPlayerSetupIndex != -1 && currentPlayerSetupIndex == currentVisibleIndex){
             // Stop Setup of player
+            videoPlayerView?.stopVideo()
             return
         }
-        let item = collectionItems[currentVisibleIndex]
-        let media = item.data as! TDPreviewViewModel
-        if media.asset.mediaType == .video{
+        let media = mediaItems[currentVisibleIndex]
+        if media.asset?.mediaType == .video{
             let cell = collectionView.cellForItem(at: IndexPath(item: currentVisibleIndex, section: 0))
             if cell != nil{
                 currentPlayerSetupIndex = currentVisibleIndex
-                videoPlayerView?.removeFromSuperview()
-                cell?.addSubview(videoPlayerView!)
-                videoPlayerView?.isHidden = true
-                videoPlayerView?.setupVideoPlayer(media.asset, completion: {})
+                purgeVideoPlayer {
+                    cell?.addSubview(self.videoPlayerView!)
+                    self.videoPlayerView?.setupVideoPlayer(media.asset!, completion: {})
+                }
                 return
             }
         }
@@ -171,15 +160,13 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
                 self.videoPlayerView?.playVideo()
             }
         }
-        
-        
     }
     
     private func setUpMediaCell(mediaItem: TDPreviewViewModel, indexPath: IndexPath) -> TDMediaCell?{
-        if mediaItem.asset.mediaType == .image{
+        if mediaItem.asset?.mediaType == .image{
             return TDMediaCell.mediaCellWithType(.Image, collectionView: collectionView, for: indexPath)
         }
-        if mediaItem.asset.mediaType == .video{
+        if mediaItem.asset?.mediaType == .video{
             let cell =  TDMediaCell.mediaCellWithType(.Video, collectionView: collectionView, for: indexPath)
             handleMediaCellActions(cell: cell, indexPath: indexPath)
             return cell
@@ -187,23 +174,22 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         return nil
     }
 
-    private func configureMediaCell(item: CollectionItem, indexPath: IndexPath)-> UICollectionViewCell{
+    private func configureMediaCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         
         let cell: TDMediaCell?
-        let media = item.data as! TDPreviewViewModel
-        cell = setUpMediaCell(mediaItem: media, indexPath: indexPath)
+        cell = setUpMediaCell(mediaItem: item, indexPath: indexPath)
         
         if cell == nil{
             print("ERROR IN GENERATING CORRECT CELL")
             return UICollectionViewCell()
         }
         
-        if media.mainImage != nil{
-            cell?.configure(media.mainImage!)
+        if item.mainImage != nil{
+            cell?.configure(item.mainImage!)
         }
         else{
-            cell?.configure(media.asset, completionHandler: { (image) in
-                media.mainImage = image
+            cell?.configure(item.asset!, completionHandler: { (image) in
+                item.mainImage = image
             })
         }
         
@@ -216,14 +202,13 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return collectionItems.count
+        return mediaItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let item = collectionItems[(indexPath as NSIndexPath).item]
-
-        if item.type == .Media{
+        let item = mediaItems[(indexPath as NSIndexPath).item]
+        if item.itemType == .Media{
             return configureMediaCell(item: item, indexPath: indexPath)
         }
         print("THIS SHOULD NOT BE CALLED. CHECK FOR ERROR")
@@ -260,5 +245,15 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         setupVideoPlayerView()
     }
+}
+
+//MARK: - VideoPlayer Delegate Method(s)
+
+extension TDMediaPreviewMainView: TDMediaVideoViewDelegate{
+    
+    func videoViewDidStopPlay(_ view: TDMediaVideoView) {
+        
+    }
+    
 }
 

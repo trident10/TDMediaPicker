@@ -9,6 +9,10 @@
 import UIKit
 import Photos
 
+protocol TDMediaVideoViewDelegate {
+    func videoViewDidStopPlay(_ view:TDMediaVideoView)
+}
+
 class TDMediaVideoView: UIView {
     
     // MARK: - Variable(s)
@@ -16,6 +20,7 @@ class TDMediaVideoView: UIView {
     private var avPlayerLayer: AVPlayerLayer?
     private var avPlayer: AVPlayer?
     private var asset: PHAsset?
+    var delegate: TDMediaVideoViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,15 +36,25 @@ class TDMediaVideoView: UIView {
     // MARK: - Public Method(s)
     
     func playVideo(){
-        self.avPlayer?.seek(to: kCMTimeZero)
+        self.isHidden = false
         self.avPlayer?.play()
+    }
+    
+    func stopVideo(){
+        self.isHidden = true
+        self.avPlayer?.pause()
+        self.avPlayer?.seek(to: kCMTimeZero)
+    }
+    
+    func pause(){
+        self.isHidden = true
+        self.avPlayer?.pause()
     }
     
     func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
         if self.avPlayerLayer != nil{
             self.purgeVideoLayer {
                 completion()
-                return
             }
             return
         }
@@ -48,10 +63,9 @@ class TDMediaVideoView: UIView {
     
     func setupVideoPlayer(_ asset: PHAsset, completion: @escaping (Void) -> Void){
         self.asset = asset
-        purgeVideoPlayer {
-            self.setupPlayer {
-                completion()
-            }
+        self.setupPlayer {
+            self.isHidden = true
+            completion()
         }
     }
     
@@ -74,22 +88,18 @@ class TDMediaVideoView: UIView {
         }
     }
     
-    private func stopPlayer(){
-        avPlayer?.pause()
-        avPlayer?.seek(to: kCMTimeZero)
-    }
-    
     private func purgeVideoLayer(_ completion: @escaping (Void) -> Void){
         self.avPlayerLayer?.removeFromSuperlayer()
         avPlayerLayer = nil
-        stopPlayer()
+        stopVideo()
         avPlayer = nil
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         completion()
     }
     
     @objc private func playerItemDidPlayToEndTime(){
-        stopPlayer()
+        stopVideo()
+        self.delegate?.videoViewDidStopPlay(self)
     }
 
 }

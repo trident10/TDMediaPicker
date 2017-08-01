@@ -13,27 +13,13 @@ protocol TDMediaPreviewThumbViewDelegate: class {
     func previewThumbViewDidTapAddOption(_ view: TDMediaPreviewThumbView)
 }
 
-private class CollectionItem{
-    enum ItemType{
-        case Media, AddOption
-    }
-    
-    var type:ItemType
-    var data:AnyObject
-    
-    init(type: ItemType, data: AnyObject) {
-        self.type = type
-        self.data = data
-    }
-}
-
 class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewThumbViewDelegate?
     
-    private var collectionItems:[CollectionItem] = []
+    private var mediaItems:[TDPreviewViewModel] = []
     private var selectedIndex: Int = 0
     
     private let rows: CGFloat = 1
@@ -57,21 +43,17 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     }
     
     func purgeData(){
-        collectionItems.removeAll()
+        mediaItems.removeAll()
     }
     
     func reload(media: [TDPreviewViewModel], shouldDisplayAddMoreOption: Bool){
         
-        collectionItems.removeAll()
-        
-        for (_, media) in media.enumerated(){
-            let item = CollectionItem.init(type: .Media, data: media as AnyObject)
-            collectionItems.append(item)
-        }
+        mediaItems.removeAll()
+        mediaItems = media
         
         if shouldDisplayAddMoreOption{
-            let item = CollectionItem.init(type: .AddOption, data: "Add Option" as AnyObject)
-            collectionItems.append(item)
+            let item = TDPreviewViewModel.init(itemType: .AddOption)
+            mediaItems.append(item)
         }
         
         collectionView.reloadData()
@@ -107,39 +89,38 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     }
     
     private func setUpMediaCell(mediaItem: TDPreviewViewModel, indexPath: IndexPath) -> TDMediaCell?{
-        if mediaItem.asset.mediaType == .image{
+        if mediaItem.asset?.mediaType == .image{
             return TDMediaCell.mediaCellWithType(.ImageThumb, collectionView: collectionView, for: indexPath)
         }
-        if mediaItem.asset.mediaType == .video{
+        if mediaItem.asset?.mediaType == .video{
             return TDMediaCell.mediaCellWithType(.VideoThumb, collectionView: collectionView, for: indexPath)
         }
         return nil
     }
 
-    private func configureMediaCell(item: CollectionItem, indexPath: IndexPath)-> UICollectionViewCell{
+    private func configureMediaCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         
         let cell: TDMediaCell?
-        let media = item.data as! TDPreviewViewModel
-        cell = setUpMediaCell(mediaItem: media, indexPath: indexPath)
+        cell = setUpMediaCell(mediaItem: item, indexPath: indexPath)
         
         if cell == nil{
             print("ERROR IN GENERATING CORRECT CELL")
             return UICollectionViewCell()
         }
         
-        if media.thumbImage != nil{
-            cell?.configure(media.thumbImage!)
+        if item.thumbImage != nil{
+            cell?.configure(item.thumbImage!)
         }
         else{
-            cell?.configure(media.asset, completionHandler: { (image) in
-                media.thumbImage = image
+            cell?.configure(item.asset!, completionHandler: { (image) in
+                item.thumbImage = image
             })
         }
         configureFrameView(cell!, indexPath: indexPath)
         return cell!
     }
     
-    private func configureAddOptionCell(item: CollectionItem, indexPath: IndexPath)-> UICollectionViewCell{
+    private func configureAddOptionCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TDAddOptionCell.self), for: indexPath)
             as! TDAddOptionCell
         return cell
@@ -147,13 +128,13 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     
     private func getMediaIndex(collectionIndex: Int) -> Int?{
-        let mediaItems = collectionItems.filter { (item) -> Bool in
-            return item.type == .Media
+        let items = mediaItems.filter { (item) -> Bool in
+            return item.itemType == .Media
         }
         
-        let mediaItem = collectionItems[collectionIndex]
+        let mediaItem = items[collectionIndex]
         
-        return mediaItems.index(where: { (element) -> Bool in
+        return items.index(where: { (element) -> Bool in
             return mediaItem === element
         })
         
@@ -163,14 +144,14 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return collectionItems.count
+        return mediaItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let item = collectionItems[(indexPath as NSIndexPath).item]
+        let item = mediaItems[(indexPath as NSIndexPath).item]
         
-        if item.type == .Media{
+        if item.itemType == .Media{
             return configureMediaCell(item: item, indexPath: indexPath)
         }
         return configureAddOptionCell(item: item, indexPath: indexPath)
@@ -192,9 +173,9 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
             return
         }
         
-        let item = collectionItems[(indexPath as NSIndexPath).item]
+        let item = mediaItems[(indexPath as NSIndexPath).item]
         
-        if item.type == .Media{
+        if item.itemType == .Media{
             let index = indexPath.item
             reload(toIndex: index)
             
@@ -204,7 +185,7 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
             }
             return
         }
-        if item.type == .AddOption{
+        if item.itemType == .AddOption{
             self.delegate?.previewThumbViewDidTapAddOption(self)
         }
     }

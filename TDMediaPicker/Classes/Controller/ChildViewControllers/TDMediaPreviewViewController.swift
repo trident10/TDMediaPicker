@@ -79,7 +79,7 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     private func map<T>(_ from: T) -> AnyObject?{
         if from is TDMedia{
             let media = from as! TDMedia
-            return TDPreviewViewModel.init(id: media.id, asset: media.asset)
+            return TDPreviewViewModel.init(id: media.id, asset: media.asset, itemType: .Media)
         }
         return nil
     }
