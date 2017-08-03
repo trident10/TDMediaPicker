@@ -46,10 +46,10 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
         mediaItems.removeAll()
     }
     
-    func reload(media: [TDPreviewViewModel], shouldDisplayAddMoreOption: Bool){
+    func reload(media: TDMediaPreviewViewModel, shouldDisplayAddMoreOption: Bool){
         
         mediaItems.removeAll()
-        mediaItems = media
+        mediaItems = media.previewMedia
         
         if shouldDisplayAddMoreOption{
             let item = TDPreviewViewModel.init(itemType: .AddOption)
@@ -66,6 +66,10 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
         
         let indexPath = IndexPath(row: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+    }
+    
+    func getCurrentSelectedIndex()-> Int{
+        return selectedIndex
     }
     
     // MARK: - Private Method(s)

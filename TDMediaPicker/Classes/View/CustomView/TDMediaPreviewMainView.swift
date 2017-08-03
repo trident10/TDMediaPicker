@@ -59,10 +59,10 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         videoPlayerView = nil
     }
     
-    func reload(media: [TDPreviewViewModel]){
+    func reload(media: TDMediaPreviewViewModel){
         
         mediaItems.removeAll()
-        mediaItems = media
+        mediaItems = media.previewMedia
         
         collectionView.reloadData()
         

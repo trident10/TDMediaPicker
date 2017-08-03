@@ -98,6 +98,9 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     private func configureFrameView(_ cell: TDMediaCell, indexPath: IndexPath) {
+        if mediaItems.count <= (indexPath as NSIndexPath).item{
+            return
+        }
         let item = mediaItems[(indexPath as NSIndexPath).item]
         
         if let index = cart?.media.index(where: { (element) -> Bool in

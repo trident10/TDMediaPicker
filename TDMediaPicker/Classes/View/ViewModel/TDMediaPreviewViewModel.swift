@@ -11,7 +11,12 @@ import Photos
 
 class TDMediaPreviewViewModel{
     
-    var previewMedia: [TDMediaViewModel] = []
+    enum OperationType {
+        case done, close, addMore
+    }
+    
+    
+    var previewMedia: [TDPreviewViewModel] = []
     
 }
 
