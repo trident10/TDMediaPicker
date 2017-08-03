@@ -9,13 +9,18 @@
 import UIKit
 import Photos
 
-
 class TDMediaCell: UICollectionViewCell{
     
     // MARK: - Variable
     
+    @IBOutlet var imageView: UIImageView!
+    
     enum CellType{
         case Image, ImageThumb, Video, VideoThumb
+    }
+    
+    enum ButtonType{
+        case videoPlay
     }
     
     // MARK: - Initialization
@@ -61,12 +66,26 @@ class TDMediaCell: UICollectionViewCell{
         }
     }
     
-    func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
+    func onButtonTap(handler: ((_ type: TDMediaCell.ButtonType)->Void)?){
         fatalError("This should be implemented by concrete class")
     }
     
+    
+    func configure(_ asset: PHAsset, completionHandler: ((_ image: UIImage)->Void)?) {
+        imageView.layoutIfNeeded()
+        _ = TDMediaUtil.fetchImage(asset, targetSize: self.frame.size, completionHandler: { (image, error) in
+            if image != nil{
+                self.imageView.image = image
+                if TDMediaUtil.isImageResolutionValid(self.imageView, image: image!){
+                    completionHandler?(image!)
+                }
+            }
+        })
+    }
+    
     func configure(_ image: UIImage) {
-        fatalError("This should be implemented by concrete class")
+        imageView.layoutIfNeeded()
+        imageView.image = image
     }
     
     func willInitiateDisplay(){

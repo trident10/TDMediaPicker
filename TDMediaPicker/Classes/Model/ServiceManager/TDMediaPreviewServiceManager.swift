@@ -10,7 +10,7 @@ import Foundation
 import Photos
 
 protocol TDMediaPreviewServiceManagerDelegate: class {
-    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart media: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption:Bool)
+    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool)
 }
 
 class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
@@ -42,21 +42,36 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
         cartServiceManager.add(media)
     }
     
-    func removeMediaFromCart(_ media: TDMedia){
-        cartServiceManager.remove(media)
+    func fetchMedia(_ id:String, completion:(TDMedia?) -> Void){
+        let matchedMedia = mediaItems.filter { (media) -> Bool in
+            return media.id == id
+        }
+        if matchedMedia.count > 0{
+            completion(matchedMedia[0])
+            return
+        }
+        completion(nil)
     }
+    
+    func updateCart(_ media: TDMedia, updateType: TDCart.UpdateType){
+        if updateType == .delete{
+            cartServiceManager.remove(media)
+        }
+    }
+
     
     // MARK: - CartService Manager Delegate Method(s)
     
     
-    func cartServiceManager(_ cart: TDCartServiceManager, cartDidUpdate totalMedia: [TDMedia], updateType: TDCart.UpdateType) {
+    func cartServiceManager(_ manager: TDCartServiceManager, cartDidUpdate cart: TDCart, updateType: TDCart.UpdateType) {
         
-        if updateType == .reload{
-            if cartServiceManager.getConfig() > totalMedia.count{
-                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: true)
+        if updateType == .reload || updateType == .delete{
+            mediaItems = cart.media
+            if cartServiceManager.getConfig() > cart.media.count{
+                self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart, updateType: updateType, shouldDisplayAddMoreOption: true)
                 return
             }
-            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: totalMedia, updateType: updateType, shouldDisplayAddMoreOption: false)
+            self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart, updateType: updateType, shouldDisplayAddMoreOption: false)
             return
         }
         

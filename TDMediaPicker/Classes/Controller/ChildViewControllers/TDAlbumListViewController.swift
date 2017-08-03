@@ -21,6 +21,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     weak var delegate: TDAlbumListViewControllerDelegate?
     
     lazy private var seviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
+
     
     // MARK: - Init
     
@@ -36,7 +37,6 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
         // 2. View Setup
         
         let albumView = self.view as! TDAlbumListView
@@ -49,7 +49,9 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        seviceManager.fetchAlbums()
+        seviceManager.fetchAlbums { (albums) in
+            self.handleFetchedAlbums(albums)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -59,13 +61,49 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         albumView.purgeData()
     }
     
-    // MARK: - Public Method(s)
+    // MARK: - Private Method(s)
+    
+    private func handleFetchedAlbums(_ albums:[TDAlbum]){
+        var albumViewModels: [TDAlbumViewModel] = []
+        for(_,album) in albums.enumerated(){
+            let albumViewModel = map(album)
+            if albumViewModel != nil{
+                let albumView = albumViewModel as! TDAlbumViewModel
+                albumViewModels.append(albumView)
+            }
+        }
+        let albumView = self.view as! TDAlbumListView
+        albumView.reload(albumViewModels)
+    }
+    
+    private func map<T>(_ from: T) -> AnyObject?{
+        if from is TDAlbum{
+            let album = from as! TDAlbum
+            
+            var title = ""
+            if album.collection.localizedTitle != nil{
+                title = album.collection.localizedTitle!
+            }
+            
+            let countText = "\(album.itemsCount)"
+            let asset = album.albumMedia?.asset
+            
+            if asset != nil{
+                return TDAlbumViewModel.init(id: album.id, asset: asset!, title: title, countTitle: countText) as AnyObject
+            }
+        }
+        return nil
+    }
     
     
     // MARK: - Album View Delegate Method(s)
     
-    func albumListView(_ view:TDAlbumListView, didSelectAlbum album:TDAlbum){
-        self.delegate?.albumController(self, didSelectAlbum: album)
+    func albumListView(_ view:TDAlbumListView, didSelectAlbum album:TDAlbumViewModel){
+        seviceManager.fetchAlbum(album.id, completion: { (albumData) in
+            if albumData != nil{
+                self.delegate?.albumController(self, didSelectAlbum: albumData!)
+            }
+        })
     }
     
     func albumListViewDidTapBack(_ view:TDAlbumListView){
@@ -78,12 +116,6 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     
     // MARK: - Service Manager Delegate Method(s)
-    
-    func albumServiceManager(_ manager: TDAlbumListServiceManager, didFetchAlbums albums: [TDAlbum]) {
-        
-        let albumView = self.view as! TDAlbumListView
-        albumView.reload(albums)
-    }
     
 }
 

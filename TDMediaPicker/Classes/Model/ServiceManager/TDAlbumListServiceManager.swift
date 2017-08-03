@@ -10,7 +10,6 @@ import Foundation
 import Photos
 
 protocol TDAlbumListServiceManagerDelegate:class {
-    func albumServiceManager(_ manager: TDAlbumListServiceManager, didFetchAlbums albums: [TDAlbum])
 
 }
 
@@ -29,11 +28,11 @@ class TDAlbumListServiceManager {
         albums.removeAll()
     }
     
-    func fetchAlbums(){
+    func fetchAlbums(_ completion:@escaping ([TDAlbum]) -> Void){
         DispatchQueue.global().async {
             self.fetchAlbumsFromLibrary()
             DispatchQueue.main.async {
-                self.delegate?.albumServiceManager(self, didFetchAlbums: self.albums)
+                completion(self.albums)
             }
         }
     }
@@ -67,5 +66,17 @@ class TDAlbumListServiceManager {
             albums.remove(at: index)
             albums.insert(item, at: 0)
         }
+    }
+    
+    
+    func fetchAlbum(_ id:String, completion:(TDAlbum?) -> Void){
+        let matchedAlbum = albums.filter { (album) -> Bool in
+            return album.id == id
+        }
+        if matchedAlbum.count > 0{
+            completion(matchedAlbum[0])
+            return
+        }
+        completion(nil)
     }
 }

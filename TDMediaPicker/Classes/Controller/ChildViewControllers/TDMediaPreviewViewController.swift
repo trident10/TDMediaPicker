@@ -62,26 +62,76 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         previewView.purgeData()
     }
     
+    // MARK: - Private Method(s)
+    
+    private func mapMediaViewModels(mediaList:[TDMedia])->TDMediaPreviewViewModel{
+        var mediaViewModels: [TDPreviewViewModel] = []
+        for(_,media) in mediaList.enumerated(){
+            let mediaViewModel = map(media)
+            if mediaViewModel != nil{
+                let mediaView = mediaViewModel as! TDPreviewViewModel
+                mediaViewModels.append(mediaView)
+            }
+        }
+        let media = TDMediaPreviewViewModel()
+        media.previewMedia = mediaViewModels
+        return media
+    }
+    
+    private func mapMediaModels(mediaList:[TDMedia])->TDMediaPreviewViewModel{
+        var mediaViewModels: [TDPreviewViewModel] = []
+        for(_,media) in mediaList.enumerated(){
+            let mediaViewModel = map(media)
+            if mediaViewModel != nil{
+                let mediaView = mediaViewModel as! TDPreviewViewModel
+                mediaViewModels.append(mediaView)
+            }
+        }
+        let media = TDMediaPreviewViewModel()
+        media.previewMedia = mediaViewModels
+        return media
+    }
+    
+    private func map<T>(_ from: T) -> AnyObject?{
+        if from is TDMedia{
+            let media = from as! TDMedia
+            return TDPreviewViewModel.init(id: media.id, asset: media.asset, itemType: .Media)
+        }
+        return nil
+    }
+    
     
     // MARK: - View Delegate Method(s)
     
-    func previewViewDidTapClose(_ view: TDMediaPreviewView) {
-        self.delegate?.previewControllerDidTapClose(self)
+    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType) {
+        switch type {
+        case .close:
+            self.delegate?.previewControllerDidTapClose(self)
+        case .addMore:
+            self.delegate?.previewControllerDidTapAddOption(self)
+        case .done:
+            self.delegate?.previewControllerDidTapDone(self)
+         }
     }
     
-    func previewViewDidTapAddMore(_ view: TDMediaPreviewView) {
-        self.delegate?.previewControllerDidTapAddOption(self)
+    func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel){
+        
+        serviceManager.fetchMedia(media.id) { (mediaDataModel) in
+            if mediaDataModel == nil{
+                return
+            }
+            self.serviceManager.updateCart(mediaDataModel!, updateType: .delete)
+        }
     }
-    
-    func previewViewDidTapDone(_ view: TDMediaPreviewView){
-        self.delegate?.previewControllerDidTapDone(self)
-    }
+
     
     // MARK: - Service Manager Deleage Method(s)
     
-    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart media: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool) {
+    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool) {
+        
+        let mediaViewModels = mapMediaViewModels(mediaList: cart.media)
         let previewView = self.view as! TDMediaPreviewView
-        previewView.reload(cartItems: media, updateType: updateType, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
+        previewView.reload(media: mediaViewModels, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
     }
     
     

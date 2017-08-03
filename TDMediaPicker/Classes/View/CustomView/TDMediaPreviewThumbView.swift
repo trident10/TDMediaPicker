@@ -9,22 +9,8 @@
 import UIKit
 
 protocol TDMediaPreviewThumbViewDelegate: class {
-    func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMedia media: TDMedia, index: Int)
+    func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int)
     func previewThumbViewDidTapAddOption(_ view: TDMediaPreviewThumbView)
-}
-
-private class CollectionItem{
-    enum ItemType{
-        case Media, AddOption
-    }
-    
-    var type:ItemType
-    var data:AnyObject
-    
-    init(type: ItemType, data: AnyObject) {
-        self.type = type
-        self.data = data
-    }
 }
 
 class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -33,7 +19,7 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     weak var delegate: TDMediaPreviewThumbViewDelegate?
     
-    private var collectionItems:[CollectionItem] = []
+    private var mediaItems:[TDPreviewViewModel] = []
     private var selectedIndex: Int = 0
     
     private let rows: CGFloat = 1
@@ -57,21 +43,17 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     }
     
     func purgeData(){
-        collectionItems.removeAll()
+        mediaItems.removeAll()
     }
     
-    func reload(cartItems: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool){
+    func reload(media: TDMediaPreviewViewModel, shouldDisplayAddMoreOption: Bool){
         
-        collectionItems.removeAll()
-        
-        for (_, media) in cartItems.enumerated(){
-            let item = CollectionItem.init(type: .Media, data: media as AnyObject)
-            collectionItems.append(item)
-        }
+        mediaItems.removeAll()
+        mediaItems = media.previewMedia
         
         if shouldDisplayAddMoreOption{
-            let item = CollectionItem.init(type: .AddOption, data: "Add Option" as AnyObject)
-            collectionItems.append(item)
+            let item = TDPreviewViewModel.init(itemType: .AddOption)
+            mediaItems.append(item)
         }
         
         collectionView.reloadData()
@@ -79,10 +61,15 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     func reload(toIndex: Int){
         selectedIndex = toIndex
-        collectionView.reloadData()
+        //collectionView.reloadData()
+        configureFrameViews()
         
         let indexPath = IndexPath(row: selectedIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+    }
+    
+    func getCurrentSelectedIndex()-> Int{
+        return selectedIndex
     }
     
     // MARK: - Private Method(s)
@@ -105,41 +92,39 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
         }
     }
     
-    private func setUpMediaCell(mediaItem: TDMedia, indexPath: IndexPath) -> TDMediaCell?{
-        if mediaItem.asset.mediaType == .image{
+    private func setUpMediaCell(mediaItem: TDPreviewViewModel, indexPath: IndexPath) -> TDMediaCell?{
+        if mediaItem.asset?.mediaType == .image{
             return TDMediaCell.mediaCellWithType(.ImageThumb, collectionView: collectionView, for: indexPath)
         }
-        if mediaItem.asset.mediaType == .video{
+        if mediaItem.asset?.mediaType == .video{
             return TDMediaCell.mediaCellWithType(.VideoThumb, collectionView: collectionView, for: indexPath)
         }
         return nil
     }
 
-    private func configureMediaCell(item: CollectionItem, indexPath: IndexPath)-> UICollectionViewCell{
+    private func configureMediaCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         
         let cell: TDMediaCell?
-        let media = item.data as! TDMedia
-        cell = setUpMediaCell(mediaItem: media, indexPath: indexPath)
+        cell = setUpMediaCell(mediaItem: item, indexPath: indexPath)
         
         if cell == nil{
             print("ERROR IN GENERATING CORRECT CELL")
             return UICollectionViewCell()
         }
         
-        if media.imageThumb != nil{
-            cell?.configure(media.imageThumb!)
+        if item.thumbImage != nil{
+            cell?.configure(item.thumbImage!)
         }
         else{
-            cell?.configure(media.asset, completionHandler: { (image) in
-                media.imageThumb = image
+            cell?.configure(item.asset!, completionHandler: { (image) in
+                item.thumbImage = image
             })
         }
         configureFrameView(cell!, indexPath: indexPath)
-        
         return cell!
     }
     
-    private func configureAddOptionCell(item: CollectionItem, indexPath: IndexPath)-> UICollectionViewCell{
+    private func configureAddOptionCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TDAddOptionCell.self), for: indexPath)
             as! TDAddOptionCell
         return cell
@@ -147,13 +132,13 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     
     private func getMediaIndex(collectionIndex: Int) -> Int?{
-        let mediaItems = collectionItems.filter { (item) -> Bool in
-            return item.type == .Media
+        let items = mediaItems.filter { (item) -> Bool in
+            return item.itemType == .Media
         }
         
-        let mediaItem = collectionItems[collectionIndex]
+        let mediaItem = items[collectionIndex]
         
-        return mediaItems.index(where: { (element) -> Bool in
+        return items.index(where: { (element) -> Bool in
             return mediaItem === element
         })
         
@@ -163,17 +148,17 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return collectionItems.count
+        return mediaItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let item = collectionItems[(indexPath as NSIndexPath).item]
-
-        if item.type == .Media{
+        let item = mediaItems[(indexPath as NSIndexPath).item]
+        
+        if item.itemType == .Media{
             return configureMediaCell(item: item, indexPath: indexPath)
         }
-        return configureAddOptionCell(item: item, indexPath: indexPath)        
+        return configureAddOptionCell(item: item, indexPath: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -192,24 +177,27 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
             return
         }
         
-        let item = collectionItems[(indexPath as NSIndexPath).item]
+        let item = mediaItems[(indexPath as NSIndexPath).item]
         
-        if item.type == .Media{
+        if item.itemType == .Media{
             let index = indexPath.item
             reload(toIndex: index)
             
             let mediaIndex = getMediaIndex(collectionIndex: index)
-            let media = collectionItems[index].data as! TDMedia
             if mediaIndex != nil{
-                self.delegate?.previewThumbView(self, didTapMedia: media, index: mediaIndex!)
+                self.delegate?.previewThumbView(self, didTapMediaToIndex: mediaIndex!)
             }
             return
         }
-        if item.type == .AddOption{
+        if item.itemType == .AddOption{
             self.delegate?.previewThumbViewDidTapAddOption(self)
         }
     }
 
+    // MARK:- Scroll View Delegate Method(s)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        configureFrameViews()
+    }
     
 }
 

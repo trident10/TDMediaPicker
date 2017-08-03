@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TDMediaListViewDelegate:class {
-    func mediaListView(_ view:TDMediaListView, didSelectMedia media:TDMedia, shouldRemoveFromCart value: Bool)
+    func mediaListView(_ view:TDMediaListView, didSelectMedia media:TDMediaViewModel, shouldRemoveFromCart value: Bool)
     func mediaListViewDidTapBack(_ view:TDMediaListView)
     func mediaListViewDidTapDone(_ view:TDMediaListView)
 }
@@ -24,9 +24,8 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     private let columns: CGFloat = 4
     private let cellSpacing: CGFloat = 2
     
-    private var selectedAlbum:TDAlbum?
-    private var mediaItems:[TDMedia] = []
-    private var cartItems:[TDMedia]?
+    private var mediaItems:[TDMediaViewModel] = []
+    private var cart: TDCartViewModel?
     
     // MARK: - Outlets
     
@@ -48,21 +47,17 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func purgeData(){
-        selectedAlbum = nil
         mediaItems.removeAll()
-        cartItems?.removeAll()
+        cart?.media.removeAll()
     }
     
-    func reload(album: TDAlbum, mediaItems: [TDMedia]){
-        selectedAlbum = album
-        self.mediaItems = mediaItems
+    func reload(media:[TDMediaViewModel]){
+        mediaItems = media
         collectionView.reloadData()
     }
     
-    func reload(album: TDAlbum, cartItems: [TDMedia], updateType: TDCart.UpdateType){
-        selectedAlbum = album
-        self.cartItems = cartItems
-        
+    func reload(cart: TDCartViewModel, updateType: TDCartViewModel.UpdateType){
+        self.cart = cart
         switch updateType {
         case .reload:
             collectionView.reloadData()
@@ -84,7 +79,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - Private Method(s)
     
-    private func setUpMediaCell(mediaItem: TDMedia, indexPath: IndexPath) -> TDMediaCell?{
+    private func setUpMediaCell(mediaItem: TDMediaViewModel, indexPath: IndexPath) -> TDMediaCell?{
         if mediaItem.asset.mediaType == .image{
             return TDMediaCell.mediaCellWithType(.ImageThumb, collectionView: collectionView, for: indexPath)
         }
@@ -103,9 +98,12 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     private func configureFrameView(_ cell: TDMediaCell, indexPath: IndexPath) {
+        if mediaItems.count <= (indexPath as NSIndexPath).item{
+            return
+        }
         let item = mediaItems[(indexPath as NSIndexPath).item]
         
-        if let index = cartItems?.index(where: { (element) -> Bool in
+        if let index = cart?.media.index(where: { (element) -> Bool in
             return element.asset.localIdentifier == item.asset.localIdentifier
         }){
             cell.processHighlighting(shouldDisplay: true, count: index + 1)
@@ -133,12 +131,12 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             return UICollectionViewCell()
         }
         
-        if item.imageThumb != nil{
-            cell?.configure(item.imageThumb!)
+        if item.image != nil{
+            cell?.configure(item.image!)
         }
         else{
             cell?.configure(item.asset, completionHandler: { (image) in
-                item.imageThumb = image
+                item.image = image
             })
         }
         
@@ -160,7 +158,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         
         let media = mediaItems[(indexPath as NSIndexPath).item]
 
-        let index = cartItems?.index(where: { (element) -> Bool in
+        let index = cart?.media.index(where: { (element) -> Bool in
             return element.asset.localIdentifier == media.asset.localIdentifier
         })
         

@@ -9,9 +9,8 @@
 import UIKit
 
 protocol TDMediaPreviewViewDelegate: class {
-    func previewViewDidTapClose(_ view: TDMediaPreviewView)
-    func previewViewDidTapAddMore(_ view: TDMediaPreviewView)
-    func previewViewDidTapDone(_ view: TDMediaPreviewView)
+    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType)
+    func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel)
 }
 
 class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreviewThumbViewDelegate{
@@ -19,6 +18,9 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewViewDelegate?
+    
+    private var currentSelectedIndex: Int = -1
+    private var currentMedia: TDMediaPreviewViewModel?
     
     @IBOutlet var previewView: TDMediaPreviewMainView!
     @IBOutlet var bottomView: TDMediaPreviewThumbView!
@@ -37,40 +39,53 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     // MARK: - Public Method(s)
     
-    func reload(cartItems: [TDMedia], updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool){
-        bottomView.reload(cartItems: cartItems, updateType: updateType, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
-        previewView.reload(cartItems: cartItems, updateType: updateType)
+    func reload(media: TDMediaPreviewViewModel, shouldDisplayAddMoreOption: Bool){
+        
+        bottomView.reload(media: media, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
+        previewView.reload(media: media)
+        
+        currentSelectedIndex = bottomView.getCurrentSelectedIndex()
+        currentMedia = media
     }
     
     func purgeData(){
         previewView.purgeData()
         bottomView.purgeData()
+        currentSelectedIndex = -1
     }
     
     // MARK: - Action Method(s)
     
     @IBAction func closedTapped(sender: UIButton){
-        self.delegate?.previewViewDidTapClose(self)
+        self.delegate?.previewView(self, didUpdateOperation: .close)
     }
     
     @IBAction func doneTapped(sender: UIButton){
-        self.delegate?.previewViewDidTapDone(self)
+        self.delegate?.previewView(self, didUpdateOperation: .done)
+    }
+    
+    @IBAction func deleteTapped(sender: UIButton){
+        
+        let media = currentMedia?.previewMedia[currentSelectedIndex]
+        self.delegate?.previewView(self, didRequestDeleteMedia: media!)
     }
     
     // MARK: - Main Preview View Delegate Method(s)
     
     func previewMainView(_ view: TDMediaPreviewMainView, didDisplayViewAtIndex index: Int) {
+        currentSelectedIndex = index
         bottomView.reload(toIndex: index)
     }
     
     // MARK: - Thumb Preview View Delegate Method(s)
     
-    func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMedia media: TDMedia, index: Int) {
+    func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int) {
+        currentSelectedIndex = index
         previewView.reload(toIndex: index)
     }
     
     func previewThumbViewDidTapAddOption(_ view: TDMediaPreviewThumbView) {
-        self.delegate?.previewViewDidTapAddMore(self)
+        self.delegate?.previewView(self, didUpdateOperation: .addMore)
     }
     
 }
