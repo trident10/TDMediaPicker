@@ -42,8 +42,20 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         
     }
     
+    override func layoutSubviews() {
+        collectionView.reloadData()
+    }
     
     // MARK: - Public Method(s)
+    func viewWillTransition(){
+        isScrolledByUser = false
+    }
+    
+    func viewDidTransition(){
+        collectionView.reloadData()
+        collectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
+        isScrolledByUser = true
+    }
     
     func setupView(){
         TDMediaCell.registerCellWithType(.Image, collectionView: collectionView)
@@ -112,6 +124,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
             return
         }
         self.delegate?.previewMainView(self, didDisplayViewAtIndex: currentVisibleIndex)
+        selectedIndex = currentVisibleIndex
     }
     
     fileprivate func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
@@ -125,6 +138,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         if currentVisibleIndex == -1 || (currentPlayerSetupIndex != -1 && currentPlayerSetupIndex == currentVisibleIndex){
             // Stop Setup of player
             videoPlayerView?.stopVideo()
+            return
+        }
+        if mediaItems.count <= currentVisibleIndex{
             return
         }
         let media = mediaItems[currentVisibleIndex]

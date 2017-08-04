@@ -61,7 +61,16 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         let previewView = self.view as! TDMediaPreviewView
         previewView.purgeData()
     }
-    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let previewView = self.view as! TDMediaPreviewView
+        previewView.previewView.viewWillTransition()
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+            previewView.previewView.viewDidTransition()
+            previewView.bottomView.viewDidTransition()
+        })
+    }
     // MARK: - Private Method(s)
     
     private func mapMediaViewModels(mediaList:[TDMedia])->TDMediaPreviewViewModel{
