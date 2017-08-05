@@ -187,6 +187,7 @@
             </variation>
             <connections>
                 <outlet property="collectionView" destination="YLx-eq-Iuk" id="YBO-Bg-lkx"/>
+                <outlet property="doneButton" destination="f6v-au-edE" id="LNK-9B-PXI"/>
                 <outlet property="titleLabel" destination="KZe-S5-hdt" id="rTJ-hg-SUg"/>
             </connections>
             <point key="canvasLocation" x="56.5" y="88.5"/>

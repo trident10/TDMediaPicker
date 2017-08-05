@@ -120,7 +120,7 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
             self.delegate?.previewControllerDidTapAddOption(self)
         case .done:
             self.delegate?.previewControllerDidTapDone(self)
-         }
+        }
     }
     
     func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel){
@@ -129,10 +129,14 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
             if mediaDataModel == nil{
                 return
             }
+            let previewView = self.view as! TDMediaPreviewView
+            if previewView.previewView.getMedia().count <= 1{
+                self.delegate?.previewControllerDidTapClose(self)
+            }
             self.serviceManager.updateCart(mediaDataModel!, updateType: .delete)
         }
     }
-
+    
     
     // MARK: - Service Manager Deleage Method(s)
     

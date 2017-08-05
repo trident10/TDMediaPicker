@@ -47,6 +47,10 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     }
     
     // MARK: - Public Method(s)
+    func getMedia()->[TDPreviewViewModel]{
+        return self.mediaItems
+    }
+    
     func viewWillTransition(){
         isScrolledByUser = false
     }

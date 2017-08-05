@@ -25,12 +25,27 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     private let cellSpacing: CGFloat = 2
     
     private var mediaItems:[TDMediaViewModel] = []
-    private var cart: TDCartViewModel?
+    private var _cart: TDCartViewModel? = TDCartViewModel(media: [])
+    var cart: TDCartViewModel?{
+        get{
+            return _cart
+        }
+        set{
+            _cart = newValue
+            if self.cart?.media.count == 0{
+                self.doneButton.isEnabled = false
+            }else{
+                self.doneButton.isEnabled = true
+            }
+        }
+    }
+    
     
     // MARK: - Outlets
     
     @IBOutlet var collectionView:  UICollectionView!
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
     
     
     // MARK: - LifeCycle
