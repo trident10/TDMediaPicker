@@ -13,6 +13,7 @@ class TDCart{
     enum UpdateType {
         case add
         case delete
+        case edit
         case reload
         case purgeCache
     }

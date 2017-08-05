@@ -19,7 +19,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     // MARK: - Variable(s)
     
     private var selectedAlbum:TDAlbum?
-
+    
     weak var delegate: TDMediaListViewControllerDelegate?
     lazy private var seviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
@@ -34,6 +34,14 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     }
     
     // MARK: - Life cycle
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let mediaView = self.view as! TDMediaListView
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+            mediaView.viewDidTransition()
+        })
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +53,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         mediaView.delegate = self
         
         // 2. Service Manager Setup
-
+        
         seviceManager.delegate = self
     }
     
@@ -139,14 +147,16 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         var cartViewUpdateType: TDCartViewModel.UpdateType = .none
         
         switch updateType {
-            case .add:
-                cartViewUpdateType = .add
-            case .delete:
-                cartViewUpdateType = .delete
-            case .purgeCache:
-                cartViewUpdateType = .purgeCache
-            case .reload:
-                cartViewUpdateType = .reload
+        case .add:
+            cartViewUpdateType = .add
+        case .delete:
+            cartViewUpdateType = .delete
+        case .purgeCache:
+            cartViewUpdateType = .purgeCache
+        case .reload:
+            cartViewUpdateType = .reload
+        case .edit:
+            cartViewUpdateType = .edit
         }
         
         let mediaView = self.view as! TDMediaListView

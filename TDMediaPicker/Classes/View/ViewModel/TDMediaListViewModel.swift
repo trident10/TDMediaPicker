@@ -36,6 +36,7 @@ class TDCartViewModel{
     
     enum UpdateType {
         case none
+        case edit
         case add
         case delete
         case reload

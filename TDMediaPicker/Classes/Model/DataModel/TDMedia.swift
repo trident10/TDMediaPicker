@@ -11,10 +11,11 @@ import Photos
 
 open class TDMedia{
     var id: String
+    var caption: String = ""
     let asset: PHAsset
     // MARK: - Initialization
     
-    init(asset: PHAsset) {
+    init(asset: PHAsset, caption:String) {
         self.asset = asset
         id = asset.localIdentifier
     }

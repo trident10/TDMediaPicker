@@ -171,11 +171,12 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N18-p6-wvu" customClass="TDMediaPreviewMainView" customModule="TDMediaPicker">
-                    <rect key="frame" x="0.0" y="64" width="320" height="431.5"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="434"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Vkg-WO-iGq">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="431.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="434"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <gestureRecognizers/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="QnH-0o-fqP">
                                 <size key="itemSize" width="50" height="50"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -185,19 +186,37 @@
                             <connections>
                                 <outlet property="dataSource" destination="N18-p6-wvu" id="LHr-nc-Bov"/>
                                 <outlet property="delegate" destination="N18-p6-wvu" id="XhI-8o-l3W"/>
+                                <outletCollection property="gestureRecognizers" destination="d2p-F1-SyB" appends="YES" id="AYb-Q9-beg"/>
                             </connections>
                         </collectionView>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ztN-9p-hOT">
+                            <rect key="frame" x="15" y="399" width="290" height="30"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="6gR-oZ-aza"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <integer key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textView>
                     </subviews>
                     <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Vkg-WO-iGq" secondAttribute="bottom" id="2UI-ZD-Rxb"/>
+                        <constraint firstItem="ztN-9p-hOT" firstAttribute="leading" secondItem="N18-p6-wvu" secondAttribute="leading" constant="15" id="4tn-hK-yjY"/>
                         <constraint firstAttribute="bottom" secondItem="Vkg-WO-iGq" secondAttribute="bottom" id="6pS-Jn-fm5"/>
+                        <constraint firstAttribute="trailing" secondItem="ztN-9p-hOT" secondAttribute="trailing" constant="15" id="9vh-wt-H6x"/>
                         <constraint firstAttribute="trailing" secondItem="Vkg-WO-iGq" secondAttribute="trailing" id="ECq-xz-07w"/>
                         <constraint firstItem="Vkg-WO-iGq" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="top" id="MMn-YK-3Lh"/>
                         <constraint firstItem="Vkg-WO-iGq" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="top" id="ZHn-2l-Yap"/>
                         <constraint firstAttribute="trailing" secondItem="Vkg-WO-iGq" secondAttribute="trailing" id="aOB-eG-bkp"/>
                         <constraint firstItem="Vkg-WO-iGq" firstAttribute="leading" secondItem="N18-p6-wvu" secondAttribute="leading" id="cR2-sl-3X6"/>
                         <constraint firstItem="Vkg-WO-iGq" firstAttribute="leading" secondItem="N18-p6-wvu" secondAttribute="leading" id="l4X-gc-QOB"/>
+                        <constraint firstAttribute="bottom" secondItem="ztN-9p-hOT" secondAttribute="bottom" constant="5" id="mXM-8t-xWr"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -220,14 +239,16 @@
                         </mask>
                     </variation>
                     <connections>
+                        <outlet property="captionTextView" destination="ztN-9p-hOT" id="yXa-gD-N1V"/>
+                        <outlet property="captionTextViewBottomConstraint" destination="mXM-8t-xWr" id="ffr-sw-TCc"/>
                         <outlet property="collectionView" destination="Vkg-WO-iGq" id="MZk-RI-r1G"/>
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czz-22-T2n" customClass="TDMediaPreviewThumbView" customModule="TDMediaPicker">
-                    <rect key="frame" x="0.0" y="495.5" width="320" height="72.5"/>
+                    <rect key="frame" x="0.0" y="498" width="320" height="70"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="sOL-eJ-3D5">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="72.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="2" minimumInteritemSpacing="2" id="LbK-DE-5t9">
                                 <size key="itemSize" width="50" height="50"/>
@@ -243,38 +264,38 @@
                     </subviews>
                     <color key="backgroundColor" red="0.33725490200000002" green="0.46666666670000001" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="sOL-eJ-3D5" firstAttribute="top" secondItem="czz-22-T2n" secondAttribute="top" id="GNY-IQ-Asi"/>
-                        <constraint firstItem="sOL-eJ-3D5" firstAttribute="leading" secondItem="czz-22-T2n" secondAttribute="leading" id="JwP-RV-EtN"/>
-                        <constraint firstAttribute="width" secondItem="czz-22-T2n" secondAttribute="height" multiplier="75:17" id="Peo-2N-5Hp"/>
+                        <constraint firstAttribute="height" constant="70" id="COf-q0-dm2"/>
+                        <constraint firstItem="sOL-eJ-3D5" firstAttribute="top" secondItem="czz-22-T2n" secondAttribute="top" id="Dv9-hY-nN3"/>
+                        <constraint firstAttribute="height" constant="30" id="Lte-QV-hzk"/>
+                        <constraint firstItem="sOL-eJ-3D5" firstAttribute="leading" secondItem="czz-22-T2n" secondAttribute="leading" id="MYf-ta-4Sz"/>
                         <constraint firstAttribute="trailing" secondItem="sOL-eJ-3D5" secondAttribute="trailing" id="VQg-KO-cia"/>
-                        <constraint firstAttribute="bottom" secondItem="sOL-eJ-3D5" secondAttribute="bottom" id="XHo-BX-19f"/>
+                        <constraint firstAttribute="trailing" secondItem="sOL-eJ-3D5" secondAttribute="trailing" id="Ws0-yY-ORQ"/>
                         <constraint firstItem="sOL-eJ-3D5" firstAttribute="leading" secondItem="czz-22-T2n" secondAttribute="leading" id="YaR-Mt-gct"/>
-                        <constraint firstAttribute="trailing" secondItem="sOL-eJ-3D5" secondAttribute="trailing" id="aDV-7N-bZR"/>
                         <constraint firstItem="sOL-eJ-3D5" firstAttribute="top" secondItem="czz-22-T2n" secondAttribute="top" id="gdF-4K-Wed"/>
                         <constraint firstAttribute="bottom" secondItem="sOL-eJ-3D5" secondAttribute="bottom" id="mRu-zb-aMn"/>
-                        <constraint firstAttribute="height" constant="30" id="uFx-Dw-IoG"/>
+                        <constraint firstAttribute="bottom" secondItem="sOL-eJ-3D5" secondAttribute="bottom" id="uBb-Xa-Ktt"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="uFx-Dw-IoG"/>
-                            <exclude reference="GNY-IQ-Asi"/>
-                            <exclude reference="JwP-RV-EtN"/>
-                            <exclude reference="XHo-BX-19f"/>
-                            <exclude reference="aDV-7N-bZR"/>
+                            <exclude reference="Lte-QV-hzk"/>
+                            <exclude reference="Dv9-hY-nN3"/>
+                            <exclude reference="MYf-ta-4Sz"/>
+                            <exclude reference="Ws0-yY-ORQ"/>
+                            <exclude reference="uBb-Xa-Ktt"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=compact">
                         <mask key="constraints">
-                            <exclude reference="Peo-2N-5Hp"/>
-                            <include reference="uFx-Dw-IoG"/>
-                            <include reference="GNY-IQ-Asi"/>
-                            <include reference="JwP-RV-EtN"/>
+                            <exclude reference="COf-q0-dm2"/>
+                            <include reference="Lte-QV-hzk"/>
+                            <include reference="Dv9-hY-nN3"/>
+                            <include reference="MYf-ta-4Sz"/>
                             <exclude reference="VQg-KO-cia"/>
-                            <include reference="XHo-BX-19f"/>
+                            <include reference="Ws0-yY-ORQ"/>
                             <exclude reference="YaR-Mt-gct"/>
-                            <include reference="aDV-7N-bZR"/>
                             <exclude reference="gdF-4K-Wed"/>
                             <exclude reference="mRu-zb-aMn"/>
+                            <include reference="uBb-Xa-Ktt"/>
                         </mask>
                     </variation>
                     <connections>
@@ -285,20 +306,19 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="czz-22-T2n" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="bottom" id="1KO-pM-ieE"/>
+                <constraint firstAttribute="bottom" secondItem="czz-22-T2n" secondAttribute="bottom" id="3hd-Ac-XoC"/>
                 <constraint firstItem="N18-p6-wvu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3mT-LZ-1GA"/>
                 <constraint firstItem="VKS-OA-ROD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6GL-iX-YSS"/>
+                <constraint firstItem="czz-22-T2n" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="bottom" id="6nV-wm-UcP"/>
                 <constraint firstItem="VKS-OA-ROD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="71K-9l-pCi"/>
-                <constraint firstAttribute="trailing" secondItem="czz-22-T2n" secondAttribute="trailing" id="8eU-xB-jmN"/>
-                <constraint firstItem="czz-22-T2n" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="bottom" id="AEL-YE-PpO"/>
+                <constraint firstAttribute="trailing" secondItem="czz-22-T2n" secondAttribute="trailing" id="74V-1r-vI8"/>
                 <constraint firstItem="VKS-OA-ROD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="CAO-eI-nST"/>
-                <constraint firstAttribute="bottom" secondItem="czz-22-T2n" secondAttribute="bottom" id="DDk-zW-c29"/>
                 <constraint firstItem="VKS-OA-ROD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fea-lT-C8s"/>
                 <constraint firstAttribute="bottom" secondItem="czz-22-T2n" secondAttribute="bottom" id="HBt-gr-kIw"/>
                 <constraint firstItem="N18-p6-wvu" firstAttribute="top" secondItem="VKS-OA-ROD" secondAttribute="bottom" id="HOO-Sy-Cyt"/>
-                <constraint firstItem="czz-22-T2n" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="bottom" id="Oq6-hU-6pe"/>
                 <constraint firstItem="N18-p6-wvu" firstAttribute="top" secondItem="VKS-OA-ROD" secondAttribute="bottom" id="PE6-cj-h6C"/>
+                <constraint firstItem="czz-22-T2n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Pqn-ft-a6D"/>
                 <constraint firstAttribute="trailing" secondItem="czz-22-T2n" secondAttribute="trailing" id="Tyt-HT-Ccp"/>
-                <constraint firstItem="czz-22-T2n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UtK-z4-ORY"/>
                 <constraint firstItem="czz-22-T2n" firstAttribute="top" secondItem="N18-p6-wvu" secondAttribute="bottom" id="WhA-1s-Kfc"/>
                 <constraint firstAttribute="trailing" secondItem="VKS-OA-ROD" secondAttribute="trailing" id="iwH-D4-QeD"/>
                 <constraint firstAttribute="trailing" secondItem="N18-p6-wvu" secondAttribute="trailing" id="rbq-wx-Mle"/>
@@ -315,11 +335,10 @@
                     <exclude reference="3mT-LZ-1GA"/>
                     <exclude reference="HOO-Sy-Cyt"/>
                     <exclude reference="sU5-hb-Sel"/>
-                    <exclude reference="8eU-xB-jmN"/>
-                    <exclude reference="AEL-YE-PpO"/>
-                    <exclude reference="DDk-zW-c29"/>
-                    <exclude reference="Oq6-hU-6pe"/>
-                    <exclude reference="UtK-z4-ORY"/>
+                    <exclude reference="3hd-Ac-XoC"/>
+                    <exclude reference="6nV-wm-UcP"/>
+                    <exclude reference="74V-1r-vI8"/>
+                    <exclude reference="Pqn-ft-a6D"/>
                 </mask>
             </variation>
             <variation key="heightClass=compact">
@@ -337,13 +356,12 @@
                     <include reference="sU5-hb-Sel"/>
                     <exclude reference="ySS-0D-Ma2"/>
                     <exclude reference="1KO-pM-ieE"/>
-                    <include reference="8eU-xB-jmN"/>
-                    <include reference="AEL-YE-PpO"/>
-                    <include reference="DDk-zW-c29"/>
+                    <include reference="3hd-Ac-XoC"/>
+                    <include reference="6nV-wm-UcP"/>
+                    <include reference="74V-1r-vI8"/>
                     <exclude reference="HBt-gr-kIw"/>
-                    <include reference="Oq6-hU-6pe"/>
+                    <include reference="Pqn-ft-a6D"/>
                     <exclude reference="Tyt-HT-Ccp"/>
-                    <include reference="UtK-z4-ORY"/>
                     <exclude reference="WhA-1s-Kfc"/>
                     <exclude reference="y0z-Ey-cgu"/>
                 </mask>
@@ -354,5 +372,10 @@
             </connections>
             <point key="canvasLocation" x="-308" y="12"/>
         </view>
+        <tapGestureRecognizer id="d2p-F1-SyB">
+            <connections>
+                <action selector="tapOnCollectionView:" destination="iN0-l3-epB" id="hAU-94-hai"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

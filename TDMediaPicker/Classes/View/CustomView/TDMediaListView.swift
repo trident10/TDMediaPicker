@@ -21,7 +21,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     weak var delegate:TDMediaListViewDelegate?
     
-    private let columns: CGFloat = 4
+    private var columns: CGFloat = 4
     private let cellSpacing: CGFloat = 2
     
     private var mediaItems:[TDMediaViewModel] = []
@@ -55,6 +55,14 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     // MARK: - Public Method(s)
+    func viewDidTransition(){
+        if UIDevice.current.orientation == UIDeviceOrientation.portrait {
+            columns = 4
+        }else{
+            columns = 7
+        }
+        collectionView.reloadData()
+    }
     
     func setupView(){
         TDMediaCell.registerCellWithType(.ImageThumb, collectionView: collectionView)
@@ -162,7 +170,6 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let size = (collectionView.bounds.size.width - (columns - 1) * cellSpacing) / columns
         return CGSize(width: size, height: size)
     }

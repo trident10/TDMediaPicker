@@ -11,6 +11,7 @@ import UIKit
 protocol TDMediaPreviewViewDelegate: class {
     func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType)
     func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel)
+    func previewView(_ view: TDMediaPreviewView, didRequestUpdateMedia media: TDPreviewViewModel)
 }
 
 class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreviewThumbViewDelegate{
@@ -69,6 +70,9 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         let media = currentMedia?.previewMedia[currentSelectedIndex]
         self.delegate?.previewView(self, didRequestDeleteMedia: media!)
     }
+    @IBAction func tapOnCollectionView(_ sender: UITapGestureRecognizer) {
+        self.endEditing(true)
+    }
     
     // MARK: - Main Preview View Delegate Method(s)
     
@@ -76,7 +80,9 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         currentSelectedIndex = index
         bottomView.reload(toIndex: index)
     }
-    
+    func previewMainView(_ view: TDMediaPreviewMainView, didRequestUpdateMedia media: TDPreviewViewModel) {
+        self.delegate?.previewView(self, didRequestUpdateMedia: media)
+    }
     // MARK: - Thumb Preview View Delegate Method(s)
     
     func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int) {

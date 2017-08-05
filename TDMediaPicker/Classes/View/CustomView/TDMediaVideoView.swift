@@ -81,7 +81,7 @@ class TDMediaVideoView: UIView {
                 self.avPlayerLayer = AVPlayerLayer(player: self.avPlayer)
                 self.avPlayerLayer?.backgroundColor = UIColor.green.cgColor
                 self.avPlayerLayer!.frame = self.bounds
-                self.avPlayerLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+                self.avPlayerLayer?.videoGravity = AVLayerVideoGravityResizeAspect
                 self.layer.addSublayer(self.avPlayerLayer!)
                 completion()
             }
