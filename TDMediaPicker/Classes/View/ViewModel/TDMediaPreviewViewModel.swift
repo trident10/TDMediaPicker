@@ -12,7 +12,7 @@ import Photos
 class TDMediaPreviewViewModel{
     
     enum OperationType {
-        case done, close, addMore
+        case done, close, addMore, delete, edit
     }
     
     

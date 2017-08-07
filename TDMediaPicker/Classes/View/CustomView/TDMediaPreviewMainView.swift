@@ -36,6 +36,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     @IBOutlet var collectionView:  UICollectionView!
     @IBOutlet var captionTextViewBottomConstraint:NSLayoutConstraint!
+    @IBOutlet var captionTextViewHeightConstraint:NSLayoutConstraint!
     @IBOutlet var captionTextView:UITextView!
     // MARK: - LifeCycle
     
@@ -61,6 +62,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         collectionView.reloadData()
         collectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
         isScrolledByUser = true
+        self.updateTextViewFrame()
     }
     
     func setupView(){
@@ -78,7 +80,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     }
     
     func reload(media: TDMediaPreviewViewModel){
-        
+        if  media.previewMedia.count == 0 {
+            return
+        }
         mediaItems.removeAll()
         mediaItems = media.previewMedia
         
@@ -88,6 +92,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         selectedIndex = 0
         
         captionTextView.text = mediaItems[selectedIndex].caption
+        self.updateTextViewFrame()
         DispatchQueue.main.async {
             self.setupVideoPlayerView()
         }
@@ -123,6 +128,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
             self.isScrolledByUser = true
         })
         captionTextView.text = mediaItems[selectedIndex].caption
+        self.updateTextViewFrame()
     }
     
     // MARK: - Private Method(s)
@@ -134,6 +140,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         self.delegate?.previewMainView(self, didDisplayViewAtIndex: currentVisibleIndex)
         selectedIndex = currentVisibleIndex
         captionTextView.text = mediaItems[selectedIndex].caption
+        self.updateTextViewFrame()
     }
     
     fileprivate func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
@@ -141,6 +148,18 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         videoPlayerView?.purgeVideoPlayer {
             completion()
         }
+    }
+    
+    fileprivate func updateTextViewFrame(){
+        let contentSize = self.captionTextView.sizeThatFits(self.captionTextView.bounds.size)
+        if contentSize.height > 60{
+            captionTextViewHeightConstraint.constant = 60
+            captionTextView.isScrollEnabled = true
+        }else{
+            captionTextViewHeightConstraint.constant = contentSize.height
+            captionTextView.isScrollEnabled = false
+        }
+        captionTextView.contentInset = .zero
     }
     
     private func setupVideoPlayerView(){
@@ -255,9 +274,11 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     // MARK: - ScrollView Delegate Method(s)
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateCurrentVisibleIndex()
-        notifyScrolling()
-        setupVideoPlayerView()
+        if scrollView == self.collectionView{
+            updateCurrentVisibleIndex()
+            notifyScrolling()
+            setupVideoPlayerView()
+        }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -323,6 +344,7 @@ extension TDMediaPreviewMainView{
 }
 extension TDMediaPreviewMainView:UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
+        self.updateTextViewFrame()
         mediaItems[selectedIndex].caption = textView.text
         self.delegate?.previewMainView(self, didRequestUpdateMedia : mediaItems[selectedIndex])
     }

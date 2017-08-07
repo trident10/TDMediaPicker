@@ -241,6 +241,7 @@
                     <connections>
                         <outlet property="captionTextView" destination="ztN-9p-hOT" id="yXa-gD-N1V"/>
                         <outlet property="captionTextViewBottomConstraint" destination="mXM-8t-xWr" id="ffr-sw-TCc"/>
+                        <outlet property="captionTextViewHeightConstraint" destination="6gR-oZ-aza" id="Cd1-Ve-Fb0"/>
                         <outlet property="collectionView" destination="Vkg-WO-iGq" id="MZk-RI-r1G"/>
                     </connections>
                 </view>

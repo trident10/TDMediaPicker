@@ -112,22 +112,7 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         return nil
     }
     
-    
-    // MARK: - View Delegate Method(s)
-    
-    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType) {
-        switch type {
-        case .close:
-            self.delegate?.previewControllerDidTapClose(self)
-        case .addMore:
-            self.delegate?.previewControllerDidTapAddOption(self)
-        case .done:
-            self.delegate?.previewControllerDidTapDone(self)
-        }
-    }
-    
-    func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel){
-        
+    private func didRequestDeleteMedia(media: TDPreviewViewModel){
         serviceManager.fetchMedia(media.id) { (mediaDataModel) in
             if mediaDataModel == nil{
                 return
@@ -139,7 +124,8 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
             self.serviceManager.updateCart(mediaDataModel!, updateType: .delete)
         }
     }
-    func previewView(_ view: TDMediaPreviewView, didRequestUpdateMedia media: TDPreviewViewModel){
+    
+    private func didRequestEditMedia(media: TDPreviewViewModel){
         serviceManager.fetchMedia(media.id) { (mediaDataModel) in
             if mediaDataModel == nil{
                 return
@@ -149,6 +135,23 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         }
     }
     
+    
+    // MARK: - View Delegate Method(s)
+    
+    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType, media: TDPreviewViewModel?) {
+        switch type {
+        case .close:
+            self.delegate?.previewControllerDidTapClose(self)
+        case .addMore:
+            self.delegate?.previewControllerDidTapAddOption(self)
+        case .done:
+            self.delegate?.previewControllerDidTapDone(self)
+        case .delete:
+            self.didRequestDeleteMedia(media: media!)
+        case .edit:
+            self.didRequestEditMedia(media: media!)
+        }
+    }
     
     // MARK: - Service Manager Deleage Method(s)
     
