@@ -51,6 +51,8 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         super.viewWillAppear(animated)
         
         serviceManager.fetchMediaItems()
+        let previewView = self.view as! TDMediaPreviewView
+        previewView.previewView.viewWillAppear()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -60,8 +62,18 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         
         let previewView = self.view as! TDMediaPreviewView
         previewView.purgeData()
+        previewView.previewView.viewDidDisappear()
     }
-    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let previewView = self.view as! TDMediaPreviewView
+        previewView.previewView.viewWillTransition()
+        coordinator.animate(alongsideTransition: nil, completion: {
+            _ in
+            previewView.previewView.viewDidTransition()
+            previewView.bottomView.viewDidTransition()
+        })
+    }
     // MARK: - Private Method(s)
     
     private func mapMediaViewModels(mediaList:[TDMedia])->TDMediaPreviewViewModel{
@@ -95,15 +107,38 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     private func map<T>(_ from: T) -> AnyObject?{
         if from is TDMedia{
             let media = from as! TDMedia
-            return TDPreviewViewModel.init(id: media.id, asset: media.asset, itemType: .Media)
+            return TDPreviewViewModel.init(id: media.id, asset: media.asset, itemType: .Media, caption:media.caption)
         }
         return nil
+    }
+    
+    private func didRequestDeleteMedia(media: TDPreviewViewModel){
+        serviceManager.fetchMedia(media.id) { (mediaDataModel) in
+            if mediaDataModel == nil{
+                return
+            }
+            let previewView = self.view as! TDMediaPreviewView
+            if previewView.previewView.getMedia().count <= 1{
+                self.delegate?.previewControllerDidTapClose(self)
+            }
+            self.serviceManager.updateCart(mediaDataModel!, updateType: .delete)
+        }
+    }
+    
+    private func didRequestEditMedia(media: TDPreviewViewModel){
+        serviceManager.fetchMedia(media.id) { (mediaDataModel) in
+            if mediaDataModel == nil{
+                return
+            }
+            mediaDataModel?.caption = media.caption!
+            self.serviceManager.updateCart(mediaDataModel!, updateType: .edit)
+        }
     }
     
     
     // MARK: - View Delegate Method(s)
     
-    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType) {
+    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType, media: TDPreviewViewModel?) {
         switch type {
         case .close:
             self.delegate?.previewControllerDidTapClose(self)
@@ -111,19 +146,12 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
             self.delegate?.previewControllerDidTapAddOption(self)
         case .done:
             self.delegate?.previewControllerDidTapDone(self)
-         }
-    }
-    
-    func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel){
-        
-        serviceManager.fetchMedia(media.id) { (mediaDataModel) in
-            if mediaDataModel == nil{
-                return
-            }
-            self.serviceManager.updateCart(mediaDataModel!, updateType: .delete)
+        case .delete:
+            self.didRequestDeleteMedia(media: media!)
+        case .edit:
+            self.didRequestEditMedia(media: media!)
         }
     }
-
     
     // MARK: - Service Manager Deleage Method(s)
     

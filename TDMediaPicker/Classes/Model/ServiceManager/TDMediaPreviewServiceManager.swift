@@ -56,6 +56,8 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
     func updateCart(_ media: TDMedia, updateType: TDCart.UpdateType){
         if updateType == .delete{
             cartServiceManager.remove(media)
+        }else if updateType == .edit{
+            cartServiceManager.edit(media)
         }
     }
 

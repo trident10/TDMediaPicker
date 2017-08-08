@@ -33,7 +33,7 @@ class TDAlbum{
         itemsCount = itemsFetchResult.count
         
         if itemsFetchResult.count > 0{
-            albumMedia = TDMedia(asset: itemsFetchResult[0])
+            albumMedia = TDMedia(asset: itemsFetchResult[0], caption: "")
 
         }
     }

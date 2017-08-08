@@ -12,7 +12,7 @@ import Photos
 class TDMediaPreviewViewModel{
     
     enum OperationType {
-        case done, close, addMore
+        case done, close, addMore, delete, edit
     }
     
     
@@ -27,16 +27,18 @@ class TDPreviewViewModel{
         case Media, AddOption
     }
     
+    var caption:String?
     var itemType:ItemType
     var mainImage: UIImage?
     var thumbImage: UIImage?
     var asset: PHAsset?
     var id: String
     
-    init(id:String, asset: PHAsset, itemType: ItemType) {
+    init(id:String, asset: PHAsset, itemType: ItemType, caption: String) {
         self.id = id
         self.asset = asset
         self.itemType = itemType
+        self.caption = caption
     }
     
     init(itemType: ItemType) {

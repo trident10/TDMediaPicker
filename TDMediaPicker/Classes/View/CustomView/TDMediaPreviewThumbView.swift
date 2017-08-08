@@ -33,8 +33,16 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     override func awakeFromNib() {
     }
     
+    override func layoutSubviews() {
+        collectionView.reloadData()
+    }
     
     // MARK: - Public Method(s)
+    
+    func viewDidTransition(){
+        collectionView.reloadData()
+        collectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
+    }
     
     func setupView(){
         TDMediaCell.registerCellWithType(.ImageThumb, collectionView: collectionView)
@@ -171,15 +179,17 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        // Just to avoid reload on tap of selected cell
-        if selectedIndex == indexPath.item{
-            collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
-            return
-        }
         
         let item = mediaItems[(indexPath as NSIndexPath).item]
         
         if item.itemType == .Media{
+            
+            // Just to avoid reload on tap of selected cell
+            if selectedIndex == indexPath.item{
+                collectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
+                return
+            }
+            
             let index = indexPath.item
             reload(toIndex: index)
             

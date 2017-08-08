@@ -9,8 +9,7 @@
 import UIKit
 
 protocol TDMediaPreviewViewDelegate: class {
-    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType)
-    func previewView(_ view: TDMediaPreviewView, didRequestDeleteMedia media: TDPreviewViewModel)
+    func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType, media: TDPreviewViewModel?)
 }
 
 class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreviewThumbViewDelegate{
@@ -57,17 +56,19 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     // MARK: - Action Method(s)
     
     @IBAction func closedTapped(sender: UIButton){
-        self.delegate?.previewView(self, didUpdateOperation: .close)
+        self.delegate?.previewView(self, didUpdateOperation: .close, media: nil)
     }
     
     @IBAction func doneTapped(sender: UIButton){
-        self.delegate?.previewView(self, didUpdateOperation: .done)
+        self.delegate?.previewView(self, didUpdateOperation: .done, media: nil)
     }
     
     @IBAction func deleteTapped(sender: UIButton){
-        
         let media = currentMedia?.previewMedia[currentSelectedIndex]
-        self.delegate?.previewView(self, didRequestDeleteMedia: media!)
+        self.delegate?.previewView(self, didUpdateOperation: .delete, media: media!)
+    }
+    @IBAction func tapOnCollectionView(_ sender: UITapGestureRecognizer) {
+        self.endEditing(true)
     }
     
     // MARK: - Main Preview View Delegate Method(s)
@@ -76,7 +77,9 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         currentSelectedIndex = index
         bottomView.reload(toIndex: index)
     }
-    
+    func previewMainView(_ view: TDMediaPreviewMainView, didRequestUpdateMedia media: TDPreviewViewModel) {
+        self.delegate?.previewView(self, didUpdateOperation: .edit, media: media)
+    }
     // MARK: - Thumb Preview View Delegate Method(s)
     
     func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int) {
@@ -85,7 +88,7 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     }
     
     func previewThumbViewDidTapAddOption(_ view: TDMediaPreviewThumbView) {
-        self.delegate?.previewView(self, didUpdateOperation: .addMore)
+        self.delegate?.previewView(self, didUpdateOperation: .addMore, media: nil)
     }
     
 }

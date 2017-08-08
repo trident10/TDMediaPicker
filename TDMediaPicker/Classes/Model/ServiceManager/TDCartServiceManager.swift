@@ -95,6 +95,22 @@ class TDCartServiceManager{
             delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .delete)
         }
     }
+    func edit(_ media: TDMedia) {
+        
+        let index = cart.media.index(where: { (element) -> Bool in
+            return element.asset.localIdentifier == media.asset.localIdentifier
+        })
+        
+        if index != nil{
+            cart.media[index!].caption = media.caption
+        }
+        else{
+            return
+        }
+//        for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {
+//            delegate.cartServiceManager(self, cartDidUpdate: cart, updateType: .delete)
+//        }
+    }
     
     func purgeCache(){
         for case let delegate as TDCartServiceManagerDelegate in delegates.allObjects {

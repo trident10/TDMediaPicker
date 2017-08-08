@@ -76,7 +76,7 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
         
         let itemsFetchResult = PHAsset.fetchAssets(in: album.collection, options: options)
         itemsFetchResult.enumerateObjects({ (asset, count, stop) in
-            self.mediaItems.append(TDMedia(asset: asset))
+            self.mediaItems.append(TDMedia(asset: asset, caption: ""))
         })
     }
     

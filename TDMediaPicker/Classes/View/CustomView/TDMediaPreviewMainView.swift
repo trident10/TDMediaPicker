@@ -10,6 +10,7 @@ import UIKit
 
 protocol TDMediaPreviewMainViewDelegate: class {
     func previewMainView(_ view: TDMediaPreviewMainView, didDisplayViewAtIndex index: Int)
+    func previewMainView(_ view: TDMediaPreviewMainView, didRequestUpdateMedia media: TDPreviewViewModel)
 }
 
 class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
@@ -18,8 +19,8 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     weak var delegate: TDMediaPreviewMainViewDelegate?
     
-    private var mediaItems: [TDPreviewViewModel] = []
-    private var selectedIndex: Int = 0
+    fileprivate var mediaItems: [TDPreviewViewModel] = []
+    fileprivate var selectedIndex: Int = 0
     
     private let rows: CGFloat = 1
     private let cellSpacing: CGFloat = 2
@@ -34,16 +35,35 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     fileprivate var videoPlayerView: TDMediaVideoView?
     
     @IBOutlet var collectionView:  UICollectionView!
-
-    
+    @IBOutlet var captionTextViewBottomConstraint:NSLayoutConstraint!
+    @IBOutlet var captionTextViewHeightConstraint:NSLayoutConstraint!
+    @IBOutlet var captionTextView:UITextView!
     // MARK: - LifeCycle
     
     override func awakeFromNib() {
-        
+        captionTextView.delegate = self
     }
     
+    override func layoutSubviews() {
+        collectionView.reloadData()
+        videoPlayerView?.frame = self.bounds
+    }
     
     // MARK: - Public Method(s)
+    func getMedia()->[TDPreviewViewModel]{
+        return self.mediaItems
+    }
+    
+    func viewWillTransition(){
+        isScrolledByUser = false
+    }
+    
+    func viewDidTransition(){
+        collectionView.reloadData()
+        collectionView.scrollToItem(at: IndexPath(row: selectedIndex, section: 0), at: .centeredHorizontally, animated: false)
+        isScrolledByUser = true
+        self.updateTextViewFrame()
+    }
     
     func setupView(){
         TDMediaCell.registerCellWithType(.Image, collectionView: collectionView)
@@ -60,7 +80,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     }
     
     func reload(media: TDMediaPreviewViewModel){
-        
+        if  media.previewMedia.count == 0 {
+            return
+        }
         mediaItems.removeAll()
         mediaItems = media.previewMedia
         
@@ -69,6 +91,8 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         currentVisibleIndex = 0
         selectedIndex = 0
         
+        captionTextView.text = mediaItems[selectedIndex].caption
+        self.updateTextViewFrame()
         DispatchQueue.main.async {
             self.setupVideoPlayerView()
         }
@@ -103,6 +127,8 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (timer) in
             self.isScrolledByUser = true
         })
+        captionTextView.text = mediaItems[selectedIndex].caption
+        self.updateTextViewFrame()
     }
     
     // MARK: - Private Method(s)
@@ -112,6 +138,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
             return
         }
         self.delegate?.previewMainView(self, didDisplayViewAtIndex: currentVisibleIndex)
+        selectedIndex = currentVisibleIndex
+        captionTextView.text = mediaItems[selectedIndex].caption
+        self.updateTextViewFrame()
     }
     
     fileprivate func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
@@ -121,10 +150,25 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         }
     }
     
+    fileprivate func updateTextViewFrame(){
+        let contentSize = self.captionTextView.sizeThatFits(self.captionTextView.bounds.size)
+        if contentSize.height > 60{
+            captionTextViewHeightConstraint.constant = 60
+            captionTextView.isScrollEnabled = true
+        }else{
+            captionTextViewHeightConstraint.constant = contentSize.height
+            captionTextView.isScrollEnabled = false
+        }
+        captionTextView.contentInset = .zero
+    }
+    
     private func setupVideoPlayerView(){
         if currentVisibleIndex == -1 || (currentPlayerSetupIndex != -1 && currentPlayerSetupIndex == currentVisibleIndex){
             // Stop Setup of player
             videoPlayerView?.stopVideo()
+            return
+        }
+        if mediaItems.count <= currentVisibleIndex{
             return
         }
         let media = mediaItems[currentVisibleIndex]
@@ -149,8 +193,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         visibleRect.origin = collectionView.contentOffset
         visibleRect.size = collectionView.bounds.size
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
-        currentVisibleIndex = visibleIndexPath.item
+        if let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint){
+            currentVisibleIndex = visibleIndexPath.item
+        }
     }
     
     private func handleMediaCellActions(cell:TDMediaCell, indexPath: IndexPath){
@@ -173,7 +218,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         }
         return nil
     }
-
+    
     private func configureMediaCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         
         let cell: TDMediaCell?
@@ -229,9 +274,11 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     // MARK: - ScrollView Delegate Method(s)
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateCurrentVisibleIndex()
-        notifyScrolling()
-        setupVideoPlayerView()
+        if scrollView == self.collectionView{
+            updateCurrentVisibleIndex()
+            notifyScrolling()
+            setupVideoPlayerView()
+        }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -256,4 +303,49 @@ extension TDMediaPreviewMainView: TDMediaVideoViewDelegate{
     }
     
 }
-
+extension TDMediaPreviewMainView{
+    func viewWillAppear(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    func viewDidDisappear(){
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let height = keyboardSize.height
+            var duration = 0.3
+            if let userInfo = notification.userInfo {
+                duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.3
+            }
+            UIView.animate(withDuration: duration) {
+                var bottomSpace:CGFloat = 65
+                if UIApplication.shared.statusBarOrientation.isLandscape{
+                    bottomSpace = 25
+                }
+                self.captionTextViewBottomConstraint.constant = height-bottomSpace
+                self.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private  func keyboardWillHide(notification: NSNotification) {
+        var duration = 0.3
+        if let userInfo = notification.userInfo {
+            duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.3
+        }
+        UIView.animate(withDuration: duration) {
+            self.captionTextViewBottomConstraint.constant = 5
+            self.layoutIfNeeded()
+        }
+    }
+}
+extension TDMediaPreviewMainView:UITextViewDelegate{
+    func textViewDidChange(_ textView: UITextView) {
+        self.updateTextViewFrame()
+        mediaItems[selectedIndex].caption = textView.text
+        self.delegate?.previewMainView(self, didRequestUpdateMedia : mediaItems[selectedIndex])
+    }
+}
