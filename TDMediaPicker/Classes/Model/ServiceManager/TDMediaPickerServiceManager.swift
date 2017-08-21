@@ -18,7 +18,7 @@ class TDMediaPickerServiceManager{
     
     weak var delegate: TDMediaPickerServiceManagerDelegate?
     private var cartServiceManager = TDCartServiceManager.sharedInstance
-
+    private var configServiceManager = TDConfigServiceManager.sharedInstance
     // MARK: - Init
     
     init() {
@@ -28,6 +28,10 @@ class TDMediaPickerServiceManager{
     
     func setupConfig(maxSelections:Int){
         cartServiceManager.setupConfig(maxSelection: maxSelections)
+    }
+    
+    func setupConfig(navigationTheme: TDConfigViewStandard){
+        configServiceManager.navigationTheme = navigationTheme
     }
     
     func resetSelectedMedia(){

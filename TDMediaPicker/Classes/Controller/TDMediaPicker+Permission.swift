@@ -17,4 +17,8 @@ extension TDMediaPicker: TDMediaPermissionViewControllerDelegate{
             self.showPickerScreen()
         }
     }
+    
+    func permissionControllerDidRequestForConfig(_ controller: TDMediaPermissionViewController)-> TDConfigPermissionScreen?{
+        return self.dataSource?.mediaPickerPermissionScreenConfig?(self)
+    }
 }

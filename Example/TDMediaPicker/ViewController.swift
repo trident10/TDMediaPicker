@@ -15,6 +15,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         mediaPicker.delegate = self
+        mediaPicker.dataSource = self
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -46,6 +47,21 @@ extension ViewController: TDMediaPickerDelegate{
             self.displayAlert(title: "Media Selection Cancelled")
 
         }
+    }
+}
+
+
+extension ViewController: TDMediaPickerDataSource{
+    
+    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker) -> TDConfigPermissionScreen {
+        
+        //let view = UIView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        //view.backgroundColor = .red
+        //let configView = TDConfigViewCustom(view: view)
+        
+        let configView = TDConfigViewStandard(backgroundColor: .blue)
+        let permissionConfig = TDConfigPermissionScreen(standardView: configView)
+        return permissionConfig
     }
 }
 

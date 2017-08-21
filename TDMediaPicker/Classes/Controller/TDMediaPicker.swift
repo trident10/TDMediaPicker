@@ -7,22 +7,48 @@
 //
 
 import UIKit
+import Photos
 
 public protocol TDMediaPickerDelegate: class{
     func mediaPicker(_ picker: TDMediaPicker, didSelectMedia media:[TDMedia])
     func mediaPickerDidCancel(_ picker: TDMediaPicker)
 }
 
+@objc public protocol TDMediaPickerDataSource{
+    
+    //THEME
+    @objc optional func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard
+    
+    //Permission Screen
+    @objc optional func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
+    
+    //Album Screen
+    @objc optional func mediaPickerScreenTitleForAlbumScreen(_ picker: TDMediaPicker)-> TDConfigText
+    @objc optional func mediaPickerFetchOptionsForAlbumScreen(_ picker: TDMediaPicker)-> PHFetchOptions
+    @objc optional func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType
+    @objc optional func mediaPicker(_ picker: TDMediaPicker, imageSizeForAlbum album: TDAlbum)-> CGSize
+    @objc optional func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText
+    @objc optional func mediaPickerNextButtonConfigForAlbumScreen(_ picker: TDMediaPicker)-> TDConfigButton
+    @objc optional func mediaPickerBackButtonConfigForAlbumScreen(_ picker: TDMediaPicker)-> TDConfigButton
+    @objc optional func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
+    
+}
+
 open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     
     // MARK: - Variable(s)
+    
+    @objc public enum AlbumCollectionType: Int {
+        case Grid = 1, List = 2
+    }
     
     enum ScreenType{
         case Permission, Album, Media, Preview, All
     }
     
-    
     open weak var delegate:  TDMediaPickerDelegate?
+    open weak var dataSource:  TDMediaPickerDataSource?
+    
     var maxSelections = 300
     
     var permissionVC: TDMediaPermissionViewController?
@@ -55,6 +81,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         super.viewDidLoad()
         
         setupNavigationController()
+        setupInitialConfiguration()
         
         if TDMediaUtil.hasPermission(accessType: .Gallery){
             showPickerScreen()
@@ -68,6 +95,13 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     }
     
     // MARK: - Setup Method(s)
+    
+    func setupInitialConfiguration(){
+        if let viewConfig = dataSource?.mediaPickerNavigationTheme?(self){
+            seviceManager.setupConfig(navigationTheme: viewConfig)
+        }
+    }
+    
     
     func setupScreen(_ screenType:TDMediaPicker.ScreenType){
         switch screenType {

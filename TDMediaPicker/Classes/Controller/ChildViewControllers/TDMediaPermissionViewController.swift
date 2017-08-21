@@ -10,12 +10,18 @@ import UIKit
 
 protocol TDMediaPermissionViewControllerDelegate:class{
     func permissionControllerDidFinish(_ controller: TDMediaPermissionViewController)
+    func permissionControllerDidRequestForConfig(_ controller: TDMediaPermissionViewController)-> TDConfigPermissionScreen?
+
 }
 
 class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDelegate{
     
     // MARK: - Variables
+    
     weak var delegate: TDMediaPermissionViewControllerDelegate?
+    private lazy var serviceManager = TDPermissionServiceManager()
+    private var permissionView: TDMediaPermissionView?
+    
     
     // MARK: - Init
     
@@ -31,9 +37,11 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let permissionView = self.view as! TDMediaPermissionView
-        permissionView.delegate = self
         
+        permissionView = self.view as? TDMediaPermissionView
+        permissionView?.delegate = self
+        
+        setupPermissionConfig()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,6 +51,22 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
     }
     
     //MARK: - Private Method(s)
+    
+    func setupPermissionConfig(){
+        let config = self.delegate?.permissionControllerDidRequestForConfig(self)
+        if config == nil{
+            return
+        }
+        if let customView = config?.customView{
+            permissionView?.setupCustomView(view: customView)
+            return
+        }
+        if let standardView = config?.standardView{
+            permissionView?.setupStandardView(view: standardView)
+            return
+        }
+        
+    }
     
     private func requestGalleryPermission(){
         TDMediaUtil.requestForHardwareAccess(accessType: .Gallery) { (isGranted) in

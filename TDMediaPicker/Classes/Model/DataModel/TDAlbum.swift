@@ -9,7 +9,8 @@
 import Foundation
 import Photos
 
-class TDAlbum{
+open class TDAlbum: NSObject{
+    
     let collection: PHAssetCollection
     var itemsCount: Int = 0
     var albumMedia: TDMedia?
