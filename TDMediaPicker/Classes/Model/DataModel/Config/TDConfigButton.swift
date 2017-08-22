@@ -18,29 +18,36 @@ open class TDConfigButton: TDConfig{
 
 open class TDConfigButtonText: TDConfigButton{
     
-    var normalColor: UIColor = .white
-    var selectedColor: UIColor = .blue
+    var normalColor: UIColor?
+    var highlightedColor: UIColor?
+    var selectedColor: UIColor?
     
-    var normalTextConfig: TDConfigText = TDConfigText(text: "")
-    var selectedTextConfig: TDConfigText = TDConfigText(text: "")
+    var normalTextConfig: TDConfigText?
+    var highlightTextConfig: TDConfigText?
+    var selectedTextConfig: TDConfigText?
     
-    public init(normalColor: UIColor, selectedColor: UIColor, normalTextConfig: TDConfigText, selectedTextConfig: TDConfigText) {
+    public init(normalColor: UIColor? = nil, highlightedColor: UIColor? = nil, selectedColor: UIColor? = nil, normalTextConfig: TDConfigText? = nil, highlightTextConfig: TDConfigText? = nil, selectedTextConfig: TDConfigText? = nil) {
         super.init()
         self.normalColor = normalColor
+        self.highlightedColor = highlightedColor
         self.selectedColor = selectedColor
         
         self.normalTextConfig = normalTextConfig
+        self.highlightTextConfig = highlightTextConfig
         self.selectedTextConfig = selectedTextConfig
     }
 }
 
 open class TDConfigButtonImage: TDConfigButton{
     
-    var normalImage: UIImage
-    var selectedImage: UIImage
+    var normalImage: UIImage?
+    var highlightImage: UIImage?
+    var selectedImage: UIImage?
     
-    init(normalImage: UIImage, selectedImage: UIImage) {
+    public init(normalImage: UIImage? = nil, highlightImage: UIImage? = nil , selectedImage: UIImage? = nil) {
+        super.init()
         self.normalImage = normalImage
+        self.highlightImage = highlightImage
         self.selectedImage = selectedImage
     }
 }

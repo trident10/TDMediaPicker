@@ -17,6 +17,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		B77AF07A1F343D55002983BF /* Pods_TDMediaPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF5E54C0ECFA87E84BB52E4 /* Pods_TDMediaPicker_Tests.framework */; };
 		B77AF07C1F343D55002983BF /* TDMediaPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77AF07B1F343D55002983BF /* TDMediaPicker.framework */; };
+		CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		81587B4AFAB08EB1720CA335 /* Pods_TDMediaPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TDMediaPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A631B15BFD09830AA7D7173A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B77AF07B1F343D55002983BF /* TDMediaPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TDMediaPicker.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TDMediaPicker-drsslcvwrcbyrgaugihzoqkrthkz/Build/Products/Debug-iphoneos/TDMediaPicker/TDMediaPicker.framework"; sourceTree = "<group>"; };
+		CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB824E5911EBD6C1C26F19EF /* Pods-TDMediaPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDMediaPicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TDMediaPicker_Tests/Pods-TDMediaPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DA791F76A2287FFA5B4C422D /* TDMediaPicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TDMediaPicker.podspec; path = ../TDMediaPicker.podspec; sourceTree = "<group>"; };
 		F9BDA805B17937E89504880D /* Pods-TDMediaPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDMediaPicker_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TDMediaPicker_Tests/Pods-TDMediaPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
+				CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */,
 			);
 			name = "Example for TDMediaPicker";
 			path = TDMediaPicker;
@@ -259,6 +262,7 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

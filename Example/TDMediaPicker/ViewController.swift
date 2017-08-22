@@ -55,12 +55,21 @@ extension ViewController: TDMediaPickerDataSource{
     
     func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker) -> TDConfigPermissionScreen {
         
+        //1.
         //let view = UIView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         //view.backgroundColor = .red
         //let configView = TDConfigViewCustom(view: view)
         
-        let configView = TDConfigViewStandard(backgroundColor: .blue)
-        let permissionConfig = TDConfigPermissionScreen(standardView: configView)
+        //2.
+        //let configView = TDConfigViewStandard(backgroundColor: .blue)
+        //let permissionConfig = TDConfigPermissionScreen(standardView: configView)
+        
+        //3.
+        let permissionConfig = TDConfigPermissionScreen()
+        permissionConfig.settingButton = TDConfigButtonText.init(normalColor: .red, highlightedColor: .blue, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
+        //permissionConfig.settingButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "scan_qr_button"), highlightImage: UIImage.init(named: "cameraBtn"))
+        
+        
         return permissionConfig
     }
 }

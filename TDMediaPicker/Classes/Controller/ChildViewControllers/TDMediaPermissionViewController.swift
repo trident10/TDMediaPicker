@@ -41,18 +41,19 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
         permissionView = self.view as? TDMediaPermissionView
         permissionView?.delegate = self
         
-        setupPermissionConfig()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         requestGalleryPermission()
+        setupPermissionConfig()
+
     }
     
     //MARK: - Private Method(s)
     
-    func setupPermissionConfig(){
+    private func setupPermissionConfig(){
         let config = self.delegate?.permissionControllerDidRequestForConfig(self)
         if config == nil{
             return
@@ -63,7 +64,9 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
         }
         if let standardView = config?.standardView{
             permissionView?.setupStandardView(view: standardView)
-            return
+        }
+        if let settingsButtonConfig = config?.settingButton{
+            permissionView?.setupSettingsButton(buttonConfig: settingsButtonConfig)
         }
         
     }
