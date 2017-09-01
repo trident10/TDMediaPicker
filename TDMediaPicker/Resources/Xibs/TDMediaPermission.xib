@@ -20,10 +20,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-mw-wDH">
-                    <rect key="frame" x="25" y="25" width="39" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Close"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-mw-wDH">
+                    <rect key="frame" x="25" y="25" width="56" height="34"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="closeButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="tr7-f3-UYM"/>
                     </connections>
@@ -50,7 +51,9 @@
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="50" id="KqO-WD-jar"/>
                 <constraint firstItem="Nqz-ei-HJ9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OBY-7h-mQh"/>
                 <constraint firstItem="Nqz-ei-HJ9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="PoU-Jv-Mh5"/>
+                <constraint firstItem="Na1-mw-wDH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="QD3-00-0hx"/>
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aYX-tc-mbP"/>
+                <constraint firstItem="Na1-mw-wDH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="cGo-wa-vUq"/>
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="top" secondItem="Nqz-ei-HJ9" secondAttribute="bottom" constant="10" id="cuZ-en-zzf"/>
             </constraints>
             <connections>

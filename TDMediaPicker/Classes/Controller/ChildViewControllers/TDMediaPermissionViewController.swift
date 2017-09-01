@@ -10,6 +10,7 @@ import UIKit
 
 protocol TDMediaPermissionViewControllerDelegate:class{
     func permissionControllerDidFinish(_ controller: TDMediaPermissionViewController)
+    func permissionControllerDidTapClose(_ controller: TDMediaPermissionViewController)
     func permissionControllerDidRequestForConfig(_ controller: TDMediaPermissionViewController)-> TDConfigPermissionScreen?
 
 }
@@ -40,33 +41,48 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
         
         permissionView = self.view as? TDMediaPermissionView
         permissionView?.delegate = self
-        
+        setupPermissionConfig()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         requestGalleryPermission()
-        setupPermissionConfig()
-
     }
     
     //MARK: - Private Method(s)
     
     private func setupPermissionConfig(){
         let config = self.delegate?.permissionControllerDidRequestForConfig(self)
-        if config == nil{
-            return
-        }
+        
+        //1.
         if let customView = config?.customView{
             permissionView?.setupCustomView(view: customView)
             return
         }
+        
+        //2.
+        var shouldDisplayDefaultScreen = true
+        
         if let standardView = config?.standardView{
             permissionView?.setupStandardView(view: standardView)
+            shouldDisplayDefaultScreen = false
         }
         if let settingsButtonConfig = config?.settingButton{
             permissionView?.setupSettingsButton(buttonConfig: settingsButtonConfig)
+            shouldDisplayDefaultScreen = false
+        }
+        if let cancelButtonConfig = config?.cancelButton{
+            permissionView?.setupCancelButton(buttonConfig: cancelButtonConfig)
+            shouldDisplayDefaultScreen = false
+        }
+        if let captionConfig = config?.caption{
+            permissionView?.setupCancelButton(buttonConfig: cancelButtonConfig)
+            shouldDisplayDefaultScreen = false
+        }
+        
+        //3.
+        if shouldDisplayDefaultScreen{
+            permissionView?.setupDefaultScreen()
         }
         
     }
@@ -94,7 +110,7 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
     }
     
     func permissionViewCloseButtonTapped(_ view: TDMediaPermissionView) {
-        
+        self.delegate?.permissionControllerDidTapClose(self)
     }
     
 }

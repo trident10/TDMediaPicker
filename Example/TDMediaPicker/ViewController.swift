@@ -66,10 +66,9 @@ extension ViewController: TDMediaPickerDataSource{
         
         //3.
         let permissionConfig = TDConfigPermissionScreen()
-        permissionConfig.settingButton = TDConfigButtonText.init(normalColor: .red, highlightedColor: .blue, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        //permissionConfig.settingButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "scan_qr_button"), highlightImage: UIImage.init(named: "cameraBtn"))
-        
-        
+        permissionConfig.settingButton = TDConfigButtonText.init(normalColor: .red, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+        permissionConfig.cancelButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "close"), customSize: CGSize.init(width: 16, height: 16))
+        permissionConfig.caption = TDConfigText.init(text: "Please give access to photo library", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 10))
         return permissionConfig
     }
 }
