@@ -68,7 +68,12 @@ extension ViewController: TDMediaPickerDataSource{
         let permissionConfig = TDConfigPermissionScreen()
         permissionConfig.settingButton = TDConfigButtonText.init(normalColor: .red, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
         permissionConfig.cancelButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "close"), customSize: CGSize.init(width: 16, height: 16))
-        permissionConfig.caption = TDConfigText.init(text: "Please give access to photo library", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 10))
+        
+        //4. 
+        
+        permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "1. Please give access to photo library. 2. Please give access to photo library. 3. Please give access to photo library. 4. Please give access to photo library. 5. Please give access to photo library. 6. Please give access to photo library. 7. Please give access to photo library.", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
+            
+            //TDConfigText.init(text: "Please give access to photo library", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 10))
         return permissionConfig
     }
 }

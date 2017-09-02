@@ -76,7 +76,7 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
             shouldDisplayDefaultScreen = false
         }
         if let captionConfig = config?.caption{
-            permissionView?.setupCancelButton(buttonConfig: cancelButtonConfig)
+            permissionView?.setupCaptionLabel(captionConfig)
             shouldDisplayDefaultScreen = false
         }
         

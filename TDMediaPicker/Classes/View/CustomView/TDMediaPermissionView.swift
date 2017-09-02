@@ -51,8 +51,31 @@ class TDMediaPermissionView: TDMediaPickerView{
         TDMediaUtil.setupButton(btnCancel, buttonConfig: buttonConfig)
     }
     
-    func setupCaptionLabel(buttonConfig: TDConfigButton){
-        TDMediaUtil.setupButton(btnCancel, buttonConfig: buttonConfig)
+    func setupCaptionLabel(_ config: TDConfigLabel){
+        if let alignment = config.textAlignment{
+            lblCaption.textAlignment = alignment
+        }
+        if let color = config.backgroundColor{
+            lblCaption.backgroundColor = color
+        }
+        if let text = config.textConfig?.text{
+            lblCaption.text = text
+        }
+        if let font = config.textConfig?.textFont{
+            lblCaption.font = font
+        }
+        if let color = config.textConfig?.textColor{
+            lblCaption.textColor = color
+        }
+        if let minimumFontSize = config.minimumFontSize{
+            lblCaption.adjustsFontSizeToFitWidth = true
+            let currentTextSize = lblCaption.font.pointSize
+            var scale = minimumFontSize / currentTextSize
+            if scale <= 0{
+                scale = 0.1
+            }
+            lblCaption.minimumScaleFactor = scale
+        }
     }
     
     func setupDefaultScreen(){

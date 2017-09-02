@@ -21,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-mw-wDH">
-                    <rect key="frame" x="25" y="25" width="56" height="34"/>
+                    <rect key="frame" x="10" y="35" width="56" height="34"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -29,7 +29,7 @@
                         <action selector="closeButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="tr7-f3-UYM"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqz-ei-HJ9">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqz-ei-HJ9">
                     <rect key="frame" x="20" y="216" width="335" height="140"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -40,7 +40,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-hS-Jni">
-                    <rect key="frame" x="172.5" y="366.5" width="30" height="34"/>
+                    <rect key="frame" x="154" y="366.5" width="67" height="34"/>
+                    <state key="normal" title="Settings">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="settingsButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="S5x-nc-GHH"/>
                     </connections>
@@ -51,9 +54,9 @@
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="50" id="KqO-WD-jar"/>
                 <constraint firstItem="Nqz-ei-HJ9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OBY-7h-mQh"/>
                 <constraint firstItem="Nqz-ei-HJ9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="PoU-Jv-Mh5"/>
-                <constraint firstItem="Na1-mw-wDH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="QD3-00-0hx"/>
+                <constraint firstItem="Na1-mw-wDH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="QD3-00-0hx"/>
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aYX-tc-mbP"/>
-                <constraint firstItem="Na1-mw-wDH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="25" id="cGo-wa-vUq"/>
+                <constraint firstItem="Na1-mw-wDH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="cGo-wa-vUq"/>
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="top" secondItem="Nqz-ei-HJ9" secondAttribute="bottom" constant="10" id="cuZ-en-zzf"/>
             </constraints>
             <connections>

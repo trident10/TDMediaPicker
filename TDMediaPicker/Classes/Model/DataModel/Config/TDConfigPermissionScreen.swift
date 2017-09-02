@@ -12,7 +12,7 @@ open class TDConfigPermissionScreen: NSObject{
     
     open var customView:TDConfigView?
     open var standardView:TDConfigView?
-    open var caption:TDConfigText?
+    open var caption:TDConfigLabel?
     open var settingButton:TDConfigButton?
     open var cancelButton:TDConfigButton?
     
@@ -21,7 +21,7 @@ open class TDConfigPermissionScreen: NSObject{
         self.customView = customView
     }
     
-    public init(standardView: TDConfigViewStandard? = nil, caption: TDConfigText? = nil, settingButton: TDConfigButton? = nil, cancelButton: TDConfigButton? = nil){
+    public init(standardView: TDConfigViewStandard? = nil, caption: TDConfigLabel? = nil, settingButton: TDConfigButton? = nil, cancelButton: TDConfigButton? = nil){
         super.init()
         self.standardView = standardView
         self.caption = caption
