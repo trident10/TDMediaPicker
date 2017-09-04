@@ -12,6 +12,6 @@ extension ViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedTheme = themes[indexPath.row]
-        present(mediaPicker, animated: true, completion: nil)
+        present(mediaPicker!, animated: true, completion: nil)
     }
 }

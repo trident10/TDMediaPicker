@@ -12,17 +12,11 @@ import TDMediaPicker
 class Theme4: ThemeConfig{
     
     override func getPermissionScreenConfig() -> TDConfigPermissionScreen {
-        //1.
-        //let view = UIView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        //view.backgroundColor = .red
-        //let configView = TDConfigViewCustom(view: view)
+        let view = UIView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        view.backgroundColor = UIColor(rgb: 0x2ABB9B)
+        let configView = TDConfigViewCustom(view: view)
         
-        //2.
-        //let configView = TDConfigViewStandard(backgroundColor: .blue)
-        //let permissionConfig = TDConfigPermissionScreen(standardView: configView)
-        
-        //3.
-        let permissionConfig = TDConfigPermissionScreen()
+        let permissionConfig = TDConfigPermissionScreen(customView: configView)
         permissionConfig.settingButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "scan_qr_button"), customSize: CGSize.init(width: 32, height: 32))
         //TDConfigButtonText.init(normalColor: .red, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
         permissionConfig.cancelButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "close"), customSize: CGSize.init(width: 16, height: 16))
