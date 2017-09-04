@@ -81,6 +81,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     func reload(media:[TDMediaViewModel]){
         mediaItems = media
+        processReceivedMediaItems()
         collectionView.reloadData()
     }
     
@@ -106,6 +107,14 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     
     // MARK: - Private Method(s)
+    private func processReceivedMediaItems(){
+        mediaItems = mediaItems.filter({ (mediaItem) -> Bool in
+            if mediaItem.asset.mediaType == .image || mediaItem.asset.mediaType == .video{
+                return true
+            }
+            return false
+        })
+    }
     
     private func setUpMediaCell(mediaItem: TDMediaViewModel, indexPath: IndexPath) -> TDMediaCell?{
         if mediaItem.asset.mediaType == .image{
@@ -169,9 +178,9 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         configureFrameView(cell!, indexPath: indexPath)
-
+        
         return cell!
-
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -184,7 +193,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let media = mediaItems[(indexPath as NSIndexPath).item]
-
+        
         let index = cart?.media.index(where: { (element) -> Bool in
             return element.asset.localIdentifier == media.asset.localIdentifier
         })
@@ -202,6 +211,6 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         let mediaCell = cell as! TDMediaCell
         mediaCell.didEndDisplay()
     }
-
+    
     
 }
