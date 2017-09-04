@@ -21,7 +21,7 @@ extension TDMediaPicker: TDAlbumListViewControllerDelegate{
     }
     
     func albumControllerDidTapDone(_ controller:TDAlbumListViewController){
-        if seviceManager.getSelectedMedia().count == 0{
+        if serviceManager.getSelectedMedia().count == 0{
             // Display alert to select Any Media First. Or enable done button
             return
         }

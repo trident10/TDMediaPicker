@@ -57,15 +57,15 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     var previewVC: TDMediaPreviewViewController?
     
     lazy var navVC          = UINavigationController()
-    lazy var seviceManager  = TDMediaPickerServiceManager()
+    lazy var serviceManager  = TDMediaPickerServiceManager()
         
     // MARK: - Init
     
     public required init() {
         super.init(nibName: nil, bundle: nil)
         
-        seviceManager.delegate = self
-        seviceManager.setupConfig(maxSelections: maxSelections)
+        serviceManager.delegate = self
+        serviceManager.setupConfig(maxSelections: maxSelections)
     }
     
     deinit {
@@ -81,13 +81,16 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         super.viewDidLoad()
         
         setupNavigationController()
-        setupInitialConfiguration()
         
         if TDMediaUtil.hasPermission(accessType: .Gallery){
             showPickerScreen()
             return
         }
         showPermissionScreen()
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        setupInitialConfiguration()
     }
     
     override open func viewDidDisappear(_ animated: Bool) {
@@ -98,7 +101,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     
     func setupInitialConfiguration(){
         if let viewConfig = dataSource?.mediaPickerNavigationTheme?(self){
-            seviceManager.setupConfig(navigationTheme: viewConfig)
+            serviceManager.setupConfig(navigationTheme: viewConfig)
         }
     }
     
@@ -201,7 +204,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     }
     
     func resetPicker(){
-        seviceManager.resetSelectedMedia()
+        serviceManager.resetSelectedMedia()
         navVC.popToRootViewController(animated: false)
     }
 }

@@ -22,7 +22,7 @@ extension TDMediaPicker: TDMediaPreviewViewControllerDelegate{
     }
     
     func previewControllerDidTapDone(_ controller: TDMediaPreviewViewController){
-        let media = seviceManager.getSelectedMedia()
+        let media = serviceManager.getSelectedMedia()
         self.delegate?.mediaPicker(self, didSelectMedia: media)
         cleanupScreen(.All)
         resetPicker()

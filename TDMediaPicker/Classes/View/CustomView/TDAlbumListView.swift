@@ -26,6 +26,7 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     @IBOutlet var tableView:  UITableView!
     @IBOutlet var titleLable: UILabel!
+    @IBOutlet var navigationBar: UIView!
 
     
     // MARK: - LifeCycle 
@@ -39,6 +40,10 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     func setupView(){
         tableView.register(UINib.init(nibName: "TDAlbumCell", bundle: TDMediaUtil.xibBundle()), forCellReuseIdentifier: String(describing: TDAlbumCell.self))
         self.setupViewModel()
+    }
+    
+    func setupNavigationTheme(_ color: UIColor){
+        navigationBar.backgroundColor = color
     }
     
     func purgeData(){

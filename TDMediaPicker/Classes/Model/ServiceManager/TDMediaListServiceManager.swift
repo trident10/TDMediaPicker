@@ -20,7 +20,8 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     lazy private var mediaItems:[TDMedia] = []
     
     private var cartServiceManager = TDCartServiceManager.sharedInstance
-    
+    private var configServiceManager = TDConfigServiceManager.sharedInstance
+
     weak var delegate:TDMediaListServiceManagerDelegate?
     
     public init() {
@@ -52,6 +53,10 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     
     func purgeData(){
         mediaItems.removeAll()
+    }
+    
+    func getNavigationThemeConfig()-> TDConfigViewStandard{
+        return configServiceManager.navigationTheme
     }
     
     // MARK: ... Cart Method(s)

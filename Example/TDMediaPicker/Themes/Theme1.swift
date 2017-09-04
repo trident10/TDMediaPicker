@@ -34,6 +34,10 @@ class Theme1: ThemeConfig{
         //TDConfigText.init(text: "Please give access to photo library", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 10))
         return permissionConfig
     }
+    
+    override func getNavigationThemeConfig() -> TDConfigViewStandard {
+        return TDConfigViewStandard.init(backgroundColor: .white)
+    }
 
 }
 

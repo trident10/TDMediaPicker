@@ -35,6 +35,10 @@ class Theme7: ThemeConfig{
         return permissionConfig
     }
     
+    override func getNavigationThemeConfig() -> TDConfigViewStandard {
+        return TDConfigViewStandard.init(backgroundColor: .yellow)
+    }
+    
 }
 
 

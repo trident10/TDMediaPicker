@@ -18,6 +18,8 @@ class TDAlbumListServiceManager {
     // MARK: - Variable(s)
     private var albumsFetchResults = [PHFetchResult<PHAssetCollection>]()
     
+    private var configServiceManager = TDConfigServiceManager.sharedInstance
+
     lazy private var albums:[TDAlbum] = []
 
     weak var delegate: TDAlbumListServiceManagerDelegate?
@@ -35,6 +37,10 @@ class TDAlbumListServiceManager {
                 completion(self.albums)
             }
         }
+    }
+    
+    func getNavigationThemeConfig()-> TDConfigViewStandard{
+        return configServiceManager.navigationTheme
     }
     
     // MARK: - Private Method(s)
