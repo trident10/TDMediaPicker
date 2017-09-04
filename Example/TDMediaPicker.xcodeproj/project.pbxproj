@@ -18,6 +18,18 @@
 		B77AF07A1F343D55002983BF /* Pods_TDMediaPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF5E54C0ECFA87E84BB52E4 /* Pods_TDMediaPicker_Tests.framework */; };
 		B77AF07C1F343D55002983BF /* TDMediaPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77AF07B1F343D55002983BF /* TDMediaPicker.framework */; };
 		CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */; };
+		CAED5EAC1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EAB1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift */; };
+		CAED5EAE1F5D238B007A25ED /* ViewController+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EAD1F5D238B007A25ED /* ViewController+TableViewDelegate.swift */; };
+		CAED5EB01F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EAF1F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift */; };
+		CAED5EB21F5D2F50007A25ED /* ViewController+MediaPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EB11F5D2F50007A25ED /* ViewController+MediaPickerDelegate.swift */; };
+		CAED5EB51F5D374E007A25ED /* Theme1.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EB41F5D374E007A25ED /* Theme1.swift */; };
+		CAED5EB71F5D3758007A25ED /* Theme2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EB61F5D3758007A25ED /* Theme2.swift */; };
+		CAED5EB91F5D3B3E007A25ED /* ThemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EB81F5D3B3E007A25ED /* ThemeConfig.swift */; };
+		CAED5EBB1F5D3E3A007A25ED /* Theme3.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EBA1F5D3E3A007A25ED /* Theme3.swift */; };
+		CAED5EBD1F5D3E48007A25ED /* Theme4.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EBC1F5D3E48007A25ED /* Theme4.swift */; };
+		CAED5EBF1F5D3E50007A25ED /* Theme5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EBE1F5D3E50007A25ED /* Theme5.swift */; };
+		CAED5EC11F5D3E58007A25ED /* Theme6.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EC01F5D3E58007A25ED /* Theme6.swift */; };
+		CAED5EC31F5D3E5F007A25ED /* Theme7.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAED5EC21F5D3E5F007A25ED /* Theme7.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +61,18 @@
 		A631B15BFD09830AA7D7173A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B77AF07B1F343D55002983BF /* TDMediaPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TDMediaPicker.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TDMediaPicker-drsslcvwrcbyrgaugihzoqkrthkz/Build/Products/Debug-iphoneos/TDMediaPicker/TDMediaPicker.framework"; sourceTree = "<group>"; };
 		CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CAED5EAB1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+TableViewDatasource.swift"; sourceTree = "<group>"; };
+		CAED5EAD1F5D238B007A25ED /* ViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		CAED5EAF1F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+MediaPickerDataSource.swift"; sourceTree = "<group>"; };
+		CAED5EB11F5D2F50007A25ED /* ViewController+MediaPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+MediaPickerDelegate.swift"; sourceTree = "<group>"; };
+		CAED5EB41F5D374E007A25ED /* Theme1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme1.swift; sourceTree = "<group>"; };
+		CAED5EB61F5D3758007A25ED /* Theme2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme2.swift; sourceTree = "<group>"; };
+		CAED5EB81F5D3B3E007A25ED /* ThemeConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
+		CAED5EBA1F5D3E3A007A25ED /* Theme3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme3.swift; sourceTree = "<group>"; };
+		CAED5EBC1F5D3E48007A25ED /* Theme4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme4.swift; sourceTree = "<group>"; };
+		CAED5EBE1F5D3E50007A25ED /* Theme5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme5.swift; sourceTree = "<group>"; };
+		CAED5EC01F5D3E58007A25ED /* Theme6.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme6.swift; sourceTree = "<group>"; };
+		CAED5EC21F5D3E5F007A25ED /* Theme7.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme7.swift; sourceTree = "<group>"; };
 		CB824E5911EBD6C1C26F19EF /* Pods-TDMediaPicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDMediaPicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TDMediaPicker_Tests/Pods-TDMediaPicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		DA791F76A2287FFA5B4C422D /* TDMediaPicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TDMediaPicker.podspec; path = ../TDMediaPicker.podspec; sourceTree = "<group>"; };
 		F9BDA805B17937E89504880D /* Pods-TDMediaPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDMediaPicker_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TDMediaPicker_Tests/Pods-TDMediaPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +126,11 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				CAED5EAB1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift */,
+				CAED5EAD1F5D238B007A25ED /* ViewController+TableViewDelegate.swift */,
+				CAED5EAF1F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift */,
+				CAED5EB11F5D2F50007A25ED /* ViewController+MediaPickerDelegate.swift */,
+				CAED5EB31F5D3735007A25ED /* Themes */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -155,6 +184,21 @@
 				4FF5E54C0ECFA87E84BB52E4 /* Pods_TDMediaPicker_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAED5EB31F5D3735007A25ED /* Themes */ = {
+			isa = PBXGroup;
+			children = (
+				CAED5EB81F5D3B3E007A25ED /* ThemeConfig.swift */,
+				CAED5EB41F5D374E007A25ED /* Theme1.swift */,
+				CAED5EB61F5D3758007A25ED /* Theme2.swift */,
+				CAED5EBA1F5D3E3A007A25ED /* Theme3.swift */,
+				CAED5EBC1F5D3E48007A25ED /* Theme4.swift */,
+				CAED5EBE1F5D3E50007A25ED /* Theme5.swift */,
+				CAED5EC01F5D3E58007A25ED /* Theme6.swift */,
+				CAED5EC21F5D3E5F007A25ED /* Theme7.swift */,
+			);
+			path = Themes;
 			sourceTree = "<group>";
 		};
 		F77C0DF932604993A4158BD2 /* Pods */ = {
@@ -374,8 +418,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAED5EB91F5D3B3E007A25ED /* ThemeConfig.swift in Sources */,
+				CAED5EBD1F5D3E48007A25ED /* Theme4.swift in Sources */,
+				CAED5EB01F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift in Sources */,
+				CAED5EC31F5D3E5F007A25ED /* Theme7.swift in Sources */,
+				CAED5EB51F5D374E007A25ED /* Theme1.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				CAED5EAE1F5D238B007A25ED /* ViewController+TableViewDelegate.swift in Sources */,
+				CAED5EB71F5D3758007A25ED /* Theme2.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				CAED5EC11F5D3E58007A25ED /* Theme6.swift in Sources */,
+				CAED5EB21F5D2F50007A25ED /* ViewController+MediaPickerDelegate.swift in Sources */,
+				CAED5EAC1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift in Sources */,
+				CAED5EBB1F5D3E3A007A25ED /* Theme3.swift in Sources */,
+				CAED5EBF1F5D3E50007A25ED /* Theme5.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

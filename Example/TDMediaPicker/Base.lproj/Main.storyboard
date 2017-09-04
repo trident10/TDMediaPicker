@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="q7B-rs-K7J">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--TDMediaPicker-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="TDMediaPicker_Example" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,23 +21,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UEr-jZ-NhR">
-                                <rect key="frame" x="145" y="318" width="84" height="30"/>
-                                <state key="normal" title="Show Picker"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="100-47-s1e">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <action selector="showPickerButtonTappedWithSender:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Su4-D1-ny4"/>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="tA0-NL-MR7"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="srz-jQ-t2L"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="UEr-jZ-NhR" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="cFv-ZP-05P"/>
-                            <constraint firstItem="UEr-jZ-NhR" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="imj-3X-r61"/>
+                            <constraint firstItem="100-47-s1e" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="P4E-Sj-N8Z"/>
+                            <constraint firstItem="100-47-s1e" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Xkt-OM-pAE"/>
+                            <constraint firstAttribute="trailing" secondItem="100-47-s1e" secondAttribute="trailing" id="Zgo-yE-Jgt"/>
+                            <constraint firstItem="100-47-s1e" firstAttribute="bottom" secondItem="2fi-mo-0CV" secondAttribute="top" id="dYU-EN-wxR"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="TDMediaPicker" id="ujb-Lf-220"/>
+                    <connections>
+                        <outlet property="tableView" destination="100-47-s1e" id="Tp1-BO-FrG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="629.60000000000002" y="142.57871064467767"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FlN-5F-e7c">
+            <objects>
+                <navigationController id="q7B-rs-K7J" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lin-gX-LlP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Ubc-2R-Jb2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yuw-bl-8MU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-102" y="143"/>
         </scene>
     </scenes>
 </document>
