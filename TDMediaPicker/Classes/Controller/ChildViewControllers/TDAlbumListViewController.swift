@@ -20,7 +20,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     // MARK: - Variables
     weak var delegate: TDAlbumListViewControllerDelegate?
     
-    lazy private var seviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
+    lazy private var serviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
 
     
     // MARK: - Init
@@ -44,24 +44,33 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         albumView.delegate = self
         
         // 3. Service Manager Setup
-        seviceManager.delegate = self
+        serviceManager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        seviceManager.fetchAlbums { (albums) in
+        
+        setupNavigationTheme()
+        
+        serviceManager.fetchAlbums { (albums) in
             self.handleFetchedAlbums(albums)
         }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        seviceManager.purgeData()
+        serviceManager.purgeData()
         
         let albumView = self.view as! TDAlbumListView
         albumView.purgeData()
     }
     
     // MARK: - Private Method(s)
+    
+    private func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let albumView = self.view as! TDAlbumListView
+        albumView.setupNavigationTheme(config.backgroundColor)
+    }
     
     private func handleFetchedAlbums(_ albums:[TDAlbum]){
         var albumViewModels: [TDAlbumViewModel] = []
@@ -99,7 +108,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     // MARK: - Album View Delegate Method(s)
     
     func albumListView(_ view:TDAlbumListView, didSelectAlbum album:TDAlbumViewModel){
-        seviceManager.fetchAlbum(album.id, completion: { (albumData) in
+        serviceManager.fetchAlbum(album.id, completion: { (albumData) in
             if albumData != nil{
                 self.delegate?.albumController(self, didSelectAlbum: albumData!)
             }

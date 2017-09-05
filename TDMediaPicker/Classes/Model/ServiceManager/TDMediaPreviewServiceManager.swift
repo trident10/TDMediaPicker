@@ -19,7 +19,8 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
     
     lazy private var mediaItems:[TDMedia] = []
     private var cartServiceManager = TDCartServiceManager.sharedInstance
-    
+    private var configServiceManager = TDConfigServiceManager.sharedInstance
+
     weak var delegate:TDMediaPreviewServiceManagerDelegate?
     
     public init() {
@@ -61,6 +62,9 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
         }
     }
 
+    func getNavigationThemeConfig()-> TDConfigViewStandard{
+        return configServiceManager.navigationTheme
+    }
     
     // MARK: - CartService Manager Delegate Method(s)
     

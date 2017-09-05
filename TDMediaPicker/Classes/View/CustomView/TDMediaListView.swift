@@ -46,7 +46,8 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     @IBOutlet var collectionView:  UICollectionView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
-    
+    @IBOutlet var navigationBar: UIView!
+
     
     // MARK: - LifeCycle
     
@@ -67,6 +68,10 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     func setupView(){
         TDMediaCell.registerCellWithType(.ImageThumb, collectionView: collectionView)
         TDMediaCell.registerCellWithType(.VideoThumb, collectionView: collectionView)
+    }
+    
+    func setupNavigationTheme(_ color: UIColor){
+        navigationBar.backgroundColor = color
     }
     
     func purgeData(){

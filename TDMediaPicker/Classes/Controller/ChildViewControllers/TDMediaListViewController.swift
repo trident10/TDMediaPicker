@@ -21,7 +21,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     private var selectedAlbum:TDAlbum?
     
     weak var delegate: TDMediaListViewControllerDelegate?
-    lazy private var seviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
+    lazy private var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
     // MARK: - Init
     
@@ -54,15 +54,17 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         
         // 2. Service Manager Setup
         
-        seviceManager.delegate = self
+        serviceManager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         
+        setupNavigationTheme()
+        
         if selectedAlbum != nil{
-            seviceManager.fetchMediaItems(album: selectedAlbum!, completion: { (media) in
+            serviceManager.fetchMediaItems(album: selectedAlbum!, completion: { (media) in
                 self.handleFetchedMedia(media)
             })
         }
@@ -71,7 +73,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        seviceManager.purgeData()
+        serviceManager.purgeData()
         
         let mediaView = self.view as! TDMediaListView
         mediaView.purgeData()
@@ -84,6 +86,12 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     }
     
     // MARK: - Private Method(s)
+    
+    private func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let mediaView = self.view as! TDMediaListView
+        mediaView.setupNavigationTheme(config.backgroundColor)
+    }
     
     private func handleFetchedMedia(_ mediaList:[TDMedia]){
         let mediaViewModels = mapMediaViewModels(mediaList: mediaList)
@@ -115,15 +123,15 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     // MARK: - View Delegate Method(s)
     
     func mediaListView(_ view: TDMediaListView, didSelectMedia media: TDMediaViewModel, shouldRemoveFromCart value: Bool) {
-        seviceManager.fetchMedia(media.id) { (mediaDataModel) in
+        serviceManager.fetchMedia(media.id) { (mediaDataModel) in
             if mediaDataModel == nil{
                 return
             }
             if value{
-                seviceManager.updateCart(mediaDataModel!, updateType: .delete)
+                serviceManager.updateCart(mediaDataModel!, updateType: .delete)
                 return
             }
-            seviceManager.updateCart(mediaDataModel!, updateType: .add)
+            serviceManager.updateCart(mediaDataModel!, updateType: .add)
         }
     }
     

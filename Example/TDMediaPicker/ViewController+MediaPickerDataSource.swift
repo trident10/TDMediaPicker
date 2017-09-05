@@ -11,6 +11,14 @@ import TDMediaPicker
 
 extension ViewController: TDMediaPickerDataSource{
     
+    //Navigation Bar Theme
+    
+    func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
+        let themeConfig = getThemeConfig()
+        return themeConfig.getNavigationThemeConfig()
+    }
+    
+    // Permission Screen
     func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker) -> TDConfigPermissionScreen {
         let themeConfig = getThemeConfig()
         return themeConfig.getPermissionScreenConfig()

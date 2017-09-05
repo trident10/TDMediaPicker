@@ -20,6 +20,10 @@ class Theme4: ThemeConfig{
         permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Allow TDMedia Picker to access your photos.", textColor: .white, textFont: UIFont.init(name: "Palatino-Bold", size: 22)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
         return permissionConfig
     }
+    
+    override func getNavigationThemeConfig() -> TDConfigViewStandard {
+        return TDConfigViewStandard.init(backgroundColor: .lightGray)
+    }
 }
 
 

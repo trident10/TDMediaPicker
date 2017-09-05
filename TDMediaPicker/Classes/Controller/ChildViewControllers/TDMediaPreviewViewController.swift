@@ -49,7 +49,8 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        setupNavigationTheme()
+
         serviceManager.fetchMediaItems()
         let previewView = self.view as! TDMediaPreviewView
         previewView.previewView.viewWillAppear()
@@ -75,6 +76,11 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         })
     }
     // MARK: - Private Method(s)
+    private func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let previewView = self.view as! TDMediaPreviewView
+        previewView.setupNavigationTheme(config.backgroundColor)
+    }
     
     private func mapMediaViewModels(mediaList:[TDMedia])->TDMediaPreviewViewModel{
         var mediaViewModels: [TDPreviewViewModel] = []
