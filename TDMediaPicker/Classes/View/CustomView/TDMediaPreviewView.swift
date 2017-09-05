@@ -23,7 +23,8 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     @IBOutlet var previewView: TDMediaPreviewMainView!
     @IBOutlet var bottomView: TDMediaPreviewThumbView!
-    
+    @IBOutlet var navigationBar: UIView!
+
     
     // MARK: - LifeCycle
     
@@ -51,6 +52,10 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         previewView.purgeData()
         bottomView.purgeData()
         currentSelectedIndex = -1
+    }
+    
+    func setupNavigationTheme(_ color: UIColor){
+        navigationBar.backgroundColor = color
     }
     
     // MARK: - Action Method(s)
