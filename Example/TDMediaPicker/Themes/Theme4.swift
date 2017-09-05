@@ -10,25 +10,16 @@ import Foundation
 import TDMediaPicker
 
 class Theme4: ThemeConfig{
-    
     override func getPermissionScreenConfig() -> TDConfigPermissionScreen {
-        let view = UIView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        view.backgroundColor = UIColor(rgb: 0x2ABB9B)
-        let configView = TDConfigViewCustom(view: view)
+        let configView = TDConfigViewStandard(backgroundColor: UIColor(rgb: 0x6C7A89))
+        let permissionConfig = TDConfigPermissionScreen(standardView: configView)
         
-        let permissionConfig = TDConfigPermissionScreen(customView: configView)
-        permissionConfig.settingButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "scan_qr_button"), customSize: CGSize.init(width: 32, height: 32))
-        //TDConfigButtonText.init(normalColor: .red, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        permissionConfig.cancelButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "close"), customSize: CGSize.init(width: 16, height: 16))
+        permissionConfig.settingButton = TDConfigButtonText.init(normalColor: UIColor(rgb: 0xF62459), normalTextConfig: TDConfigText.init(text: "Open Settings", textColor: .white, textFont: UIFont.init(name: "Palatino-Bold", size: 15)), cornerRadius: 6.0)
+        permissionConfig.cancelButton = TDConfigButtonText.init(normalColor: UIColor(rgb: 0xF62459), normalTextConfig: TDConfigText.init(text: "Close", textColor: .white, textFont: UIFont.init(name: "Palatino-Bold", size: 15)), cornerRadius: 6.0)
         
-        //4.
-        
-        permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "1. Please give access to photo library. 2. Please give access to photo library. 3. Please give access to photo library. 4. Please give access to photo library. 5. Please give access to photo library. 6. Please give access to photo library. 7. Please give access to photo library.", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
-        
-        //TDConfigText.init(text: "Please give access to photo library", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 10))
+        permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Allow TDMedia Picker to access your photos.", textColor: .white, textFont: UIFont.init(name: "Palatino-Bold", size: 22)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
         return permissionConfig
     }
-    
 }
 
 

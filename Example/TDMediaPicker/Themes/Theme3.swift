@@ -18,7 +18,7 @@ class Theme3: ThemeConfig{
         permissionConfig.settingButton = TDConfigButtonText.init(normalColor: UIColor(rgb: 0x19B5FE), normalTextConfig: TDConfigText.init(text: "Open Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 16)), cornerRadius: 6.0)
         permissionConfig.cancelButton = TDConfigButtonText.init(normalColor: UIColor(rgb: 0xC91F37), normalTextConfig: TDConfigText.init(text: "Close", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 15)), cornerRadius: 6.0)
         
-        permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Allow TDMedia Picker to access your photos.", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
+        permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Allow TDMedia Picker to access your photos.", textColor: UIColor(rgb: 0x003171), textFont: UIFont.boldSystemFont(ofSize: 20)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
         return permissionConfig
     }
     
