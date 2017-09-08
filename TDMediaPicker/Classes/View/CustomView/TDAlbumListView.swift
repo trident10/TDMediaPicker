@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol TDAlbumListViewDelegate:class {
-    func albumListView(_ view:TDAlbumListView, didSelectAlbum album:TDAlbumViewModel)
-    func albumListViewDidTapBack(_ view:TDAlbumListView)
-    func albumListViewDidTapNext(_ view:TDAlbumListView)
+protocol TDAlbumListViewDelegate: class {
+    func albumListView(_ view: TDAlbumListView, didSelectAlbum album: TDAlbumViewModel)
+    func albumListViewDidTapBack(_ view: TDAlbumListView)
+    func albumListViewDidTapNext(_ view: TDAlbumListView)
 }
 
 class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
@@ -21,13 +21,15 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     weak var delegate:TDAlbumListViewDelegate?
     
     lazy private var albumListViewModel = TDAlbumListViewModel.init(headerTitle: "Albums")
+    private var imageSize: CGSize?
 
     // MARK: - Outlets
     
     @IBOutlet var tableView:  UITableView!
     @IBOutlet var titleLable: UILabel!
     @IBOutlet var navigationBar: UIView!
-
+    @IBOutlet var backBtn: UIButton!
+    @IBOutlet var nextBtn: UIButton!
     
     // MARK: - LifeCycle 
     
@@ -44,6 +46,26 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     func setupNavigationTheme(_ color: UIColor){
         navigationBar.backgroundColor = color
+    }
+    
+    func setupScreenTitle(_ config: TDConfigLabel){
+        TDMediaUtil.setupLabel(titleLable, config: config)
+    }
+    
+    func setupBackButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(backBtn, buttonConfig: config)
+    }
+    
+    func setupNextButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(nextBtn, buttonConfig: config)
+    }
+    
+    func setupNextbutton(_ config: TDConfigLabel){
+        TDMediaUtil.setupLabel(titleLable, config: config)
+    }
+    
+    func setupAlbumImageSize(_ size: CGSize){
+        imageSize = size
     }
     
     func purgeData(){

@@ -22,15 +22,19 @@ public protocol TDMediaPickerDelegate: class{
     //Permission Screen
     @objc optional func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
     
-    //Album Screen
-    @objc optional func mediaPickerScreenTitleForAlbumScreen(_ picker: TDMediaPicker)-> TDConfigText
-    @objc optional func mediaPickerFetchOptionsForAlbumScreen(_ picker: TDMediaPicker)-> PHFetchOptions
+    //Album List Screen
+    @objc optional func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    @objc optional func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]
     @objc optional func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType
-    @objc optional func mediaPicker(_ picker: TDMediaPicker, imageSizeForAlbum album: TDAlbum)-> CGSize
+    @objc optional func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize
     @objc optional func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText
-    @objc optional func mediaPickerNextButtonConfigForAlbumScreen(_ picker: TDMediaPicker)-> TDConfigButton
-    @objc optional func mediaPickerBackButtonConfigForAlbumScreen(_ picker: TDMediaPicker)-> TDConfigButton
     @objc optional func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
+    
+    //Media List Screen
+    @objc optional func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    
+    //Preview Screen
+    @objc optional func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
     
 }
 
@@ -97,18 +101,17 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         
     }
     
-    // MARK: - Setup Method(s)
-    
-    func setupInitialConfiguration(){
-        if let viewConfig = dataSource?.mediaPickerNavigationTheme?(self){
-            serviceManager.setupConfig(navigationTheme: viewConfig)
-        }
+    func resetPicker(){
+        serviceManager.resetSelectedMedia()
+        navVC.popToRootViewController(animated: false)
     }
-    
-    
+}
+
+//MARK:- SCREEN SETUP METHOD(S)
+extension TDMediaPicker{
     func setupScreen(_ screenType:TDMediaPicker.ScreenType){
         switch screenType {
-        
+            
         case .Permission:
             if permissionVC != nil{
                 permissionVC = nil
@@ -122,6 +125,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
             }
             albumListVC = TDAlbumListViewController()
             albumListVC?.delegate = self
+            albumListVC?.datasource = self
             
         case .Media:
             if mediaListVC != nil{
@@ -186,8 +190,10 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         navVC.setNavigationBarHidden(true, animated: false)
         TDMediaUtil.addChildController(navVC, toController: self)
     }
-    
-    // MARK: - Display Screen Method(s)
+}
+
+//MARK:- SCREEN DISPLAY METHOD(S)
+extension TDMediaPicker{
     
     func showPickerScreen(){
         setupScreen(.Album)
@@ -203,9 +209,5 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         
     }
     
-    func resetPicker(){
-        serviceManager.resetSelectedMedia()
-        navVC.popToRootViewController(animated: false)
-    }
 }
 

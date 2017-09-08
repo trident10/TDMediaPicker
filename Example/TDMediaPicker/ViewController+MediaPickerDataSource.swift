@@ -8,20 +8,50 @@
 
 import UIKit
 import TDMediaPicker
+import Photos
 
 extension ViewController: TDMediaPickerDataSource{
     
-    //Navigation Bar Theme
+    //MARK:- Navigation Bar Theme
     
     func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
         let themeConfig = getThemeConfig()
         return themeConfig.getNavigationThemeConfig()
     }
     
-    // Permission Screen
+    //MARK:-  Permission Screen
     func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker) -> TDConfigPermissionScreen {
         let themeConfig = getThemeConfig()
         return themeConfig.getPermissionScreenConfig()
+    }
+    
+    //MARK:- Album Screen
+    
+    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+        return TDConfigNavigationBar()
+    }
+    
+    func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
+        let types: [PHAssetCollectionType] = [.smartAlbum, .album]
+        return types.map {
+            return PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)
+        }
+    }
+    
+    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType{
+        return .List
+    }
+    
+    func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize{
+        return CGSize(width: 30, height: 40)
+    }
+    
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText{
+        return TDConfigText.init(text: "Albums", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+    }
+    
+    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
+        return albums[0]
     }
     
 }

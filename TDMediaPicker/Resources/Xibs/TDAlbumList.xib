@@ -188,7 +188,9 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="backBtn" destination="VOD-SD-q6v" id="ezu-jv-Vdu"/>
                 <outlet property="navigationBar" destination="W75-Ve-4bU" id="Kql-c4-c0K"/>
+                <outlet property="nextBtn" destination="jj4-Om-rHy" id="yqS-b3-zZb"/>
                 <outlet property="tableView" destination="usx-1F-buK" id="fpy-gy-SOk"/>
                 <outlet property="titleLable" destination="5ZV-PM-3UV" id="Vc5-Jn-8u3"/>
             </connections>
