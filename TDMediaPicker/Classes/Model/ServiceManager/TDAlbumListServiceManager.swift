@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-protocol TDAlbumListServiceManagerDelegate:class {
+protocol TDAlbumListServiceManagerDelegate: class {
 
 }
 
@@ -20,7 +20,7 @@ class TDAlbumListServiceManager {
     
     private var configServiceManager = TDConfigServiceManager.sharedInstance
 
-    lazy private var albums:[TDAlbum] = []
+    lazy private var albums: [TDAlbum] = []
 
     weak var delegate: TDAlbumListServiceManagerDelegate?
     
@@ -30,9 +30,9 @@ class TDAlbumListServiceManager {
         albums.removeAll()
     }
     
-    func fetchAlbums(_ completion:@escaping ([TDAlbum]) -> Void){
+    func fetchAlbums(_ fetchResults: [PHFetchResult<PHAssetCollection>]?, completion: @escaping ([TDAlbum]) -> Void){
         DispatchQueue.global().async {
-            self.fetchAlbumsFromLibrary()
+            self.fetchAlbumsFromLibrary(fetchResults)
             DispatchQueue.main.async {
                 completion(self.albums)
             }
@@ -43,13 +43,23 @@ class TDAlbumListServiceManager {
         return configServiceManager.navigationTheme
     }
     
+    func getAlbumScreenConfig()-> TDConfigAlbumScreen{
+        return configServiceManager.albumScreenConfig
+    }
+    
     // MARK: - Private Method(s)
     
-    fileprivate func fetchAlbumsFromLibrary() {
-        let types: [PHAssetCollectionType] = [.smartAlbum, .album]
+    fileprivate func fetchAlbumsFromLibrary(_ fetchResults: [PHFetchResult<PHAssetCollection>]?) {
         
-        albumsFetchResults = types.map {
-            return PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)
+        if fetchResults != nil{
+            albumsFetchResults = fetchResults!
+        }
+        else{
+            let types: [PHAssetCollectionType] = [.smartAlbum, .album]
+            
+            albumsFetchResults = types.map {
+                return PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)
+            }
         }
         
         albums.removeAll()
@@ -75,7 +85,7 @@ class TDAlbumListServiceManager {
     }
     
     
-    func fetchAlbum(_ id:String, completion:(TDAlbum?) -> Void){
+    func fetchAlbum(_ id: String, completion: (TDAlbum?) -> Void){
         let matchedAlbum = albums.filter { (album) -> Bool in
             return album.id == id
         }

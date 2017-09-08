@@ -18,6 +18,5 @@ class ThemeConfig {
     func getPermissionScreenConfig()->TDConfigPermissionScreen{
         fatalError("Concrete class must provide data")
     }
-
 }
 

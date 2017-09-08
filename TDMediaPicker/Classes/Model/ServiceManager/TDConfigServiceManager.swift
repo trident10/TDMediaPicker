@@ -15,4 +15,5 @@ class TDConfigServiceManager{
     static let sharedInstance = TDConfigServiceManager()
     
     lazy var navigationTheme: TDConfigViewStandard = TDConfigViewStandard.init(backgroundColor: .white)
+    lazy var albumScreenConfig = TDConfigAlbumScreen()
 }

@@ -10,11 +10,11 @@ import Foundation
 
 open class TDConfigPermissionScreen: NSObject{
     
-    open var customView:TDConfigView?
-    open var standardView:TDConfigView?
-    open var caption:TDConfigLabel?
-    open var settingButton:TDConfigButton?
-    open var cancelButton:TDConfigButton?
+    open var customView: TDConfigView?
+    open var standardView: TDConfigView?
+    open var caption: TDConfigLabel?
+    open var settingButton: TDConfigButton?
+    open var cancelButton: TDConfigButton?
     
     public init(customView: TDConfigViewCustom){
         super.init()

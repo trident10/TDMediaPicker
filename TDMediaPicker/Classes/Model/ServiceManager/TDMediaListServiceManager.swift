@@ -17,12 +17,12 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     
     // MARK: - Variable(s)
     
-    lazy private var mediaItems:[TDMedia] = []
+    lazy private var mediaItems: [TDMedia] = []
     
     private var cartServiceManager = TDCartServiceManager.sharedInstance
     private var configServiceManager = TDConfigServiceManager.sharedInstance
 
-    weak var delegate:TDMediaListServiceManagerDelegate?
+    weak var delegate: TDMediaListServiceManagerDelegate?
     
     public init() {
         cartServiceManager.add(delegate: self)
@@ -30,7 +30,7 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     
     // MARK: - Public Method(s)
     
-    func fetchMediaItems(album: TDAlbum, completion:@escaping ([TDMedia]) -> Void){
+    func fetchMediaItems(album: TDAlbum, completion: @escaping ([TDMedia]) -> Void){
         DispatchQueue.global().async {
             self.fetchMediaItemsFromLibrary(album: album)
             DispatchQueue.main.async {

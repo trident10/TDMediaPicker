@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import Photos
+
+protocol TDAlbumListViewControllerDataSource: class{
+    func albumController(_ controller: TDAlbumListViewController, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
+}
 
 
 protocol TDAlbumListViewControllerDelegate: class{
@@ -19,9 +24,9 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     // MARK: - Variables
     weak var delegate: TDAlbumListViewControllerDelegate?
+    weak var datasource: TDAlbumListViewControllerDataSource?
     
-    lazy private var serviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
-
+    lazy fileprivate var serviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
     
     // MARK: - Init
     
@@ -51,8 +56,10 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         super.viewWillAppear(animated)
         
         setupNavigationTheme()
-        
-        serviceManager.fetchAlbums { (albums) in
+        setupConfig()
+        serviceManager.fetchAlbums(getAlbumFetchResults()) { (albums) in
+            
+            
             self.handleFetchedAlbums(albums)
         }
     }
@@ -65,13 +72,6 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     }
     
     // MARK: - Private Method(s)
-    
-    private func setupNavigationTheme(){
-        let config = serviceManager.getNavigationThemeConfig()
-        let albumView = self.view as! TDAlbumListView
-        albumView.setupNavigationTheme(config.backgroundColor)
-    }
-    
     private func handleFetchedAlbums(_ albums:[TDAlbum]){
         var albumViewModels: [TDAlbumViewModel] = []
         for(_,album) in albums.enumerated(){
@@ -123,8 +123,46 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         self.delegate?.albumControllerDidTapDone(self)
     }
     
+}
+
+
+// MARK: - Configurations
+
+extension TDAlbumListViewController{
     
-    // MARK: - Service Manager Delegate Method(s)
+    func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let albumView = self.view as! TDAlbumListView
+        albumView.setupNavigationTheme(config.backgroundColor)
+    }
+    
+    func setupConfig(){
+        let albumView = self.view as! TDAlbumListView
+        let config = serviceManager.getAlbumScreenConfig()
+        
+        if let title = config.navigationBar?.screenTitle{
+            albumView.setupScreenTitle(title)
+        }
+        if let btnConfig = config.navigationBar?.backButton{
+            albumView.setupBackButton(btnConfig)
+        }
+        if let btnConfig = config.navigationBar?.nextButton{
+            albumView.setupBackButton(btnConfig)
+        }
+        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+            albumView.setupNavigationTheme(color)
+        }
+        if let size = config.imageSize{
+            albumView.setupAlbumImageSize(size)
+        }
+    }
+    
+    func getAlbumFetchResults()->[PHFetchResult<PHAssetCollection>]?{
+        let config = serviceManager.getAlbumScreenConfig()
+        return config.fetchResults
+    }
     
 }
+
+
 

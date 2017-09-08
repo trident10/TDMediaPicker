@@ -35,3 +35,10 @@ extension TDMediaPicker: TDAlbumListViewControllerDelegate{
         navVC.pushViewController(mediaListVC!, animated: true)
     }
 }
+
+extension TDMediaPicker: TDAlbumListViewControllerDataSource{
+    
+    func albumController(_ controller: TDAlbumListViewController, selectedAlbumAtInitialLoad albums: [TDAlbum]) -> TDAlbum? {
+        return getSelectedAlbumAtInitialLoad(albums: albums)
+    }
+}

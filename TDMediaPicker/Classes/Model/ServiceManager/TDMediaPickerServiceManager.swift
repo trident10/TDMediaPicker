@@ -17,22 +17,14 @@ class TDMediaPickerServiceManager{
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPickerServiceManagerDelegate?
-    private var cartServiceManager = TDCartServiceManager.sharedInstance
-    private var configServiceManager = TDConfigServiceManager.sharedInstance
+    fileprivate var cartServiceManager = TDCartServiceManager.sharedInstance
+    fileprivate var configServiceManager = TDConfigServiceManager.sharedInstance
     // MARK: - Init
     
     init() {
     }
     
     // MARK: - Public Method(s)
-    
-    func setupConfig(maxSelections:Int){
-        cartServiceManager.setupConfig(maxSelection: maxSelections)
-    }
-    
-    func setupConfig(navigationTheme: TDConfigViewStandard){
-        configServiceManager.navigationTheme = navigationTheme
-    }
     
     func resetSelectedMedia(){
         cartServiceManager.reset()
@@ -42,4 +34,21 @@ class TDMediaPickerServiceManager{
         return cartServiceManager.getSelectedMedia()
     }
     
+}
+
+// MARK: - Configurations
+
+extension TDMediaPickerServiceManager{
+    
+    func setupConfig(maxSelections:Int){
+        cartServiceManager.setupConfig(maxSelection: maxSelections)
+    }
+    
+    func setupConfig(navigationTheme: TDConfigViewStandard){
+        configServiceManager.navigationTheme = navigationTheme
+    }
+    
+    func setupConfig(albumScreen: TDConfigAlbumScreen){
+        configServiceManager.albumScreenConfig = albumScreen
+    }
 }
