@@ -22,7 +22,7 @@ class Theme7: ThemeConfig{
     }
     
     override func getNavigationThemeConfig() -> TDConfigViewStandard {
-        return TDConfigViewStandard.init(backgroundColor: .yellow)
+        return TDConfigViewStandard.init(backgroundColor: .clear)
     }
     
 }

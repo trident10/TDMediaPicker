@@ -22,7 +22,7 @@ class Theme4: ThemeConfig{
     }
     
     override func getNavigationThemeConfig() -> TDConfigViewStandard {
-        return TDConfigViewStandard.init(backgroundColor: .lightGray)
+        return TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0x6C7A89))
     }
 }
 

@@ -55,7 +55,7 @@ class Theme5: ThemeConfig{
     }
     
     override func getNavigationThemeConfig() -> TDConfigViewStandard {
-        return TDConfigViewStandard.init(backgroundColor: .orange)
+        return TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
     }
     
 }
