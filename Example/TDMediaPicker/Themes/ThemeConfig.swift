@@ -10,13 +10,18 @@ import UIKit
 import TDMediaPicker
 
 class ThemeConfig {
-    
     func getNavigationThemeConfig()->TDConfigViewStandard{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getImageSizeForAlbum()->CGSize{
         fatalError("Concrete class must provide data")
     }
     
     func getPermissionScreenConfig()->TDConfigPermissionScreen{
         fatalError("Concrete class must provide data")
     }
+    
+    
 }
 

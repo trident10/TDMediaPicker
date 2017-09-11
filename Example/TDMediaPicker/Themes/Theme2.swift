@@ -25,6 +25,10 @@ class Theme2: ThemeConfig{
     override func getNavigationThemeConfig() -> TDConfigViewStandard {
         return TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0x89C4F4))
     }
+    
+    override func getImageSizeForAlbum()->CGSize{
+        return CGSize(width: 50, height: 70)
+    }
 }
 
 

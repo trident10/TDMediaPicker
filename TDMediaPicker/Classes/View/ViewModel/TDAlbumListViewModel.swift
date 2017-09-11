@@ -27,11 +27,13 @@ class TDAlbumViewModel{
     var image: UIImage?
     var asset: PHAsset
     var id: String
+    var imageSize: CGSize
     
-    init(id:String, asset: PHAsset, title: String, countTitle: String) {
+    init(id:String, asset: PHAsset, title: String, countTitle: String, imageSize:CGSize) {
         self.id = id
         self.asset = asset
         self.title = title
         self.countTitle = countTitle
+        self.imageSize = imageSize
     }
 }

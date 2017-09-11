@@ -26,6 +26,9 @@ class Theme1: ThemeConfig{
         return TDConfigViewStandard.init(backgroundColor: .lightGray)
     }
 
+    override func getImageSizeForAlbum()->CGSize{
+        return CGSize(width: 90, height: 90)
+    }
 }
 
 

@@ -96,9 +96,10 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
             
             let countText = "\(album.itemsCount)"
             let asset = album.albumMedia?.asset
+            let imageSize = CGSize(width: 65, height: 65)
             
             if asset != nil{
-                return TDAlbumViewModel.init(id: album.id, asset: asset!, title: title, countTitle: countText) as AnyObject
+                return TDAlbumViewModel.init(id: album.id, asset: asset!, title: title, countTitle: countText, imageSize: imageSize) as AnyObject
             }
         }
         return nil
