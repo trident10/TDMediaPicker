@@ -14,6 +14,8 @@ class TDAlbumCell: UITableViewCell{
     // MARK: - Variables
     
     @IBOutlet var albumImageView: UIImageView!
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var countLabel: UILabel!
     
@@ -37,6 +39,8 @@ class TDAlbumCell: UITableViewCell{
         
         titleLabel.text = album.title
         countLabel.text = album.countTitle
+        imageWidthConstraint.constant = album.imageSize.width
+        imageHeightConstraint.constant = album.imageSize.height
             
         requestID = TDMediaUtil.fetchImage(album.asset, targetSize: albumImageView.frame.size, completionHandler: { (image, error) in
             if image != nil{
@@ -52,6 +56,8 @@ class TDAlbumCell: UITableViewCell{
         
         titleLabel.text = album.title
         countLabel.text = album.countTitle
+        imageWidthConstraint.constant = album.imageSize.width
+        imageHeightConstraint.constant = album.imageSize.height
         
         albumImageView.layoutIfNeeded()
         albumImageView.image = image

@@ -41,6 +41,8 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     func setupView(){
         tableView.register(UINib.init(nibName: "TDAlbumCell", bundle: TDMediaUtil.xibBundle()), forCellReuseIdentifier: String(describing: TDAlbumCell.self))
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = UITableViewAutomaticDimension
         self.setupViewModel()
     }
     
@@ -104,7 +106,7 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
             as! TDAlbumCell
         
         let album = albumListViewModel.albums[(indexPath as NSIndexPath).row]
-        
+        album.imageSize = imageSize!
         if album.image != nil{
             cell.configure(album, image: album.image!)
         }

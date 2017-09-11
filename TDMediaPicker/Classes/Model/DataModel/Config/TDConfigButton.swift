@@ -10,8 +10,8 @@ import Foundation
 
 
 open class TDConfigButton: TDConfig{
-    var size: CGSize?
-    var cornerRadius: CGFloat?
+    open var size: CGSize?
+    open var cornerRadius: CGFloat?
     public override init() {
         super.init()
     }
@@ -19,13 +19,13 @@ open class TDConfigButton: TDConfig{
 
 open class TDConfigButtonText: TDConfigButton{
     
-    var normalColor: UIColor?
-    var highlightedColor: UIColor?
-    var selectedColor: UIColor?
+    open var normalColor: UIColor?
+    open var highlightedColor: UIColor?
+    open var selectedColor: UIColor?
     
-    var normalTextConfig: TDConfigText?
-    var highlightTextConfig: TDConfigText?
-    var selectedTextConfig: TDConfigText?
+    open var normalTextConfig: TDConfigText?
+    open var highlightTextConfig: TDConfigText?
+    open var selectedTextConfig: TDConfigText?
     
     public init(normalColor: UIColor? = nil, highlightedColor: UIColor? = nil, selectedColor: UIColor? = nil, normalTextConfig: TDConfigText? = nil, highlightTextConfig: TDConfigText? = nil, selectedTextConfig: TDConfigText? = nil, customSize: CGSize? = nil, cornerRadius: CGFloat? = nil) {
         super.init()
@@ -44,9 +44,9 @@ open class TDConfigButtonText: TDConfigButton{
 
 open class TDConfigButtonImage: TDConfigButton{
     
-    var normalImage: UIImage?
-    var highlightImage: UIImage?
-    var selectedImage: UIImage?
+    open var normalImage: UIImage?
+    open var highlightImage: UIImage?
+    open var selectedImage: UIImage?
     
     public init(normalImage: UIImage? = nil, highlightImage: UIImage? = nil , selectedImage: UIImage? = nil, customSize: CGSize? = nil, cornerRadius: CGFloat? = nil) {
         super.init()

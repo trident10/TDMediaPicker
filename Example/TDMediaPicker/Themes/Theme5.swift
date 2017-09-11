@@ -12,31 +12,54 @@ import TDMediaPicker
 class Theme5: ThemeConfig{
     
     override func getPermissionScreenConfig() -> TDConfigPermissionScreen {
-        //1.
-        //let view = UIView(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        //view.backgroundColor = .red
-        //let configView = TDConfigViewCustom(view: view)
         
-        //2.
-        //let configView = TDConfigViewStandard(backgroundColor: .blue)
-        //let permissionConfig = TDConfigPermissionScreen(standardView: configView)
+        // View
+        let configView = TDConfigViewStandard(backgroundColor: UIColor(rgb: 0xF5D76E))
         
-        //3.
+        // Settings Button
+        let buttonSettingsConfig = TDConfigButtonText()
+        //Color
+        buttonSettingsConfig.normalColor = .clear
+        buttonSettingsConfig.highlightedColor = .clear
+        //Text
+        let butonSettingsTextConfig = TDConfigText(text: "")
+        butonSettingsTextConfig.text = "Open Settings"
+        butonSettingsTextConfig.textColor = UIColor(rgb: 0xF62459)
+        butonSettingsTextConfig.textFont = UIFont.init(name: "BradleyHandITCTT-Bold", size: 25)
+        buttonSettingsConfig.normalTextConfig = butonSettingsTextConfig
+            
+            
+        // Cancel Button
+        let buttonCancelConfig = TDConfigButtonText()
+        //Color
+        buttonCancelConfig.normalColor = .clear
+        buttonCancelConfig.highlightedColor = .clear
+        //Text
+        let buttonCancelTextConfig = TDConfigText(text: "")
+        buttonCancelTextConfig.text = "Cancel"
+        buttonCancelTextConfig.textColor = UIColor(rgb: 0xF62459)
+        buttonCancelTextConfig.textFont = UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)
+        buttonCancelConfig.normalTextConfig = buttonCancelTextConfig
+        
+        //Caption Text
+        let labelCaptionView = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Allow TDMedia Picker to access your photos.", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 24)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
+        
         let permissionConfig = TDConfigPermissionScreen()
-        permissionConfig.settingButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "scan_qr_button"), customSize: CGSize.init(width: 32, height: 32))
-        //TDConfigButtonText.init(normalColor: .red, normalTextConfig: TDConfigText.init(text: "Settings", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        permissionConfig.cancelButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "close"), customSize: CGSize.init(width: 16, height: 16))
+        permissionConfig.standardView = configView
+        permissionConfig.settingButton = buttonSettingsConfig
+        permissionConfig.cancelButton = buttonCancelConfig
+        permissionConfig.caption = labelCaptionView
         
-        //4.
-        
-        permissionConfig.caption = TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "1. Please give access to photo library. 2. Please give access to photo library. 3. Please give access to photo library. 4. Please give access to photo library. 5. Please give access to photo library. 6. Please give access to photo library. 7. Please give access to photo library.", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20)), textAlignment: .center, lineBreakMode: .byWordWrapping, minimumFontSize: 2.0)
-        
-        //TDConfigText.init(text: "Please give access to photo library", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 10))
+
         return permissionConfig
     }
     
     override func getNavigationThemeConfig() -> TDConfigViewStandard {
-        return TDConfigViewStandard.init(backgroundColor: .orange)
+        return TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
+    }
+    
+    override func getImageSizeForAlbum()->CGSize{
+        return CGSize(width: 65, height: 65)
     }
     
 }

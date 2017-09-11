@@ -53,9 +53,9 @@ extension TDMediaUtil {
         button.setTitle("", for: .highlighted)
         button.setTitle("", for: .selected)
         
-        button.setBackgroundImage(normalImage, for: .normal)
-        button.setBackgroundImage(highlightedImage, for: .highlighted)
-        button.setBackgroundImage(selectedImage, for: .selected)
+        button.setImage(normalImage, for: .normal)
+        button.setImage(highlightedImage, for: .highlighted)
+        button.setImage(selectedImage, for: .selected)
         
     }
     

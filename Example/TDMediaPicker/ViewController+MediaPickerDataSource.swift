@@ -43,7 +43,8 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize{
-        return CGSize(width: 30, height: 40)
+        let themeConfig = getThemeConfig()
+        return themeConfig.getImageSizeForAlbum()
     }
     
     func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText{
@@ -53,6 +54,7 @@ extension ViewController: TDMediaPickerDataSource{
     func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
         return albums[0]
     }
+    
     
 }
 
