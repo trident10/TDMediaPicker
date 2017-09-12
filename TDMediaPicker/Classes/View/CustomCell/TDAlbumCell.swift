@@ -35,8 +35,6 @@ class TDAlbumCell: UITableViewCell{
     // MARK: - Config
     
     func configure(_ album: TDAlbumViewModel, completionHandler: ((_ image: UIImage)->Void)?) {
-        
-        titleLabel.text = album.title
         imageWidthConstraint.constant = album.imageSize.width
         imageHeightConstraint.constant = album.imageSize.height
             
@@ -51,8 +49,6 @@ class TDAlbumCell: UITableViewCell{
     }
     
     func configure(_ album: TDAlbumViewModel, image: UIImage) {
-        
-        titleLabel.text = album.title
         imageWidthConstraint.constant = album.imageSize.width
         imageHeightConstraint.constant = album.imageSize.height
         

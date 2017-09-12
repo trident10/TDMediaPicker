@@ -64,7 +64,12 @@ class Theme5: ThemeConfig{
     }
     
     override func getAlbumNavBarConfig()->TDConfigNavigationBar{
-        return TDConfigNavigationBar()
+        let configNavBar = TDConfigNavigationBar()
+        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        configNavBar.nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)))
+        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
+        return configNavBar
     }
     
     override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
@@ -77,7 +82,7 @@ class Theme5: ThemeConfig{
     }
     
     override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
-        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
     }
 
     

@@ -46,7 +46,7 @@ class Theme6: ThemeConfig{
     
     override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
         let str = String(format: "%@\n\nFiles: %d",album.collection.localizedTitle!,mediaCount)
-        return TDConfigText.init(text: str, textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+        return TDConfigText.init(text: str, textColor: .black, textFont: UIFont.init(name: "Palatino-Bold", size: 17))
     }
 
     

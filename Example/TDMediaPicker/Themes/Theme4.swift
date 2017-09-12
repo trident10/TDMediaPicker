@@ -43,7 +43,7 @@ class Theme4: ThemeConfig{
     }
     
     override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
-        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.systemFont(ofSize: 16))
     }
 
 }
