@@ -117,7 +117,10 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
             
         }
         
-        album.imageSize = imageSize!
+        if imageSize != nil{
+            album.imageSize = imageSize!
+        }
+        
         if album.image != nil{
             cell.configure(album, image: album.image!)
         }

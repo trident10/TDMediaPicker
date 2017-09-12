@@ -2,8 +2,8 @@
 //  Theme1.swift
 //  TDMediaPicker
 //
-//  Created by Yapapp on 04/09/17.
-//  Copyright © 2017 CocoaPods. All rights reserved.
+//  Created by abhimanyujindal10 on 07/19/2017.
+//  Copyright (c) 2017 abhimanyujindal10. All rights reserved.
 //
 
 import Foundation
