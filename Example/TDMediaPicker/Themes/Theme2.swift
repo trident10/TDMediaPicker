@@ -29,6 +29,24 @@ class Theme2: ThemeConfig{
     override func getImageSizeForAlbum()->CGSize{
         return CGSize(width: 50, height: 70)
     }
+    
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        return TDConfigNavigationBar()
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        for album in albums{
+            if album.collection.localizedTitle == "Recently Added"{
+                return album
+            }
+        }
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+    }
+
 }
 
 

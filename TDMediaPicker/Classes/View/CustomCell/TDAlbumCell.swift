@@ -17,7 +17,6 @@ class TDAlbumCell: UITableViewCell{
     @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
     @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var countLabel: UILabel!
     
     private var requestID: PHImageRequestID?
     
@@ -38,7 +37,6 @@ class TDAlbumCell: UITableViewCell{
     func configure(_ album: TDAlbumViewModel, completionHandler: ((_ image: UIImage)->Void)?) {
         
         titleLabel.text = album.title
-        countLabel.text = album.countTitle
         imageWidthConstraint.constant = album.imageSize.width
         imageHeightConstraint.constant = album.imageSize.height
             
@@ -55,7 +53,6 @@ class TDAlbumCell: UITableViewCell{
     func configure(_ album: TDAlbumViewModel, image: UIImage) {
         
         titleLabel.text = album.title
-        countLabel.text = album.countTitle
         imageWidthConstraint.constant = album.imageSize.width
         imageHeightConstraint.constant = album.imageSize.height
         

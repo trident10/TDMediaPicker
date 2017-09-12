@@ -11,10 +11,10 @@ import Photos
 
 open class TDAlbum: NSObject{
     
-    let collection: PHAssetCollection
-    var itemsCount: Int = 0
-    var albumMedia: TDMedia?
-    var id: String
+    open let collection: PHAssetCollection
+    open private(set) var itemsCount: Int = 0
+    open private(set) var albumMedia: TDMedia?
+    open private(set) var id: String
     
     // MARK: - Initialization
     
@@ -34,7 +34,7 @@ open class TDAlbum: NSObject{
         itemsCount = itemsFetchResult.count
         
         if itemsFetchResult.count > 0{
-            albumMedia = TDMedia(asset: itemsFetchResult[0], caption: "")
+            albumMedia = TDMedia(albumID: self.id, asset: itemsFetchResult[0], caption: "")
 
         }
     }

@@ -27,7 +27,7 @@ public protocol TDMediaPickerDelegate: class{
     @objc optional func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]
     @objc optional func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType
     @objc optional func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize
-    @objc optional func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText
+    @objc optional func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
     @objc optional func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
     
     //Media List Screen

@@ -25,9 +25,31 @@ class Theme1: ThemeConfig{
     override func getNavigationThemeConfig() -> TDConfigViewStandard {
         return TDConfigViewStandard.init(backgroundColor: .lightGray)
     }
-
+    
     override func getImageSizeForAlbum()->CGSize{
         return CGSize(width: 90, height: 90)
+    }
+    
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        let configNavBar = TDConfigNavigationBar()
+        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+        configNavBar.nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
+        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        return configNavBar
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        for album in albums{
+            if album.collection.localizedTitle == "Camera Roll"{
+                return album
+            }
+        }
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
     }
 }
 

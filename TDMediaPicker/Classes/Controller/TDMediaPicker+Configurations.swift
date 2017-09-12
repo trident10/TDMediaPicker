@@ -28,6 +28,10 @@ extension TDMediaPicker{
         return self.dataSource?.mediaPicker?(self, selectedAlbumAtInitialLoad: albums)
     }
     
+    func getAlbumText(album: TDAlbum, mediaCount: Int) -> TDConfigText? {
+        return self.dataSource?.mediaPicker?(self, textFormatForAlbum: album, mediaCount: mediaCount)
+    }
+    
     //MARK: - Private Method(s)
     private func setupAlbumScreenConfiguration(){
         let albumConfig = TDConfigAlbumScreen()

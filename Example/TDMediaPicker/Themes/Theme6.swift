@@ -30,6 +30,25 @@ class Theme6: ThemeConfig{
         return CGSize(width: 80, height: 120)
     }
     
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        return TDConfigNavigationBar()
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        for album in albums{
+            if album.collection.localizedTitle == "Screenshots"{
+                return album
+            }
+        }
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        let str = String(format: "%@\n\nFiles: %d",album.collection.localizedTitle!,mediaCount)
+        return TDConfigText.init(text: str, textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+    }
+
+    
 }
 
 

@@ -36,4 +36,21 @@ extension TDMediaUtil {
             label.minimumScaleFactor = scale
         }
     }
+    
+    static func setupLabel(_ label: UILabel, config: TDConfigText){
+        label.text = config.text
+        if let font = config.textFont{
+            label.font = font
+        }
+        if let color = config.textColor{
+            label.textColor = color
+        }
+        let currentTextSize = label.font.pointSize
+        var scale = 0.1 / currentTextSize
+        if scale <= 0{
+            scale = 0.1
+        }
+        label.minimumScaleFactor = scale
+    }
+
 }

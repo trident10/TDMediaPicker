@@ -25,10 +25,22 @@ class Theme7: ThemeConfig{
         return TDConfigViewStandard.init(backgroundColor: .clear)
     }
     
-//    override func getImageSizeForAlbum()->CGSize{
-//        return CGSize(width: 65, height: 65)
-//    }
+    override func getImageSizeForAlbum()->CGSize{
+        return CGSize(width: 65, height: 65)
+    }
     
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        return TDConfigNavigationBar()
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        return TDConfigText.init(text: String(format: "%@\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
+    }
+
 }
 
 

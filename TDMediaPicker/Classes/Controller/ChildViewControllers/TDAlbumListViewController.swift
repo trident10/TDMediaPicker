@@ -11,23 +11,23 @@ import Photos
 
 protocol TDAlbumListViewControllerDataSource: class{
     func albumController(_ controller: TDAlbumListViewController, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
+    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
 }
-
 
 protocol TDAlbumListViewControllerDelegate: class{
     func albumControllerDidTapCancel(_ controller: TDAlbumListViewController)
     func albumControllerDidTapDone(_ controller: TDAlbumListViewController)
-    func albumController(_ controller: TDAlbumListViewController, didSelectAlbum album: TDAlbum)
+    func albumController(_ controller: TDAlbumListViewController, didSelectAlbum album: TDAlbum, animation:Bool)
 }
 
-class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAlbumListServiceManagerDelegate{
+class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAlbumListServiceManagerDelegate, TDAlbumListViewDataSource{
     
     // MARK: - Variables
     weak var delegate: TDAlbumListViewControllerDelegate?
     weak var datasource: TDAlbumListViewControllerDataSource?
     
     lazy fileprivate var serviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
-    
+    lazy fileprivate var isFirstTime = false
     // MARK: - Init
     
     public required init() {
@@ -47,6 +47,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         let albumView = self.view as! TDAlbumListView
         albumView.setupView()
         albumView.delegate = self
+        albumView.dataSource = self
         
         // 3. Service Manager Setup
         serviceManager.delegate = self
@@ -73,6 +74,13 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     // MARK: - Private Method(s)
     private func handleFetchedAlbums(_ albums:[TDAlbum]){
+        if !isFirstTime{
+            isFirstTime = true
+            if let selectedInitialAlbum = self.datasource?.albumController(self, selectedAlbumAtInitialLoad: albums){
+                self.delegate?.albumController(self, didSelectAlbum: selectedInitialAlbum, animation: false)
+            }
+        }
+        
         var albumViewModels: [TDAlbumViewModel] = []
         for(_,album) in albums.enumerated(){
             let albumViewModel = map(album)
@@ -105,13 +113,29 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         return nil
     }
     
+    //MARK: - Album View Datasource Method(s)
+    
+    func albumListView(_ view: TDAlbumListView, textForAlbum album: TDAlbumViewModel)->TDConfigText?{
+        let albums = serviceManager.fetchAlbum(album.id)
+        let selectedAlbum: TDAlbum?
+        if albums.count > 0{
+            selectedAlbum = albums[0]
+        }
+        else{
+            return nil
+        }
+        
+        let currentCount = selectedAlbum?.itemsCount
+        
+        return self.datasource?.albumController(self, textFormatForAlbum: selectedAlbum!, mediaCount: currentCount!)
+    }
     
     // MARK: - Album View Delegate Method(s)
     
     func albumListView(_ view:TDAlbumListView, didSelectAlbum album:TDAlbumViewModel){
         serviceManager.fetchAlbum(album.id, completion: { (albumData) in
             if albumData != nil{
-                self.delegate?.albumController(self, didSelectAlbum: albumData!)
+                self.delegate?.albumController(self, didSelectAlbum: albumData!, animation: true)
             }
         })
     }
@@ -148,7 +172,7 @@ extension TDAlbumListViewController{
             albumView.setupBackButton(btnConfig)
         }
         if let btnConfig = config.navigationBar?.nextButton{
-            albumView.setupBackButton(btnConfig)
+            albumView.setupNextButton(btnConfig)
         }
         if let color = config.navigationBar?.navigationBarView?.backgroundColor{
             albumView.setupNavigationTheme(color)

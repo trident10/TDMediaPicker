@@ -10,14 +10,16 @@ import Foundation
 import Photos
 
 open class TDMedia{
+    var albumId: String
     var id: String
     var caption: String = ""
     let asset: PHAsset
     // MARK: - Initialization
     
-    init(asset: PHAsset, caption:String) {
+    init(albumID: String, asset: PHAsset, caption:String) {
         self.asset = asset
         id = asset.localIdentifier
+        self.albumId = albumID
     }
 }
 

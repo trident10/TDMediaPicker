@@ -19,6 +19,7 @@ class TDAlbumListServiceManager {
     private var albumsFetchResults = [PHFetchResult<PHAssetCollection>]()
     
     private var configServiceManager = TDConfigServiceManager.sharedInstance
+    private var cartServiceManager = TDCartServiceManager.sharedInstance
 
     lazy private var albums: [TDAlbum] = []
 
@@ -37,6 +38,16 @@ class TDAlbumListServiceManager {
                 completion(self.albums)
             }
         }
+    }
+    
+    func fetchAlbum(_ albumId: String)-> [TDAlbum]{
+        return self.albums.filter { (album) -> Bool in
+            return album.id == albumId
+        }
+    }
+    
+    func fetchSelectedMediaForAlbum(_ album: [TDMedia])-> [TDMedia]?{
+        return cartServiceManager.getSelectedMedia(album)
     }
     
     func getNavigationThemeConfig()-> TDConfigViewStandard{

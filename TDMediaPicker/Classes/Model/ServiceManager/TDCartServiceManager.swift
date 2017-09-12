@@ -49,6 +49,14 @@ class TDCartServiceManager{
         return cart.media
     }
     
+    func getSelectedMedia(_ album: [TDMedia]) -> [TDMedia]{
+        return album.filter({ (media) -> Bool in
+            return contains(media)
+        })
+    }
+    
+
+    
     // MARK: - Logic
     
     func contains(_ media: TDMedia) -> Bool{

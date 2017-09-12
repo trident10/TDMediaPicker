@@ -28,7 +28,8 @@ extension ViewController: TDMediaPickerDataSource{
     //MARK:- Album Screen
     
     func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        return TDConfigNavigationBar()
+        let themeConfig = getThemeConfig()
+        return themeConfig.getAlbumNavBarConfig()
     }
     
     func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
@@ -47,12 +48,14 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getImageSizeForAlbum()
     }
     
-    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText{
-        return TDConfigText.init(text: "Albums", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
-    }
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getTextFormatForAlbum(album: album, mediaCount: mediaCount)
+    }     
     
     func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
-        return albums[0]
+        let themeConfig = getThemeConfig()
+        return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
     }
     
     

@@ -18,10 +18,21 @@ class ThemeConfig {
         fatalError("Concrete class must provide data")
     }
     
-    func getPermissionScreenConfig()->TDConfigPermissionScreen{
+    func getAlbumNavBarConfig()->TDConfigNavigationBar{
         fatalError("Concrete class must provide data")
     }
     
+    func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getPermissionScreenConfig()->TDConfigPermissionScreen{
+        fatalError("Concrete class must provide data")
+    }
     
 }
 

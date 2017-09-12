@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TDAlbumListViewDataSource: class {
+    func albumListView(_ view: TDAlbumListView, textForAlbum album: TDAlbumViewModel)->TDConfigText?
+}
+
 protocol TDAlbumListViewDelegate: class {
     func albumListView(_ view: TDAlbumListView, didSelectAlbum album: TDAlbumViewModel)
     func albumListViewDidTapBack(_ view: TDAlbumListView)
@@ -18,7 +22,8 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     // MARK: - Variables
     
-    weak var delegate:TDAlbumListViewDelegate?
+    weak var delegate: TDAlbumListViewDelegate?
+    weak var dataSource: TDAlbumListViewDataSource?
     
     lazy private var albumListViewModel = TDAlbumListViewModel.init(headerTitle: "Albums")
     private var imageSize: CGSize?
@@ -106,6 +111,12 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
             as! TDAlbumCell
         
         let album = albumListViewModel.albums[(indexPath as NSIndexPath).row]
+        
+        if let configText = self.dataSource?.albumListView(self, textForAlbum: album){
+            album.title = configText.text
+            
+        }
+        
         album.imageSize = imageSize!
         if album.image != nil{
             cell.configure(album, image: album.image!)
