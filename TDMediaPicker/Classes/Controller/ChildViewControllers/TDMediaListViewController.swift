@@ -21,7 +21,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     private var selectedAlbum:TDAlbum?
     
     weak var delegate: TDMediaListViewControllerDelegate?
-    lazy private var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
+    lazy fileprivate var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
     // MARK: - Init
     
@@ -62,6 +62,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         super.viewWillAppear(animated)
         
         setupNavigationTheme()
+        setupConfig()
         
         if selectedAlbum != nil{
             serviceManager.fetchMediaItems(album: selectedAlbum!, completion: { (media) in
@@ -86,12 +87,6 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     }
     
     // MARK: - Private Method(s)
-    
-    private func setupNavigationTheme(){
-        let config = serviceManager.getNavigationThemeConfig()
-        let mediaView = self.view as! TDMediaListView
-        mediaView.setupNavigationTheme(config.backgroundColor)
-    }
     
     private func handleFetchedMedia(_ mediaList:[TDMedia]){
         let mediaViewModels = mapMediaViewModels(mediaList: mediaList)
@@ -169,5 +164,36 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         
         let mediaView = self.view as! TDMediaListView
         mediaView.reload(cart: cartViewModel, updateType: cartViewUpdateType)
+    }
+}
+// MARK: - Configurations
+
+extension TDMediaListViewController{
+    
+    func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let mediaView = self.view as! TDMediaListView
+        mediaView.setupNavigationTheme(config.backgroundColor)
+    }
+    
+    func setupConfig(){
+        let mediaView = self.view as! TDMediaListView
+        let config = serviceManager.getMediaScreenConfig()
+        
+        if let title = config.navigationBar?.screenTitle{
+            mediaView.setupScreenTitle(title)
+        }
+        if let btnConfig = config.navigationBar?.backButton{
+            mediaView.setupBackButton(btnConfig)
+        }
+        if let btnConfig = config.navigationBar?.nextButton{
+            mediaView.setupNextButton(btnConfig)
+        }
+        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+            mediaView.setupNavigationTheme(color)
+        }
+        if let size = config.imageSize{
+            mediaView.setupMediaImageSize(size)
+        }
     }
 }

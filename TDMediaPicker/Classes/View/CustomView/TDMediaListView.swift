@@ -20,9 +20,8 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     // MARK: - Variables
     
     weak var delegate:TDMediaListViewDelegate?
-    
-    private var columns: CGFloat = 4
     private let cellSpacing: CGFloat = 2
+    private var imageSize: CGSize? = CGSize(width: 78, height: 78)
     
     private var mediaItems:[TDMediaViewModel] = []
     private var _cart: TDCartViewModel? = TDCartViewModel(media: [])
@@ -46,6 +45,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     @IBOutlet var collectionView:  UICollectionView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet var navigationBar: UIView!
 
     
@@ -57,12 +57,6 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - Public Method(s)
     func viewDidTransition(){
-        if UIDevice.current.orientation == UIDeviceOrientation.portrait {
-            columns = 4
-        }else{
-            columns = 7
-        }
-        collectionView.reloadData()
     }
     
     func setupView(){
@@ -72,6 +66,26 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     func setupNavigationTheme(_ color: UIColor){
         navigationBar.backgroundColor = color
+    }
+    
+    func setupScreenTitle(_ config: TDConfigLabel){
+        TDMediaUtil.setupLabel(titleLabel, config: config)
+    }
+    
+    func setupBackButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(backButton, buttonConfig: config)
+    }
+    
+    func setupNextButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(doneButton, buttonConfig: config)
+    }
+    
+    func setupNextbutton(_ config: TDConfigLabel){
+        TDMediaUtil.setupLabel(titleLabel, config: config)
+    }
+    
+    func setupMediaImageSize(_ size: CGSize){
+        imageSize = size
     }
     
     func purgeData(){
@@ -184,8 +198,8 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (collectionView.bounds.size.width - (columns - 1) * cellSpacing) / columns
-        return CGSize(width: size, height: size)
+//                let size = (collectionView.bounds.size.width - (columns - 1) * cellSpacing) / columns
+        return imageSize!
     }
     
     // MARK: - Collection View Delegate Method(s)

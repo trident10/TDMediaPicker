@@ -27,7 +27,7 @@ class Theme3: ThemeConfig{
     }
     
     override func getImageSizeForAlbum()->CGSize{
-        return CGSize(width: 20, height: 20)
+        return CGSize(width: 40, height: 40)
     }
     
     override func getAlbumNavBarConfig()->TDConfigNavigationBar{

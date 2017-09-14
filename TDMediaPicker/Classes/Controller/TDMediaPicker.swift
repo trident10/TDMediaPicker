@@ -32,6 +32,7 @@ public protocol TDMediaPickerDelegate: class{
     
     //Media List Screen
     @objc optional func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    @objc optional func mediaPickerImageSizeForMedia(_ picker: TDMediaPicker)-> CGSize
     
     //Preview Screen
     @objc optional func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar

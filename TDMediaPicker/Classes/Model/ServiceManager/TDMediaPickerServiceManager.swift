@@ -51,4 +51,8 @@ extension TDMediaPickerServiceManager{
     func setupConfig(albumScreen: TDConfigAlbumScreen){
         configServiceManager.albumScreenConfig = albumScreen
     }
+    
+    func setupConfig(mediaScreen: TDConfigMediaScreen){
+        configServiceManager.mediaScreenConfig = mediaScreen
+    }
 }

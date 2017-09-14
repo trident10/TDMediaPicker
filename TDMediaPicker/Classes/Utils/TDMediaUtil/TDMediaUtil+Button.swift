@@ -64,10 +64,12 @@ extension TDMediaUtil {
         var normalTitle = "Settings"
         var highlightedTitle = "Settings"
         var selectedTitle = "Settings"
+        var disabledTitle = "Settings"
         if let text = config.normalTextConfig?.text{
             normalTitle = text
             highlightedTitle = text
             selectedTitle = text
+            disabledTitle = text
         }
         if let text = config.highlightTextConfig?.text{
             highlightedTitle = text
@@ -75,9 +77,13 @@ extension TDMediaUtil {
         if let text = config.selectedTextConfig?.text{
             selectedTitle = text
         }
+        if let text = config.disabledTextConfig?.text{
+            disabledTitle = text
+        }
         button.setTitle(normalTitle, for: .normal)
         button.setTitle(highlightedTitle, for: .highlighted)
         button.setTitle(selectedTitle, for: .selected)
+        button.setTitle(disabledTitle, for: .disabled)
         
         //2. Set Button Title Font
         var normalTitleFont = UIFont.systemFont(ofSize: 14.0)
@@ -90,10 +96,12 @@ extension TDMediaUtil {
         var normalTitleColor = UIColor.black
         var highlightedTitleColor = UIColor.black
         var selectedTitleColor = UIColor.black
+        var disabledTitleColor = UIColor.black
         if let color = config.normalTextConfig?.textColor{
             normalTitleColor = color
             highlightedTitleColor = normalTitleColor
             selectedTitleColor = normalTitleColor
+            disabledTitleColor = normalTitleColor
         }
         if let color = config.highlightTextConfig?.textColor{
             highlightedTitleColor = color
@@ -101,18 +109,24 @@ extension TDMediaUtil {
         if let color = config.selectedTextConfig?.textColor{
             selectedTitleColor = color
         }
+        if let color = config.disabledTextConfig?.textColor{
+            disabledTitleColor = color
+        }
         button.setTitleColor(normalTitleColor, for: .normal)
         button.setTitleColor(highlightedTitleColor, for: .highlighted)
         button.setTitleColor(selectedTitleColor, for: .selected)
+        button.setTitleColor(disabledTitleColor, for: .disabled)
         
         //3. Color Setup
         var normalColor = UIColor.clear
         var highlightedColor = UIColor.clear
         var selectedColor = UIColor.clear
+        var disabledColor = UIColor.clear
         if let color = config.normalColor{
             normalColor = color
             highlightedColor = color
             selectedColor = color
+            disabledColor = color
         }
         if let color = config.highlightedColor{
             highlightedColor = color
@@ -120,10 +134,14 @@ extension TDMediaUtil {
         if let color = config.selectedColor{
             selectedColor = color
         }
+        if let color = config.selectedColor{
+            disabledColor = color
+        }
         
         button.setBackgroundImage(getImagefromColor(color: normalColor), for: .normal)
         button.setBackgroundImage(getImagefromColor(color: highlightedColor), for: .highlighted)
         button.setBackgroundImage(getImagefromColor(color: selectedColor), for: .selected)
+        button.setBackgroundImage(getImagefromColor(color: disabledColor), for: .disabled)
         
         //4. Set alpha for highlight buttons
         if normalColor.isEqual(highlightedColor) {

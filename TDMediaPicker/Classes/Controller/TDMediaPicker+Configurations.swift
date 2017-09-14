@@ -19,8 +19,9 @@ extension TDMediaPicker{
             serviceManager.setupConfig(navigationTheme: viewConfig)
         }
         
-        //1. Initial Album Configurations
+        //1. Initial Configurations
         setupAlbumScreenConfiguration()
+        setupMediaScreenConfiguration()
     }
     
     //MARK: ...Album Config Method(s)
@@ -32,7 +33,11 @@ extension TDMediaPicker{
         return self.dataSource?.mediaPicker?(self, textFormatForAlbum: album, mediaCount: mediaCount)
     }
     
+    
+    
     //MARK: - Private Method(s)
+    //MARK: ...Album Config Method(s)
+
     private func setupAlbumScreenConfiguration(){
         let albumConfig = TDConfigAlbumScreen()
         if let navBarConfig = dataSource?.mediaPickerAlbumNavBarConfig?(self){
@@ -49,4 +54,19 @@ extension TDMediaPicker{
         }
         serviceManager.setupConfig(albumScreen: albumConfig)
     }
+    
+    //MARK: ...Media Config Method(s)
+    
+    private func setupMediaScreenConfiguration(){
+        let mediaConfig = TDConfigMediaScreen()
+        if let navBarConfig = dataSource?.mediaPickerMediaNavBarConfig?(self){
+            mediaConfig.navigationBar = navBarConfig
+        }
+        if let size = dataSource?.mediaPickerImageSizeForMedia?(self){
+            mediaConfig.imageSize = size
+        }
+        serviceManager.setupConfig(mediaScreen: mediaConfig)
+    }
+    
+    
 }

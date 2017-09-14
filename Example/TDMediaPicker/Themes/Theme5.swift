@@ -60,13 +60,15 @@ class Theme5: ThemeConfig{
     }
     
     override func getImageSizeForAlbum()->CGSize{
-        return CGSize(width: 90, height: 90)
+        return CGSize(width: 78, height: 78)
     }
     
     override func getAlbumNavBarConfig()->TDConfigNavigationBar{
         let configNavBar = TDConfigNavigationBar()
         configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
-        configNavBar.nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .lightGray, textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
+        configNavBar.nextButton = nextButton
         configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)))
         configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
         return configNavBar
@@ -82,7 +84,7 @@ class Theme5: ThemeConfig{
     }
     
     override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
-        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
+        return TDConfigText.init(text: String(format: "%@\n%d",album.collection.localizedTitle!,mediaCount), textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
     }
 
     

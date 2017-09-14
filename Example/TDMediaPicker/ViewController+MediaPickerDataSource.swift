@@ -27,7 +27,6 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     //MARK:- Album Screen
-    
     func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
         let themeConfig = getThemeConfig()
         return themeConfig.getAlbumNavBarConfig()
@@ -59,6 +58,16 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
     }
     
+    //MARK:- Media Screen
+    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getAlbumNavBarConfig()
+    }
+    
+    func mediaPickerImageSizeForMedia(_ picker: TDMediaPicker)-> CGSize{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getImageSizeForAlbum()
+    }
     
 }
 
