@@ -99,5 +99,4 @@ class TDMediaCell: UICollectionViewCell{
     func processHighlighting(shouldDisplay: Bool, count: Int = -1, text: String = ""){
         fatalError("This should be implemented by concrete class")
     }
-    
 }

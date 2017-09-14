@@ -53,6 +53,11 @@ class Theme1: ThemeConfig{
     override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
         return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.systemFont(ofSize: 16))
     }
+    
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        return TDConfigViewStandard(backgroundColor: .red)
+    }
+
 }
 
 

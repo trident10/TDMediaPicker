@@ -86,6 +86,12 @@ class Theme5: ThemeConfig{
     override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
         return TDConfigText.init(text: String(format: "%@\n%d",album.collection.localizedTitle!,mediaCount), textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
     }
+    
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        let myView: HightLightedCellView = .fromNib()
+        myView.countLabel.text = String(mediaCount)
+        return TDConfigViewCustom.init(view: myView)
+    }
 
     
 }

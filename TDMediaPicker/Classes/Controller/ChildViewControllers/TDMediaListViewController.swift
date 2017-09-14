@@ -8,19 +8,25 @@
 
 import UIKit
 
+protocol TDMediaListViewControllerDataSource: class {
+    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView
+}
+
 protocol TDMediaListViewControllerDelegate: class {
     func mediaControllerDidTapDone(_ view: TDMediaListViewController)
     func mediaControllerDidTapCancel(_ view: TDMediaListViewController)
 }
 
 
-class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMediaListServiceManagerDelegate{
+class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMediaListServiceManagerDelegate,TDMediaListViewDataSource{
     
     // MARK: - Variable(s)
     
     private var selectedAlbum:TDAlbum?
     
     weak var delegate: TDMediaListViewControllerDelegate?
+    weak var datasource: TDMediaListViewControllerDataSource?
+    
     lazy fileprivate var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
     // MARK: - Init
@@ -51,6 +57,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         let mediaView = self.view as! TDMediaListView
         mediaView.setupView()
         mediaView.delegate = self
+        mediaView.dataSource = self
         
         // 2. Service Manager Setup
         
@@ -114,6 +121,10 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         return nil
     }
     
+    //MARK: - Media View Datasource Method(s)
+    func mediaListView(_ view: TDMediaListView, countForMedia mediaCount: Int)-> TDConfigView?{
+        return self.datasource?.mediaController(self, countForMedia: mediaCount)
+    }
     
     // MARK: - View Delegate Method(s)
     

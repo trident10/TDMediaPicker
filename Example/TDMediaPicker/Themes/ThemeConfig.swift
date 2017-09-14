@@ -19,6 +19,10 @@ class ThemeConfig {
         fatalError("Concrete class must provide data")
     }
     
+    func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        fatalError("Concrete class must provide data")
+    }
+    
     func getAlbumNavBarConfig()->TDConfigNavigationBar{
         fatalError("Concrete class must provide data")
     }

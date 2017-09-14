@@ -33,6 +33,10 @@ extension TDMediaPicker{
         return self.dataSource?.mediaPicker?(self, textFormatForAlbum: album, mediaCount: mediaCount)
     }
     
+    //MARK: ...Media Config Method(s)
+    func getMediaHighlightedView(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView?{
+        return self.dataSource?.mediaPicker!(self, countForMedia: mediaCount)
+    }
     
     
     //MARK: - Private Method(s)

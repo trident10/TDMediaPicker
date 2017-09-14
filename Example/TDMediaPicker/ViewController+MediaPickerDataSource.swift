@@ -69,8 +69,11 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getImageSizeForAlbum()
     }
     
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDConfigView {
+        let themeConfig = getThemeConfig()
+        return themeConfig.getMediaHighlightedCellView(mediaCount: mediaCount)
+    }
 }
-
 
 extension ViewController{
     func getThemeConfig()->ThemeConfig{

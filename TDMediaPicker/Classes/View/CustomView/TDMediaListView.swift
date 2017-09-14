@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TDMediaListViewDataSource: class {
+    func mediaListView(_ view: TDMediaListView, countForMedia mediaCount: Int)-> TDConfigView?
+}
+
 protocol TDMediaListViewDelegate:class {
     func mediaListView(_ view:TDMediaListView, didSelectMedia media:TDMediaViewModel, shouldRemoveFromCart value: Bool)
     func mediaListViewDidTapBack(_ view:TDMediaListView)
@@ -20,6 +24,8 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     // MARK: - Variables
     
     weak var delegate:TDMediaListViewDelegate?
+    weak var dataSource: TDMediaListViewDataSource?
+    
     private let cellSpacing: CGFloat = 2
     private var imageSize: CGSize? = CGSize(width: 78, height: 78)
     
@@ -157,6 +163,16 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         if let index = cart?.media.index(where: { (element) -> Bool in
             return element.asset.localIdentifier == item.asset.localIdentifier
         }){
+//            if let configView = self.dataSource?.albumListView(self, textForAlbum: album){
+//                TDMediaUtil.setupLabel(cell.titleLabel, config: configText)
+//            }
+            if let configView = self.dataSource?.mediaListView(self, countForMedia: index + 1){
+                if item.asset.mediaType == .image{
+                    TDMediaUtil.setupView((cell as! TDMediaCellImageThumb).selectedView, configView)
+                }else{
+                    TDMediaUtil.setupView((cell as! TDMediaCellVideoThumb).selectedView, configView)
+                }
+            }
             cell.processHighlighting(shouldDisplay: true, count: index + 1)
         }
         else {

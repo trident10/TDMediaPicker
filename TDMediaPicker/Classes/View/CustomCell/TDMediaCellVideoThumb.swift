@@ -12,7 +12,7 @@ import Photos
 class TDMediaCellVideoThumb: TDMediaCell{
     
     @IBOutlet var label: UILabel!
-    
+    @IBOutlet weak var selectedView: UIView!
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -45,12 +45,12 @@ class TDMediaCellVideoThumb: TDMediaCell{
     
     override func processHighlighting(shouldDisplay: Bool, count: Int = -1, text: String = ""){
         if shouldDisplay{
-            label.text = String(count)
-            imageView.isHidden = true
+            label.text = count == -1 ? "" : String(count)
+            selectedView.isHidden = false
             return
         }
         label.text = ""
-        imageView.isHidden = false
+        selectedView.isHidden = true
     }
 }
 

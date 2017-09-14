@@ -33,6 +33,7 @@ public protocol TDMediaPickerDelegate: class{
     //Media List Screen
     @objc optional func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
     @objc optional func mediaPickerImageSizeForMedia(_ picker: TDMediaPicker)-> CGSize
+    @objc optional func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView
     
     //Preview Screen
     @objc optional func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
@@ -134,6 +135,7 @@ extension TDMediaPicker{
             }
             mediaListVC = TDMediaListViewController()
             mediaListVC?.delegate = self
+            mediaListVC?.datasource = self
             
         case .Preview:
             if previewVC != nil{

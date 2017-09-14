@@ -48,6 +48,12 @@ class Theme6: ThemeConfig{
         let str = String(format: "%@\n\nFiles: %d",album.collection.localizedTitle!,mediaCount)
         return TDConfigText.init(text: str, textColor: .black, textFont: UIFont.init(name: "Palatino-Bold", size: 17))
     }
+    
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        let myView: HightLightedCellView = UIView.fromNib()
+        myView.countLabel.text = String(mediaCount)
+        return TDConfigViewCustom.init(view: myView)
+    }
 
     
 }
