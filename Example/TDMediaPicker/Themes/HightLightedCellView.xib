@@ -46,6 +46,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="countLabel" destination="dfh-cn-Bu7" id="bPg-tZ-zYJ"/>
+                <outlet property="imageView" destination="oKC-OG-NkY" id="50i-1g-7QM"/>
             </connections>
             <point key="canvasLocation" x="-88.5" y="-235.5"/>
         </view>

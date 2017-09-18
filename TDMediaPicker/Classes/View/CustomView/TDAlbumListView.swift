@@ -100,7 +100,7 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
         self.delegate?.albumListViewDidTapNext(self)
     }
     
-    //MARK: - Table View datasource Method(s)
+    //MARK: - Table View dataSource Method(s)
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return albumListViewModel.albums.count

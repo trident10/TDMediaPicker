@@ -66,6 +66,7 @@ class Theme5: ThemeConfig{
     override func getAlbumNavBarConfig()->TDConfigNavigationBar{
         let configNavBar = TDConfigNavigationBar()
         configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
         let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .lightGray, textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
         configNavBar.nextButton = nextButton
@@ -92,7 +93,15 @@ class Theme5: ThemeConfig{
         myView.countLabel.text = String(mediaCount)
         return TDConfigViewCustom.init(view: myView)
     }
-
+    
+    
+    override func getNumberOfColumnInPortrait()->Int{
+        return 3
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 7
+    }
     
 }
 

@@ -22,8 +22,12 @@ extension TDMediaPicker{
         //1. Initial Configurations
         setupAlbumScreenConfiguration()
         setupMediaScreenConfiguration()
+        setupPreviewScreenConfiguration()
     }
     
+    func getMediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView?{
+        return dataSource?.mediaPickerVideoThumbOverlay?(self)
+    }
     //MARK: ...Album Config Method(s)
     func getSelectedAlbumAtInitialLoad(albums: [TDAlbum]) -> TDAlbum? {
         return self.dataSource?.mediaPicker?(self, selectedAlbumAtInitialLoad: albums)
@@ -35,9 +39,20 @@ extension TDMediaPicker{
     
     //MARK: ...Media Config Method(s)
     func getMediaHighlightedView(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView?{
-        return self.dataSource?.mediaPicker!(self, countForMedia: mediaCount)
+        return self.dataSource?.mediaPicker?(self, countForMedia: mediaCount)
     }
     
+    //MARK: ...Preview Config Method(s)
+    func getMediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView?{
+        return self.dataSource?.mediaPickerPreviewSelectedThumbnailView?(self)
+    }
+    
+    func getMediaPickerPreviewAddThumbnailView(_ picker: TDMediaPicker)-> TDConfigView?{
+        return self.dataSource?.mediaPickerPreviewThumbnailAddView?(self)
+    }
+    func getMediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool? {
+        return self.dataSource?.mediaPickerPreviewHideCaptionView?(self)
+    }
     
     //MARK: - Private Method(s)
     //MARK: ...Album Config Method(s)
@@ -66,10 +81,26 @@ extension TDMediaPicker{
         if let navBarConfig = dataSource?.mediaPickerMediaNavBarConfig?(self){
             mediaConfig.navigationBar = navBarConfig
         }
-        if let size = dataSource?.mediaPickerImageSizeForMedia?(self){
-            mediaConfig.imageSize = size
+        if let coulmn = dataSource?.mediaPickerMediaListNumberOfColumnInPortrait?(self){
+            mediaConfig.portraitColumns = coulmn
+        }
+        if let coulmn = dataSource?.mediaPickerMediaListNumberOfColumnInLandscape?(self){
+            mediaConfig.landscapeColumns = coulmn
         }
         serviceManager.setupConfig(mediaScreen: mediaConfig)
+    }
+    
+    //MARK: ...Preview Config Method(s)
+    
+    private func setupPreviewScreenConfiguration(){
+        let previewConfig = TDConfigPreviewScreen()
+        if let navBarConfig = dataSource?.mediaPickerPreviewNavBarConfig?(self){
+            previewConfig.navigationBar = navBarConfig
+        }
+        if let videoThumbOverLay = dataSource?.mediaPickerVideoThumbOverlay?(self){
+            previewConfig.videoThumbOverlay = videoThumbOverLay
+        }
+        serviceManager.setupConfig(previewScreen: previewConfig)
     }
     
     

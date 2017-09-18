@@ -7,7 +7,12 @@
 //
 
 import UIKit
-
+protocol TDMediaPreviewControllerDataSource: class {
+    func previewControllerSelectedThumbnailView(_ controller: TDMediaPreviewViewController)-> TDConfigView
+    func previewControllerThumbnailAddView(_ controller: TDMediaPreviewViewController)-> TDConfigView
+    func previewControllerHideCaptionView(_ controller: TDMediaPreviewViewController)-> Bool?
+    func previewControllerVideoThumbOverlay(_ controller: TDMediaPreviewViewController) -> TDConfigView?
+}
 protocol TDMediaPreviewViewControllerDelegate: class {
     func previewControllerDidTapClose(_ controller: TDMediaPreviewViewController)
     func previewControllerDidTapAddOption(_ controller: TDMediaPreviewViewController)
@@ -19,8 +24,9 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewViewControllerDelegate?
+    weak var dataSource: TDMediaPreviewControllerDataSource?
 
-    lazy private var serviceManager: TDMediaPreviewServiceManager = TDMediaPreviewServiceManager()
+    lazy fileprivate var serviceManager: TDMediaPreviewServiceManager = TDMediaPreviewServiceManager()
 
     // MARK: - Init
     
@@ -41,6 +47,7 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         
         let previewView = self.view as! TDMediaPreviewView
         previewView.delegate = self
+        previewView.dataSource = self
         
         // 3. Service Manager Setup
         
@@ -50,6 +57,7 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationTheme()
+        setupConfig()
 
         serviceManager.fetchMediaItems()
         let previewView = self.view as! TDMediaPreviewView
@@ -76,11 +84,6 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         })
     }
     // MARK: - Private Method(s)
-    private func setupNavigationTheme(){
-        let config = serviceManager.getNavigationThemeConfig()
-        let previewView = self.view as! TDMediaPreviewView
-        previewView.setupNavigationTheme(config.backgroundColor)
-    }
     
     private func mapMediaViewModels(mediaList:[TDMedia])->TDMediaPreviewViewModel{
         var mediaViewModels: [TDPreviewViewModel] = []
@@ -167,6 +170,48 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
         let previewView = self.view as! TDMediaPreviewView
         previewView.reload(media: mediaViewModels, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
     }
+}
+
+// MARK: - Configurations
+
+extension TDMediaPreviewViewController{
+    func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let previewView = self.view as! TDMediaPreviewView
+        previewView.setupNavigationTheme(config.backgroundColor)
+    }
     
+    func setupConfig(){
+        let previewView = self.view as! TDMediaPreviewView
+        let config = serviceManager.getPreviewScreenConfig()
+        
+        if let btnConfig = config.navigationBar?.otherButton{
+            previewView.setupDeleteButton(btnConfig)
+        }
+        if let btnConfig = config.navigationBar?.backButton{
+            previewView.setupBackButton(btnConfig)
+        }
+        if let btnConfig = config.navigationBar?.nextButton{
+            previewView.setupNextButton(btnConfig)
+        }
+        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+            previewView.setupNavigationTheme(color)
+        }
+    }
+}
+extension TDMediaPreviewViewController: TDMediaPreviewViewDataSource{
+    func previewViewVideoThumbOverlay(_ view: TDMediaPreviewView) -> TDConfigView? {
+        return self.dataSource?.previewControllerVideoThumbOverlay(self)
+    }
+
+    func previewViewSelectedThumbnailView(_ view: TDMediaPreviewView)-> TDConfigView?{
+        return self.dataSource?.previewControllerSelectedThumbnailView(self)
+    }
     
+    func previewViewThumbnailAddView(_ view: TDMediaPreviewView)-> TDConfigView?{
+         return self.dataSource?.previewControllerThumbnailAddView(self)
+    }
+    func previewViewHideCaptionView(_ view: TDMediaPreviewView)-> Bool?{
+        return self.dataSource?.previewControllerHideCaptionView(self)
+    }
 }

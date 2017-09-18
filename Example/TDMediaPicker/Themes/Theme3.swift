@@ -50,7 +50,15 @@ class Theme3: ThemeConfig{
     override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
         return TDConfigViewStandard(backgroundColor: .red)
     }
-
+    
+    
+    override func getNumberOfColumnInPortrait()->Int{
+        return 6
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 9
+    }
     
 }
 

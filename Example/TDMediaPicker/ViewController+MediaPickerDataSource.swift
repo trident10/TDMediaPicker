@@ -13,11 +13,24 @@ import Photos
 
 extension ViewController: TDMediaPickerDataSource{
     
+    //MARK:- Max Selection
+    func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
+        return 10
+    }
+    
     //MARK:- Navigation Bar Theme
     
     func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
         let themeConfig = getThemeConfig()
         return themeConfig.getNavigationThemeConfig()
+    }
+    
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
     }
     
     //MARK:-  Permission Screen
@@ -64,15 +77,44 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getAlbumNavBarConfig()
     }
     
-    func mediaPickerImageSizeForMedia(_ picker: TDMediaPicker)-> CGSize{
+    func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int{
         let themeConfig = getThemeConfig()
-        return themeConfig.getImageSizeForAlbum()
+        return themeConfig.getNumberOfColumnInPortrait()
+    }
+    
+    func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getNumberOfColumnInLandscape()
     }
     
     func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDConfigView {
         let themeConfig = getThemeConfig()
         return themeConfig.getMediaHighlightedCellView(mediaCount: mediaCount)
     }
+    
+    //MARK:- Preview Screen
+    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getAlbumNavBarConfig()
+    }
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.countLabel.isHidden = true
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "add")
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool {
+        return true
+    }
+    
 }
 
 extension ViewController{

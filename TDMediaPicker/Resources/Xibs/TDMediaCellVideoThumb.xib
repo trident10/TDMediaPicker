@@ -21,6 +21,11 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xa5-kg-0Mt">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="105"/>
                     </imageView>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W2c-jc-mos">
+                        <rect key="frame" x="0.0" y="0.0" width="104" height="105"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-YC-ApF">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="105"/>
                         <subviews>
@@ -54,6 +59,7 @@
                 <outlet property="imageView" destination="Xa5-kg-0Mt" id="PPa-PA-lRb"/>
                 <outlet property="label" destination="7WS-te-Xnj" id="Stb-Kf-cxx"/>
                 <outlet property="selectedView" destination="ZDX-YC-ApF" id="cBg-AZ-ZiE"/>
+                <outlet property="viewForVideo" destination="W2c-jc-mos" id="Daq-zw-QUq"/>
             </connections>
             <point key="canvasLocation" x="11" y="68.5"/>
         </collectionViewCell>

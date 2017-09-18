@@ -54,6 +54,14 @@ class Theme6: ThemeConfig{
         myView.countLabel.text = String(mediaCount)
         return TDConfigViewCustom.init(view: myView)
     }
+    
+    override func getNumberOfColumnInPortrait()->Int{
+        return 5
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 10
+    }
 
     
 }

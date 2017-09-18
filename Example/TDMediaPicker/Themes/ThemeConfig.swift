@@ -39,5 +39,13 @@ class ThemeConfig {
         fatalError("Concrete class must provide data")
     }
     
+    func getNumberOfColumnInPortrait()->Int{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getNumberOfColumnInLandscape()->Int{
+        fatalError("Concrete class must provide data")
+    }
+    
 }
 

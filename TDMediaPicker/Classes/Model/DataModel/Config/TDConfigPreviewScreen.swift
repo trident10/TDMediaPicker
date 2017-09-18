@@ -8,9 +8,8 @@
 
 import Foundation
 
-class TDConfigMediaScreen: NSObject{
-    
+class TDConfigPreviewScreen: NSObject{
     var navigationBar: TDConfigNavigationBar?
-    var portraitColumns: Int?
-    var landscapeColumns: Int?    
+    var videoThumbOverlay: TDConfigView?
+    
 }

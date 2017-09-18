@@ -10,6 +10,7 @@ import UIKit
 
 protocol TDMediaListViewDataSource: class {
     func mediaListView(_ view: TDMediaListView, countForMedia mediaCount: Int)-> TDConfigView?
+    func mediaListViewVideoThumbOverlay(_ view: TDMediaListView)-> TDConfigView?
 }
 
 protocol TDMediaListViewDelegate:class {
@@ -26,8 +27,12 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     weak var delegate:TDMediaListViewDelegate?
     weak var dataSource: TDMediaListViewDataSource?
     
+    
+    private var columns: Int = 4
+    private var portraitColumns: Int = 4
+    private var landscapeColumns: Int = 7
+    
     private let cellSpacing: CGFloat = 2
-    private var imageSize: CGSize? = CGSize(width: 78, height: 78)
     
     private var mediaItems:[TDMediaViewModel] = []
     private var _cart: TDCartViewModel? = TDCartViewModel(media: [])
@@ -53,7 +58,7 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet var navigationBar: UIView!
-
+    
     
     // MARK: - LifeCycle
     
@@ -63,6 +68,12 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - Public Method(s)
     func viewDidTransition(){
+        if UIDevice.current.orientation.isLandscape {
+            columns = landscapeColumns
+        }else{
+            columns = portraitColumns
+        }
+        collectionView.reloadData()
     }
     
     func setupView(){
@@ -86,12 +97,15 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         TDMediaUtil.setupButton(doneButton, buttonConfig: config)
     }
     
-    func setupNextbutton(_ config: TDConfigLabel){
-        TDMediaUtil.setupLabel(titleLabel, config: config)
+    
+    func setupMediaNumberOfColumnForPotrait(_ column: Int){
+        portraitColumns = column
+        self.viewDidTransition()
     }
     
-    func setupMediaImageSize(_ size: CGSize){
-        imageSize = size
+    func setupMediaNumberOfColumnForLandscape(_ column: Int){
+        landscapeColumns = column
+        self.viewDidTransition()
     }
     
     func purgeData(){
@@ -159,27 +173,33 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             return
         }
         let item = mediaItems[(indexPath as NSIndexPath).item]
-        
+        if item.asset.mediaType == .video{
+            setVideoThumbView(cell)
+        }
         if let index = cart?.media.index(where: { (element) -> Bool in
             return element.asset.localIdentifier == item.asset.localIdentifier
         }){
-//            if let configView = self.dataSource?.albumListView(self, textForAlbum: album){
-//                TDMediaUtil.setupLabel(cell.titleLabel, config: configText)
-//            }
-            if let configView = self.dataSource?.mediaListView(self, countForMedia: index + 1){
-                if item.asset.mediaType == .image{
-                    TDMediaUtil.setupView((cell as! TDMediaCellImageThumb).selectedView, configView)
-                }else{
-                    TDMediaUtil.setupView((cell as! TDMediaCellVideoThumb).selectedView, configView)
-                }
-            }
+            setCellSelectedView(cell, count:  index + 1)
             cell.processHighlighting(shouldDisplay: true, count: index + 1)
         }
         else {
             cell.processHighlighting(shouldDisplay: false)
         }
     }
-    
+    private func setCellSelectedView(_ cell: TDMediaCell, count:Int){
+        if let configView = self.dataSource?.mediaListView(self, countForMedia: count){
+            if cell is TDMediaCellImageThumb{
+                TDMediaUtil.setupView((cell as! TDMediaCellImageThumb).selectedView, configView)
+            }else{
+                TDMediaUtil.setupView((cell as! TDMediaCellVideoThumb).selectedView, configView)
+            }
+        }
+    }
+    private func setVideoThumbView(_ cell: TDMediaCell){
+        if let configView = self.dataSource?.mediaListViewVideoThumbOverlay(self){
+            TDMediaUtil.setupView((cell as! TDMediaCellVideoThumb).viewForVideo, configView)
+        }
+    }
     // MARK: - Collection View Datasource Method(s)
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -214,8 +234,8 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//                let size = (collectionView.bounds.size.width - (columns - 1) * cellSpacing) / columns
-        return imageSize!
+        let size = (collectionView.bounds.size.width - (CGFloat(columns) - 1) * cellSpacing) / CGFloat(columns)
+        return CGSize(width: size, height: size)
     }
     
     // MARK: - Collection View Delegate Method(s)

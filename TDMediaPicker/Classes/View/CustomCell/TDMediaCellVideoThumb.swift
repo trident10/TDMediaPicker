@@ -13,6 +13,7 @@ class TDMediaCellVideoThumb: TDMediaCell{
     
     @IBOutlet var label: UILabel!
     @IBOutlet weak var selectedView: UIView!
+    @IBOutlet weak var viewForVideo: UIView!
     // MARK: - Initialization
     
     override init(frame: CGRect) {

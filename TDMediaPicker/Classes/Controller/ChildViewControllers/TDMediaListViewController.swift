@@ -10,6 +10,7 @@ import UIKit
 
 protocol TDMediaListViewControllerDataSource: class {
     func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView
+    func mediaControllerVideoThumbOverlay(_ view: TDMediaListViewController)-> TDConfigView?
 }
 
 protocol TDMediaListViewControllerDelegate: class {
@@ -25,7 +26,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     private var selectedAlbum:TDAlbum?
     
     weak var delegate: TDMediaListViewControllerDelegate?
-    weak var datasource: TDMediaListViewControllerDataSource?
+    weak var dataSource: TDMediaListViewControllerDataSource?
     
     lazy fileprivate var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
@@ -123,9 +124,12 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     
     //MARK: - Media View Datasource Method(s)
     func mediaListView(_ view: TDMediaListView, countForMedia mediaCount: Int)-> TDConfigView?{
-        return self.datasource?.mediaController(self, countForMedia: mediaCount)
+        return self.dataSource?.mediaController(self, countForMedia: mediaCount)
     }
     
+    func mediaListViewVideoThumbOverlay(_ view: TDMediaListView)-> TDConfigView?{
+        return self.dataSource?.mediaControllerVideoThumbOverlay(self)
+    }
     // MARK: - View Delegate Method(s)
     
     func mediaListView(_ view: TDMediaListView, didSelectMedia media: TDMediaViewModel, shouldRemoveFromCart value: Bool) {
@@ -190,7 +194,6 @@ extension TDMediaListViewController{
     func setupConfig(){
         let mediaView = self.view as! TDMediaListView
         let config = serviceManager.getMediaScreenConfig()
-        
         if let title = config.navigationBar?.screenTitle{
             mediaView.setupScreenTitle(title)
         }
@@ -203,8 +206,11 @@ extension TDMediaListViewController{
         if let color = config.navigationBar?.navigationBarView?.backgroundColor{
             mediaView.setupNavigationTheme(color)
         }
-        if let size = config.imageSize{
-            mediaView.setupMediaImageSize(size)
+        if let column = config.portraitColumns{
+            mediaView.setupMediaNumberOfColumnForPotrait(column)
+        }
+        if let column = config.landscapeColumns{
+            mediaView.setupMediaNumberOfColumnForLandscape(column)
         }
     }
 }

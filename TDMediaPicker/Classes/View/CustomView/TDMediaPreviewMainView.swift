@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TDMediaPreviewMainViewDataSource: class {
+    func previewMainViewHideCaptionView(_ view: TDMediaPreviewMainView)-> Bool?
+}
+
 protocol TDMediaPreviewMainViewDelegate: class {
     func previewMainView(_ view: TDMediaPreviewMainView, didDisplayViewAtIndex index: Int)
     func previewMainView(_ view: TDMediaPreviewMainView, didRequestUpdateMedia media: TDPreviewViewModel)
@@ -18,6 +22,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewMainViewDelegate?
+    weak var dataSource: TDMediaPreviewMainViewDataSource?
     
     fileprivate var mediaItems: [TDPreviewViewModel] = []
     fileprivate var selectedIndex: Int = 0
@@ -307,6 +312,9 @@ extension TDMediaPreviewMainView{
     func viewWillAppear(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        if let isHidden = self.dataSource?.previewMainViewHideCaptionView(self){
+            captionTextView.isHidden = isHidden
+        }
     }
     func viewDidDisappear(){
         NotificationCenter.default.removeObserver(self)

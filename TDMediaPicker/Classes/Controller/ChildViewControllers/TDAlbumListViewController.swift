@@ -24,7 +24,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     // MARK: - Variables
     weak var delegate: TDAlbumListViewControllerDelegate?
-    weak var datasource: TDAlbumListViewControllerDataSource?
+    weak var dataSource: TDAlbumListViewControllerDataSource?
     
     lazy fileprivate var serviceManager: TDAlbumListServiceManager = TDAlbumListServiceManager()
     lazy fileprivate var isFirstTime = false
@@ -76,7 +76,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     private func handleFetchedAlbums(_ albums:[TDAlbum]){
         if !isFirstTime{
             isFirstTime = true
-            if let selectedInitialAlbum = self.datasource?.albumController(self, selectedAlbumAtInitialLoad: albums){
+            if let selectedInitialAlbum = self.dataSource?.albumController(self, selectedAlbumAtInitialLoad: albums){
                 self.delegate?.albumController(self, didSelectAlbum: selectedInitialAlbum, animation: false)
             }
         }
@@ -127,7 +127,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         
         let currentCount = selectedAlbum?.itemsCount
         
-        return self.datasource?.albumController(self, textFormatForAlbum: selectedAlbum!, mediaCount: currentCount!)
+        return self.dataSource?.albumController(self, textFormatForAlbum: selectedAlbum!, mediaCount: currentCount!)
     }
     
     // MARK: - Album View Delegate Method(s)

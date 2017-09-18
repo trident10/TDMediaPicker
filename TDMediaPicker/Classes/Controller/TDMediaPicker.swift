@@ -16,8 +16,12 @@ public protocol TDMediaPickerDelegate: class{
 
 @objc public protocol TDMediaPickerDataSource{
     
+    //Max Selection
+    @objc optional func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int
+    
     //THEME
     @objc optional func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard
+    @objc optional func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView
     
     //Permission Screen
     @objc optional func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
@@ -32,11 +36,15 @@ public protocol TDMediaPickerDelegate: class{
     
     //Media List Screen
     @objc optional func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
-    @objc optional func mediaPickerImageSizeForMedia(_ picker: TDMediaPicker)-> CGSize
+    @objc optional func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int
+    @objc optional func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int
     @objc optional func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView
     
     //Preview Screen
     @objc optional func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    @objc optional func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView
+    @objc optional func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView
+    @objc optional func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool
     
 }
 
@@ -88,6 +96,11 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         
         setupNavigationController()
         
+        if let maxSel = self.dataSource?.mediaPickerMaxSelections?(self){
+            maxSelections = maxSel
+            serviceManager.setupConfig(maxSelections: maxSelections)
+        }
+        
         if TDMediaUtil.hasPermission(accessType: .Gallery){
             showPickerScreen()
             return
@@ -127,7 +140,7 @@ extension TDMediaPicker{
             }
             albumListVC = TDAlbumListViewController()
             albumListVC?.delegate = self
-            albumListVC?.datasource = self
+            albumListVC?.dataSource = self
             
         case .Media:
             if mediaListVC != nil{
@@ -135,7 +148,7 @@ extension TDMediaPicker{
             }
             mediaListVC = TDMediaListViewController()
             mediaListVC?.delegate = self
-            mediaListVC?.datasource = self
+            mediaListVC?.dataSource = self
             
         case .Preview:
             if previewVC != nil{
@@ -143,6 +156,7 @@ extension TDMediaPicker{
             }
             previewVC = TDMediaPreviewViewController()
             previewVC?.delegate = self
+            previewVC?.dataSource = self
             
         default:
             print("No Use")

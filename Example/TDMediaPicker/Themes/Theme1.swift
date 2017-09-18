@@ -30,9 +30,18 @@ class Theme1: ThemeConfig{
         return CGSize(width: 90, height: 90)
     }
     
+    override func getNumberOfColumnInPortrait()->Int{
+        return 5
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 10
+    }
+    
     override func getAlbumNavBarConfig()->TDConfigNavigationBar{
         let configNavBar = TDConfigNavigationBar()
         configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
         let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
         configNavBar.nextButton = nextButton
