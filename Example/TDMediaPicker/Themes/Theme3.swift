@@ -48,7 +48,10 @@ class Theme3: ThemeConfig{
     }
     
     override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
-        return TDConfigViewStandard(backgroundColor: .red)
+        let myView: HightLightedCellView = .fromNib()
+        myView.imageView.image = #imageLiteral(resourceName: "check-1")
+        myView.countLabel.text = String(mediaCount)
+        return TDConfigViewCustom.init(view: myView)
     }
     
     
@@ -69,10 +72,13 @@ class Theme3: ThemeConfig{
     }
     
     override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: VideoThumbCellView = .fromNib()
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getSelectedThumbnailView() -> TDConfigView {
         let myView: HightLightedCellView = .fromNib()
-        myView.backgroundColor = .clear
         myView.countLabel.isHidden = true
-        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
         return TDConfigViewCustom.init(view: myView)
     }
 }

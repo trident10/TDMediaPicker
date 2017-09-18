@@ -76,10 +76,15 @@ class Theme1: ThemeConfig{
     }
     
     override func getVideoThumbOverlay() -> TDConfigView {
-        let myView: HightLightedCellView = .fromNib()
-        myView.backgroundColor = .clear
-        myView.countLabel.isHidden = true
+        let myView: VideoThumbCellView = .fromNib()
         myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        myView.bottomView.backgroundColor = .init(white: 1, alpha: 0.8)
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getSelectedThumbnailView() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.countLabel.isHidden = true
         return TDConfigViewCustom.init(view: myView)
     }
 }

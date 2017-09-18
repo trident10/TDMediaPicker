@@ -59,6 +59,10 @@ class ThemeConfig {
         fatalError("Concrete class must provide data")
     }
     
+    func getSelectedThumbnailView()->TDConfigView{
+        fatalError("Concrete class must provide data")
+    }
+    
     
 }
 

@@ -96,9 +96,8 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getAlbumNavBarConfig()
     }
     func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDConfigView {
-        let myView: HightLightedCellView = .fromNib()
-        myView.countLabel.isHidden = true
-        return TDConfigViewCustom.init(view: myView)
+        let themeConfig = getThemeConfig()
+        return themeConfig.getSelectedThumbnailView()
     }
     
     func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {

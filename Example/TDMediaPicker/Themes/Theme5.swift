@@ -90,6 +90,7 @@ class Theme5: ThemeConfig{
     
     override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
         let myView: HightLightedCellView = .fromNib()
+        myView.imageView.image = #imageLiteral(resourceName: "check-5")
         myView.countLabel.text = String(mediaCount)
         return TDConfigViewCustom.init(view: myView)
     }
@@ -108,14 +109,20 @@ class Theme5: ThemeConfig{
     }
     
     override func getMaxNumberOfSelection() -> Int {
-        return 1
+        return 12
     }
     
     override func getVideoThumbOverlay() -> TDConfigView {
-        let myView: HightLightedCellView = .fromNib()
-        myView.backgroundColor = .clear
-        myView.countLabel.isHidden = true
+        let myView: VideoThumbCellView = .fromNib()
         myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        myView.bottomView.backgroundColor = .init(white: 1, alpha: 0.8)
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getSelectedThumbnailView() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.imageView.image = #imageLiteral(resourceName: "selected-5")
+        myView.countLabel.isHidden = true
         return TDConfigViewCustom.init(view: myView)
     }
 }

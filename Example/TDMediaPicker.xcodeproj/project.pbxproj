@@ -17,6 +17,8 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		B71C1C1E1F6A8E860057BD72 /* HightLightedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C1C1D1F6A8E860057BD72 /* HightLightedCellView.swift */; };
 		B740E73C1F6A8A7D00F87265 /* HightLightedCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */; };
+		B750BA5C1F6FA26100C7C190 /* VideoThumbCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B750BA5A1F6FA26100C7C190 /* VideoThumbCellView.swift */; };
+		B750BA5D1F6FA26100C7C190 /* VideoThumbCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B750BA5B1F6FA26100C7C190 /* VideoThumbCellView.xib */; };
 		B77AF07A1F343D55002983BF /* Pods_TDMediaPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF5E54C0ECFA87E84BB52E4 /* Pods_TDMediaPicker_Tests.framework */; };
 		B77AF07C1F343D55002983BF /* TDMediaPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77AF07B1F343D55002983BF /* TDMediaPicker.framework */; };
 		CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */; };
@@ -63,6 +65,8 @@
 		A631B15BFD09830AA7D7173A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		B71C1C1D1F6A8E860057BD72 /* HightLightedCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HightLightedCellView.swift; sourceTree = "<group>"; };
 		B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HightLightedCellView.xib; sourceTree = "<group>"; };
+		B750BA5A1F6FA26100C7C190 /* VideoThumbCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoThumbCellView.swift; sourceTree = "<group>"; };
+		B750BA5B1F6FA26100C7C190 /* VideoThumbCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoThumbCellView.xib; sourceTree = "<group>"; };
 		B77AF07B1F343D55002983BF /* TDMediaPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TDMediaPicker.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TDMediaPicker-drsslcvwrcbyrgaugihzoqkrthkz/Build/Products/Debug-iphoneos/TDMediaPicker/TDMediaPicker.framework"; sourceTree = "<group>"; };
 		CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAED5EAB1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+TableViewDatasource.swift"; sourceTree = "<group>"; };
@@ -190,19 +194,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		B740E73A1F6A8A5B00F87265 /* higlighted Cell View */ = {
+		B740E73A1F6A8A5B00F87265 /* Cell View */ = {
 			isa = PBXGroup;
 			children = (
-				B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */,
+				B750BA5A1F6FA26100C7C190 /* VideoThumbCellView.swift */,
+				B750BA5B1F6FA26100C7C190 /* VideoThumbCellView.xib */,
 				B71C1C1D1F6A8E860057BD72 /* HightLightedCellView.swift */,
+				B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */,
 			);
-			name = "higlighted Cell View";
+			name = "Cell View";
 			sourceTree = "<group>";
 		};
 		CAED5EB31F5D3735007A25ED /* Themes */ = {
 			isa = PBXGroup;
 			children = (
-				B740E73A1F6A8A5B00F87265 /* higlighted Cell View */,
+				B740E73A1F6A8A5B00F87265 /* Cell View */,
 				CAED5EB81F5D3B3E007A25ED /* ThemeConfig.swift */,
 				CAED5EB41F5D374E007A25ED /* Theme1.swift */,
 				CAED5EB61F5D3758007A25ED /* Theme2.swift */,
@@ -282,7 +288,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 2Z4FV37775;
+						DevelopmentTeam = K7XGYLBZL2;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -323,6 +329,7 @@
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				B750BA5D1F6FA26100C7C190 /* VideoThumbCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +445,7 @@
 				CAED5EBD1F5D3E48007A25ED /* Theme4.swift in Sources */,
 				CAED5EB01F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift in Sources */,
 				CAED5EC31F5D3E5F007A25ED /* Theme7.swift in Sources */,
+				B750BA5C1F6FA26100C7C190 /* VideoThumbCellView.swift in Sources */,
 				CAED5EB51F5D374E007A25ED /* Theme1.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				CAED5EAE1F5D238B007A25ED /* ViewController+TableViewDelegate.swift in Sources */,
@@ -582,13 +590,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2Z4FV37775;
+				DEVELOPMENT_TEAM = K7XGYLBZL2;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				INFOPLIST_FILE = TDMediaPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TDMediaPicker-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TDMediaPicker-Example2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -601,13 +609,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 2Z4FV37775;
+				DEVELOPMENT_TEAM = K7XGYLBZL2;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				INFOPLIST_FILE = TDMediaPicker/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TDMediaPicker-Example";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TDMediaPicker-Example2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
