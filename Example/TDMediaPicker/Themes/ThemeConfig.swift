@@ -11,6 +11,10 @@ import UIKit
 import TDMediaPicker
 
 class ThemeConfig {
+    func getMaxNumberOfSelection()->Int{
+        fatalError("Concrete class must provide data")
+    }
+    
     func getNavigationThemeConfig()->TDConfigViewStandard{
         fatalError("Concrete class must provide data")
     }
@@ -46,6 +50,15 @@ class ThemeConfig {
     func getNumberOfColumnInLandscape()->Int{
         fatalError("Concrete class must provide data")
     }
+    
+    func getIsHideCaptionView()->Bool{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getVideoThumbOverlay()->TDConfigView{
+        fatalError("Concrete class must provide data")
+    }
+    
     
 }
 

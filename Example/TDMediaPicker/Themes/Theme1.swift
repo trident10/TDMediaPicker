@@ -66,7 +66,22 @@ class Theme1: ThemeConfig{
     override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
         return TDConfigViewStandard(backgroundColor: .red)
     }
-
+    
+    override func getIsHideCaptionView() -> Bool {
+        return true
+    }
+    
+    override func getMaxNumberOfSelection() -> Int {
+        return 10
+    }
+    
+    override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
+    }
 }
 
 

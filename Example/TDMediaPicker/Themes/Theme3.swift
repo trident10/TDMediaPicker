@@ -60,6 +60,21 @@ class Theme3: ThemeConfig{
         return 9
     }
     
+    override func getIsHideCaptionView() -> Bool {
+        return false
+    }
+    
+    override func getMaxNumberOfSelection() -> Int {
+        return 30
+    }
+    
+    override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
+    }
 }
 
 

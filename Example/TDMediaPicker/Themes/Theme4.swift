@@ -58,6 +58,22 @@ class Theme4: ThemeConfig{
     override func getNumberOfColumnInLandscape()->Int{
         return 7
     }
+    
+    override func getIsHideCaptionView() -> Bool {
+        return true
+    }
+    
+    override func getMaxNumberOfSelection() -> Int {
+        return 5
+    }
+    
+    override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
+    }
 }
 
 

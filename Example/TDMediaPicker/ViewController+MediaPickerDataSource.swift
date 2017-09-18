@@ -15,7 +15,8 @@ extension ViewController: TDMediaPickerDataSource{
     
     //MARK:- Max Selection
     func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
-        return 10
+        let themeConfig = getThemeConfig()
+        return themeConfig.getMaxNumberOfSelection()
     }
     
     //MARK:- Navigation Bar Theme
@@ -26,11 +27,8 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
-        let myView: HightLightedCellView = .fromNib()
-        myView.backgroundColor = .clear
-        myView.countLabel.isHidden = true
-        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
-        return TDConfigViewCustom.init(view: myView)
+        let themeConfig = getThemeConfig()
+        return themeConfig.getVideoThumbOverlay()
     }
     
     //MARK:-  Permission Screen
@@ -112,7 +110,8 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool {
-        return true
+        let themeConfig = getThemeConfig()
+        return themeConfig.getIsHideCaptionView()
     }
     
 }
