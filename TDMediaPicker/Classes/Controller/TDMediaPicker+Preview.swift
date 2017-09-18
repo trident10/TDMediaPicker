@@ -27,6 +27,22 @@ extension TDMediaPicker: TDMediaPreviewViewControllerDelegate{
         cleanupScreen(.All)
         resetPicker()
     }
+}
+
+extension TDMediaPicker: TDMediaPreviewControllerDataSource{
+    func previewControllerVideoThumbOverlay(_ controller: TDMediaPreviewViewController) -> TDConfigView? {
+        return getMediaPickerVideoThumbOverlay(self)
+    }
+
+    func previewControllerSelectedThumbnailView(_ controller: TDMediaPreviewViewController)-> TDConfigView{
+        return getMediaPickerPreviewSelectedThumbnailView(self)!
+    }
     
+    func previewControllerThumbnailAddView(_ controller: TDMediaPreviewViewController)-> TDConfigView{
+        return getMediaPickerPreviewAddThumbnailView(self)!
+    }
     
+    func previewControllerHideCaptionView(_ controller: TDMediaPreviewViewController)-> Bool?{
+        return getMediaPickerPreviewHideCaptionView(self)!
+    }
 }

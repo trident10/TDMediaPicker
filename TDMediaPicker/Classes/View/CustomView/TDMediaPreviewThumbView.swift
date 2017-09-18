@@ -7,7 +7,11 @@
 //
 
 import UIKit
-
+protocol TDMediaPreviewThumbViewDataSource: class {
+    func previewThumbViewSelectedThumbnailView(_ view: TDMediaPreviewThumbView)-> TDConfigView?
+    func previewThumbViewThumbnailAddView(_ view: TDMediaPreviewThumbView)-> TDConfigView?
+    func previewThumbViewVideoThumbOverlay(_ view: TDMediaPreviewThumbView)-> TDConfigView?
+}
 protocol TDMediaPreviewThumbViewDelegate: class {
     func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int)
     func previewThumbViewDidTapAddOption(_ view: TDMediaPreviewThumbView)
@@ -18,6 +22,7 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewThumbViewDelegate?
+    weak var dataSource: TDMediaPreviewThumbViewDataSource?
     
     private var mediaItems:[TDPreviewViewModel] = []
     private var selectedIndex: Int = 0
@@ -94,9 +99,22 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     private func configureFrameView(_ cell: TDMediaCell, indexPath: IndexPath) {
         if selectedIndex ==  (indexPath as NSIndexPath).item{
             cell.processHighlighting(shouldDisplay: true)
+            if let configView = self.dataSource?.previewThumbViewSelectedThumbnailView(self){
+                if cell is TDMediaCellImageThumb{
+                    TDMediaUtil.setupView((cell as! TDMediaCellImageThumb).selectedView, configView)
+                }else{
+                    TDMediaUtil.setupView((cell as! TDMediaCellVideoThumb).selectedView, configView)
+                }
+            }
         }
         else{
             cell.processHighlighting(shouldDisplay: false)
+        }
+    }
+    
+    private func setVideoThumbView(_ cell: TDMediaCell){
+        if let configView = self.dataSource?.previewThumbViewVideoThumbOverlay(self){
+            TDMediaUtil.setupView((cell as! TDMediaCellVideoThumb).viewForVideo, configView)
         }
     }
     
@@ -135,6 +153,9 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     private func configureAddOptionCell(item: TDPreviewViewModel, indexPath: IndexPath)-> UICollectionViewCell{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: TDAddOptionCell.self), for: indexPath)
             as! TDAddOptionCell
+        if let configView = self.dataSource?.previewThumbViewThumbnailAddView(self){
+            TDMediaUtil.setupView(cell.selectedView, configView)
+        }
         return cell
     }
     
@@ -164,7 +185,11 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
         let item = mediaItems[(indexPath as NSIndexPath).item]
         
         if item.itemType == .Media{
-            return configureMediaCell(item: item, indexPath: indexPath)
+            let cell = configureMediaCell(item: item, indexPath: indexPath)
+            if item.asset?.mediaType == .video{
+                setVideoThumbView(cell as! TDMediaCell)
+            }
+            return cell
         }
         return configureAddOptionCell(item: item, indexPath: indexPath)
     }

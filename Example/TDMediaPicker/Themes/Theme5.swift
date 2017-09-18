@@ -60,9 +60,64 @@ class Theme5: ThemeConfig{
     }
     
     override func getImageSizeForAlbum()->CGSize{
-        return CGSize(width: 65, height: 65)
+        return CGSize(width: 78, height: 78)
     }
     
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        let configNavBar = TDConfigNavigationBar()
+        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)), cornerRadius: 6.0)
+        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .lightGray, textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
+        configNavBar.nextButton = nextButton
+        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)))
+        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
+        return configNavBar
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        for album in albums{
+            if album.collection.localizedTitle == "Videos"{
+                return album
+            }
+        }
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        return TDConfigText.init(text: String(format: "%@\n%d",album.collection.localizedTitle!,mediaCount), textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
+    }
+    
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        let myView: HightLightedCellView = .fromNib()
+        myView.countLabel.text = String(mediaCount)
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    
+    override func getNumberOfColumnInPortrait()->Int{
+        return 3
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 7
+    }
+    
+    override func getIsHideCaptionView() -> Bool {
+        return false
+    }
+    
+    override func getMaxNumberOfSelection() -> Int {
+        return 1
+    }
+    
+    override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
+    }
 }
 
 

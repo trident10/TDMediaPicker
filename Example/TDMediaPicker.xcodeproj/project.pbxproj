@@ -15,6 +15,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		B71C1C1E1F6A8E860057BD72 /* HightLightedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71C1C1D1F6A8E860057BD72 /* HightLightedCellView.swift */; };
+		B740E73C1F6A8A7D00F87265 /* HightLightedCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */; };
 		B77AF07A1F343D55002983BF /* Pods_TDMediaPicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FF5E54C0ECFA87E84BB52E4 /* Pods_TDMediaPicker_Tests.framework */; };
 		B77AF07C1F343D55002983BF /* TDMediaPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B77AF07B1F343D55002983BF /* TDMediaPicker.framework */; };
 		CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */; };
@@ -59,6 +61,8 @@
 		6E369DA97C8AE7C5D4B6FCEC /* Pods-TDMediaPicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TDMediaPicker_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TDMediaPicker_Example/Pods-TDMediaPicker_Example.release.xcconfig"; sourceTree = "<group>"; };
 		81587B4AFAB08EB1720CA335 /* Pods_TDMediaPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TDMediaPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A631B15BFD09830AA7D7173A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B71C1C1D1F6A8E860057BD72 /* HightLightedCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HightLightedCellView.swift; sourceTree = "<group>"; };
+		B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HightLightedCellView.xib; sourceTree = "<group>"; };
 		B77AF07B1F343D55002983BF /* TDMediaPicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TDMediaPicker.framework; path = "../../../../Library/Developer/Xcode/DerivedData/TDMediaPicker-drsslcvwrcbyrgaugihzoqkrthkz/Build/Products/Debug-iphoneos/TDMediaPicker/TDMediaPicker.framework"; sourceTree = "<group>"; };
 		CA7A476F1F4C13AD00948ED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAED5EAB1F5D20BE007A25ED /* ViewController+TableViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+TableViewDatasource.swift"; sourceTree = "<group>"; };
@@ -186,9 +190,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B740E73A1F6A8A5B00F87265 /* higlighted Cell View */ = {
+			isa = PBXGroup;
+			children = (
+				B740E73B1F6A8A7D00F87265 /* HightLightedCellView.xib */,
+				B71C1C1D1F6A8E860057BD72 /* HightLightedCellView.swift */,
+			);
+			name = "higlighted Cell View";
+			sourceTree = "<group>";
+		};
 		CAED5EB31F5D3735007A25ED /* Themes */ = {
 			isa = PBXGroup;
 			children = (
+				B740E73A1F6A8A5B00F87265 /* higlighted Cell View */,
 				CAED5EB81F5D3B3E007A25ED /* ThemeConfig.swift */,
 				CAED5EB41F5D374E007A25ED /* Theme1.swift */,
 				CAED5EB61F5D3758007A25ED /* Theme2.swift */,
@@ -305,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				B740E73C1F6A8A7D00F87265 /* HightLightedCellView.xib in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				CA7A47701F4C13AD00948ED4 /* Assets.xcassets in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -333,7 +348,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B3368E8CCA4D210A3026C726 /* [CP] Copy Pods Resources */ = {
@@ -378,7 +393,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		F62FBEA58EB652657084D9BA /* [CP] Embed Pods Frameworks */ = {
@@ -419,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAED5EB91F5D3B3E007A25ED /* ThemeConfig.swift in Sources */,
+				B71C1C1E1F6A8E860057BD72 /* HightLightedCellView.swift in Sources */,
 				CAED5EBD1F5D3E48007A25ED /* Theme4.swift in Sources */,
 				CAED5EB01F5D2F3C007A25ED /* ViewController+MediaPickerDataSource.swift in Sources */,
 				CAED5EC31F5D3E5F007A25ED /* Theme7.swift in Sources */,
@@ -572,7 +588,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TDMediaPicker-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -591,7 +607,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.TDMediaPicker-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

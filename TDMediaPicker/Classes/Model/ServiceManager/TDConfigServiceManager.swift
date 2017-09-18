@@ -16,4 +16,6 @@ class TDConfigServiceManager{
     
     lazy var navigationTheme: TDConfigViewStandard = TDConfigViewStandard.init(backgroundColor: .white)
     lazy var albumScreenConfig = TDConfigAlbumScreen()
+    lazy var mediaScreenConfig = TDConfigMediaScreen()
+    lazy var previewScreenConfig = TDConfigPreviewScreen()
 }

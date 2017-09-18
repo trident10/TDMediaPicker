@@ -28,6 +28,52 @@ class Theme4: ThemeConfig{
     override func getImageSizeForAlbum()->CGSize{
         return CGSize(width: 120, height: 70)
     }
+    
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        return TDConfigNavigationBar()
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        for album in albums{
+            if album.collection.localizedTitle == "Selfies"{
+                return album
+            }
+        }
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.systemFont(ofSize: 16))
+    }
+    
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        return TDConfigViewStandard(backgroundColor: .red)
+    }
+    
+    
+    override func getNumberOfColumnInPortrait()->Int{
+        return 4
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 7
+    }
+    
+    override func getIsHideCaptionView() -> Bool {
+        return true
+    }
+    
+    override func getMaxNumberOfSelection() -> Int {
+        return 5
+    }
+    
+    override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
+    }
 }
 
 

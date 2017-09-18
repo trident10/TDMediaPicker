@@ -12,6 +12,7 @@ class TDAddOptionCell: UICollectionViewCell{
     
     
     // MARK: - Initialization
+    @IBOutlet weak var selectedView: UIView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -13,11 +13,22 @@ import Photos
 
 extension ViewController: TDMediaPickerDataSource{
     
+    //MARK:- Max Selection
+    func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getMaxNumberOfSelection()
+    }
+    
     //MARK:- Navigation Bar Theme
     
     func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
         let themeConfig = getThemeConfig()
         return themeConfig.getNavigationThemeConfig()
+    }
+    
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getVideoThumbOverlay()
     }
     
     //MARK:-  Permission Screen
@@ -27,9 +38,9 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     //MARK:- Album Screen
-    
     func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        return TDConfigNavigationBar()
+        let themeConfig = getThemeConfig()
+        return themeConfig.getAlbumNavBarConfig()
     }
     
     func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
@@ -48,17 +59,62 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getImageSizeForAlbum()
     }
     
-    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int, selectedCount: Int)-> TDConfigText{
-        return TDConfigText.init(text: "Albums", textColor: .black, textFont: UIFont.boldSystemFont(ofSize: 20))
-    }
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getTextFormatForAlbum(album: album, mediaCount: mediaCount)
+    }     
     
     func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
-        return albums[0]
+        let themeConfig = getThemeConfig()
+        return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
     }
     
+    //MARK:- Media Screen
+    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getAlbumNavBarConfig()
+    }
+    
+    func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getNumberOfColumnInPortrait()
+    }
+    
+    func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getNumberOfColumnInLandscape()
+    }
+    
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDConfigView {
+        let themeConfig = getThemeConfig()
+        return themeConfig.getMediaHighlightedCellView(mediaCount: mediaCount)
+    }
+    
+    //MARK:- Preview Screen
+    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getAlbumNavBarConfig()
+    }
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.countLabel.isHidden = true
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "add")
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool {
+        let themeConfig = getThemeConfig()
+        return themeConfig.getIsHideCaptionView()
+    }
     
 }
-
 
 extension ViewController{
     func getThemeConfig()->ThemeConfig{

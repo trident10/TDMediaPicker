@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol TDMediaPreviewViewDataSource: class {
+    func previewViewSelectedThumbnailView(_ view: TDMediaPreviewView)-> TDConfigView?
+    func previewViewThumbnailAddView(_ view: TDMediaPreviewView)-> TDConfigView?
+    func previewViewHideCaptionView(_ view: TDMediaPreviewView)-> Bool?
+    func previewViewVideoThumbOverlay(_ view: TDMediaPreviewView) -> TDConfigView?
+}
+
 protocol TDMediaPreviewViewDelegate: class {
     func previewView(_ view: TDMediaPreviewView, didUpdateOperation type: TDMediaPreviewViewModel.OperationType, media: TDPreviewViewModel?)
 }
@@ -17,6 +24,7 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     // MARK: - Variable(s)
     
     weak var delegate: TDMediaPreviewViewDelegate?
+    weak var dataSource: TDMediaPreviewViewDataSource?
     
     private var currentSelectedIndex: Int = -1
     private var currentMedia: TDMediaPreviewViewModel?
@@ -24,6 +32,9 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     @IBOutlet var previewView: TDMediaPreviewMainView!
     @IBOutlet var bottomView: TDMediaPreviewThumbView!
     @IBOutlet var navigationBar: UIView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
 
     
     // MARK: - LifeCycle
@@ -31,9 +42,11 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     override func awakeFromNib() {
         
         bottomView.delegate = self
+        bottomView.dataSource = self
         bottomView.setupView()
         
         previewView.delegate = self
+        previewView.dataSource = self
         previewView.setupView()
     }
     
@@ -56,6 +69,18 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     func setupNavigationTheme(_ color: UIColor){
         navigationBar.backgroundColor = color
+    }
+    
+    func setupBackButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(backButton, buttonConfig: config)
+    }
+    
+    func setupNextButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(doneButton, buttonConfig: config)
+    }
+    
+    func setupDeleteButton(_ config: TDConfigButton){
+        TDMediaUtil.setupButton(deleteButton, buttonConfig: config)
     }
     
     // MARK: - Action Method(s)
@@ -96,5 +121,23 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         self.delegate?.previewView(self, didUpdateOperation: .addMore, media: nil)
     }
     
+}
+extension TDMediaPreviewView: TDMediaPreviewThumbViewDataSource{
+    func previewThumbViewVideoThumbOverlay(_ view: TDMediaPreviewThumbView) -> TDConfigView? {
+        return self.dataSource?.previewViewVideoThumbOverlay(self)
+    }
+
+    func previewThumbViewSelectedThumbnailView(_ view: TDMediaPreviewThumbView)-> TDConfigView?{
+        return self.dataSource?.previewViewSelectedThumbnailView(self)
+    }
+    
+    func previewThumbViewThumbnailAddView(_ view: TDMediaPreviewThumbView)-> TDConfigView?{
+        return self.dataSource?.previewViewThumbnailAddView(self)
+    }
+}
+extension TDMediaPreviewView: TDMediaPreviewMainViewDataSource{
+    func previewMainViewHideCaptionView(_ view: TDMediaPreviewMainView)-> Bool?{
+        return self.dataSource?.previewViewHideCaptionView(self)
+    }
 }
 

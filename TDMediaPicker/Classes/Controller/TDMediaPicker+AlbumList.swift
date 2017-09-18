@@ -29,10 +29,10 @@ extension TDMediaPicker: TDAlbumListViewControllerDelegate{
         navVC.pushViewController(previewVC!, animated: true)
     }
     
-    func albumController(_ controller:TDAlbumListViewController, didSelectAlbum album:TDAlbum){
+    func albumController(_ controller:TDAlbumListViewController, didSelectAlbum album:TDAlbum, animation:Bool){
         setupScreen(.Media)
         mediaListVC?.setupSelectedAlbum(album)
-        navVC.pushViewController(mediaListVC!, animated: true)
+        navVC.pushViewController(mediaListVC!, animated: animation)
     }
 }
 
@@ -41,4 +41,9 @@ extension TDMediaPicker: TDAlbumListViewControllerDataSource{
     func albumController(_ controller: TDAlbumListViewController, selectedAlbumAtInitialLoad albums: [TDAlbum]) -> TDAlbum? {
         return getSelectedAlbumAtInitialLoad(albums: albums)
     }
+    
+    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        return getAlbumText(album: album, mediaCount: mediaCount)!
+    }
+    
 }

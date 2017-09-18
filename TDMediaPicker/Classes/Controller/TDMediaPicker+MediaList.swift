@@ -24,3 +24,12 @@ extension TDMediaPicker: TDMediaListViewControllerDelegate{
     }
     
 }
+extension TDMediaPicker: TDMediaListViewControllerDataSource{
+    func mediaControllerVideoThumbOverlay(_ view: TDMediaListViewController) -> TDConfigView? {
+        return getMediaPickerVideoThumbOverlay(self)
+    }
+
+    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView{
+        return getMediaHighlightedView(self, countForMedia: mediaCount)!
+    }
+}

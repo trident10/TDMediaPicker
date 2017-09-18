@@ -8,20 +8,27 @@
 
 import UIKit
 
+protocol TDMediaListViewControllerDataSource: class {
+    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView
+    func mediaControllerVideoThumbOverlay(_ view: TDMediaListViewController)-> TDConfigView?
+}
+
 protocol TDMediaListViewControllerDelegate: class {
     func mediaControllerDidTapDone(_ view: TDMediaListViewController)
     func mediaControllerDidTapCancel(_ view: TDMediaListViewController)
 }
 
 
-class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMediaListServiceManagerDelegate{
+class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMediaListServiceManagerDelegate,TDMediaListViewDataSource{
     
     // MARK: - Variable(s)
     
     private var selectedAlbum:TDAlbum?
     
     weak var delegate: TDMediaListViewControllerDelegate?
-    lazy private var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
+    weak var dataSource: TDMediaListViewControllerDataSource?
+    
+    lazy fileprivate var serviceManager: TDMediaListServiceManager = TDMediaListServiceManager()
     
     // MARK: - Init
     
@@ -51,6 +58,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         let mediaView = self.view as! TDMediaListView
         mediaView.setupView()
         mediaView.delegate = self
+        mediaView.dataSource = self
         
         // 2. Service Manager Setup
         
@@ -62,6 +70,7 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         super.viewWillAppear(animated)
         
         setupNavigationTheme()
+        setupConfig()
         
         if selectedAlbum != nil{
             serviceManager.fetchMediaItems(album: selectedAlbum!, completion: { (media) in
@@ -86,12 +95,6 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
     }
     
     // MARK: - Private Method(s)
-    
-    private func setupNavigationTheme(){
-        let config = serviceManager.getNavigationThemeConfig()
-        let mediaView = self.view as! TDMediaListView
-        mediaView.setupNavigationTheme(config.backgroundColor)
-    }
     
     private func handleFetchedMedia(_ mediaList:[TDMedia]){
         let mediaViewModels = mapMediaViewModels(mediaList: mediaList)
@@ -119,7 +122,14 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         return nil
     }
     
+    //MARK: - Media View Datasource Method(s)
+    func mediaListView(_ view: TDMediaListView, countForMedia mediaCount: Int)-> TDConfigView?{
+        return self.dataSource?.mediaController(self, countForMedia: mediaCount)
+    }
     
+    func mediaListViewVideoThumbOverlay(_ view: TDMediaListView)-> TDConfigView?{
+        return self.dataSource?.mediaControllerVideoThumbOverlay(self)
+    }
     // MARK: - View Delegate Method(s)
     
     func mediaListView(_ view: TDMediaListView, didSelectMedia media: TDMediaViewModel, shouldRemoveFromCart value: Bool) {
@@ -169,5 +179,38 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
         
         let mediaView = self.view as! TDMediaListView
         mediaView.reload(cart: cartViewModel, updateType: cartViewUpdateType)
+    }
+}
+// MARK: - Configurations
+
+extension TDMediaListViewController{
+    
+    func setupNavigationTheme(){
+        let config = serviceManager.getNavigationThemeConfig()
+        let mediaView = self.view as! TDMediaListView
+        mediaView.setupNavigationTheme(config.backgroundColor)
+    }
+    
+    func setupConfig(){
+        let mediaView = self.view as! TDMediaListView
+        let config = serviceManager.getMediaScreenConfig()
+        if let title = config.navigationBar?.screenTitle{
+            mediaView.setupScreenTitle(title)
+        }
+        if let btnConfig = config.navigationBar?.backButton{
+            mediaView.setupBackButton(btnConfig)
+        }
+        if let btnConfig = config.navigationBar?.nextButton{
+            mediaView.setupNextButton(btnConfig)
+        }
+        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+            mediaView.setupNavigationTheme(color)
+        }
+        if let column = config.portraitColumns{
+            mediaView.setupMediaNumberOfColumnForPotrait(column)
+        }
+        if let column = config.landscapeColumns{
+            mediaView.setupMediaNumberOfColumnForLandscape(column)
+        }
     }
 }

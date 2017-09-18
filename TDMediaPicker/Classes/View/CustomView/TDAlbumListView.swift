@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TDAlbumListViewDataSource: class {
+    func albumListView(_ view: TDAlbumListView, textForAlbum album: TDAlbumViewModel)->TDConfigText?
+}
+
 protocol TDAlbumListViewDelegate: class {
     func albumListView(_ view: TDAlbumListView, didSelectAlbum album: TDAlbumViewModel)
     func albumListViewDidTapBack(_ view: TDAlbumListView)
@@ -18,7 +22,8 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
     
     // MARK: - Variables
     
-    weak var delegate:TDAlbumListViewDelegate?
+    weak var delegate: TDAlbumListViewDelegate?
+    weak var dataSource: TDAlbumListViewDataSource?
     
     lazy private var albumListViewModel = TDAlbumListViewModel.init(headerTitle: "Albums")
     private var imageSize: CGSize?
@@ -95,7 +100,7 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
         self.delegate?.albumListViewDidTapNext(self)
     }
     
-    //MARK: - Table View datasource Method(s)
+    //MARK: - Table View dataSource Method(s)
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return albumListViewModel.albums.count
@@ -107,9 +112,14 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
         
         let album = albumListViewModel.albums[(indexPath as NSIndexPath).row]
         
+        if let configText = self.dataSource?.albumListView(self, textForAlbum: album){
+            TDMediaUtil.setupLabel(cell.titleLabel, config: configText)
+        }
+        
         if imageSize != nil{
             album.imageSize = imageSize!
         }
+        
         if album.image != nil{
             cell.configure(album, image: album.image!)
         }

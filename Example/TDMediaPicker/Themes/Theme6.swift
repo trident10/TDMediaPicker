@@ -31,6 +31,55 @@ class Theme6: ThemeConfig{
         return CGSize(width: 80, height: 120)
     }
     
+    override func getAlbumNavBarConfig()->TDConfigNavigationBar{
+        return TDConfigNavigationBar()
+    }
+    
+    override func getSelectedAlbumAtInitialLoad(albums: [TDAlbum])->TDAlbum?{
+        for album in albums{
+            if album.collection.localizedTitle == "Screenshots"{
+                return album
+            }
+        }
+        return nil
+    }
+    
+    override func getTextFormatForAlbum(album: TDAlbum, mediaCount: Int)-> TDConfigText{
+        let str = String(format: "%@\n\nFiles: %d",album.collection.localizedTitle!,mediaCount)
+        return TDConfigText.init(text: str, textColor: .black, textFont: UIFont.init(name: "Palatino-Bold", size: 17))
+    }
+    
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+        let myView: HightLightedCellView = UIView.fromNib()
+        myView.countLabel.text = String(mediaCount)
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getNumberOfColumnInPortrait()->Int{
+        return 5
+    }
+    
+    override func getNumberOfColumnInLandscape()->Int{
+        return 10
+    }
+    
+    
+    override func getIsHideCaptionView() -> Bool {
+        return true
+    }
+    
+    override func getMaxNumberOfSelection() -> Int {
+        return 30
+    }
+    
+    override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
 }
 
 

@@ -12,6 +12,7 @@ import Photos
 class TDMediaCellImageThumb: TDMediaCell{
     
     @IBOutlet var label: UILabel!
+    @IBOutlet weak var selectedView: UIView!
     
     // MARK: - Initialization
     
@@ -45,10 +46,10 @@ class TDMediaCellImageThumb: TDMediaCell{
         if shouldDisplay{
             
             label.text = count == -1 ? "" : String(count)
-            imageView.isHidden = true
+            selectedView.isHidden = false
             return
         }
         label.text = ""
-        imageView.isHidden = false
+        selectedView.isHidden = true
     }
 }

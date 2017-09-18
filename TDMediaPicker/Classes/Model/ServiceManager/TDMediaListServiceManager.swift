@@ -59,6 +59,10 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
         return configServiceManager.navigationTheme
     }
     
+    func getMediaScreenConfig()-> TDConfigMediaScreen{
+        return configServiceManager.mediaScreenConfig
+    }
+    
     // MARK: ... Cart Method(s)
     
     func updateCart(_ media: TDMedia, updateType: TDCart.UpdateType){
@@ -81,7 +85,7 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
         
         let itemsFetchResult = PHAsset.fetchAssets(in: album.collection, options: options)
         itemsFetchResult.enumerateObjects({ (asset, count, stop) in
-            self.mediaItems.append(TDMedia(asset: asset, caption: ""))
+            self.mediaItems.append(TDMedia(albumID: album.id, asset: asset, caption: ""))
         })
     }
     

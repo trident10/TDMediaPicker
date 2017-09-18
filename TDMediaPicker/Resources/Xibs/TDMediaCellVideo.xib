@@ -22,7 +22,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRQ-os-NwU">
-                        <rect key="frame" x="35" y="33" width="30" height="34"/>
+                        <rect key="frame" x="34" y="34" width="32" height="32"/>
+                        <state key="normal" image="ic_play.png"/>
                         <connections>
                             <action selector="playBtnTappedWithSender:" destination="7Ia-Jm-5Dy" eventType="touchUpInside" id="a4m-xS-aXr"/>
                         </connections>
@@ -46,4 +47,7 @@
             <point key="canvasLocation" x="-15.5" y="41.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="ic_play.png" width="32" height="32"/>
+    </resources>
 </document>
