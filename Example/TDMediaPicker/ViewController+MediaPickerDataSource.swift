@@ -44,10 +44,8 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
-        let types: [PHAssetCollectionType] = [.smartAlbum, .album]
-        return types.map {
-            return PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)
-        }
+        let themeConfig = getThemeConfig()
+        return themeConfig.getFetchResultsForAlbumScreen()
     }
     
     func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType{
@@ -101,11 +99,8 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {
-        let myView: HightLightedCellView = .fromNib()
-        myView.backgroundColor = .clear
-        myView.countLabel.isHidden = true
-        myView.imageView.image = #imageLiteral(resourceName: "add")
-        return TDConfigViewCustom.init(view: myView)
+        let themeConfig = getThemeConfig()
+        return themeConfig.getPreviewThumbnailAddView()
     }
     
     func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool {

@@ -8,6 +8,7 @@
 
 import Foundation
 import TDMediaPicker
+import Photos
 
 class Theme4: ThemeConfig{
     override func getPermissionScreenConfig() -> TDConfigPermissionScreen {
@@ -74,9 +75,26 @@ class Theme4: ThemeConfig{
     
     override func getSelectedThumbnailView() -> TDConfigView {
         let myView: HightLightedCellView = .fromNib()
+        myView.imageView.image = #imageLiteral(resourceName: "selected")
         myView.countLabel.isHidden = true
         return TDConfigViewCustom.init(view: myView)
     }
+    
+    override func getPreviewThumbnailAddView() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.backgroundColor = .clear
+        myView.countLabel.isHidden = true
+        myView.imageView.image = #imageLiteral(resourceName: "add")
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getFetchResultsForAlbumScreen() -> [PHFetchResult<PHAssetCollection>] {
+        let types: [PHAssetCollectionType] = [.smartAlbum, .album]
+        return types.map {
+            return PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)
+        }
+    }
+    
 }
 
 
