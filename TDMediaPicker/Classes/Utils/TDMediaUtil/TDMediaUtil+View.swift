@@ -14,6 +14,7 @@ extension TDMediaUtil {
             subview.removeFromSuperview()
         }
         view.backgroundColor = .clear
+        config.view.frame = view.bounds
         view.addSubview(config.view)
         self.pinEdges(sourceView: config.view)
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import TDMediaPicker
+import Photos
 
 class Theme3: ThemeConfig{
     
@@ -48,7 +49,10 @@ class Theme3: ThemeConfig{
     }
     
     override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
-        return TDConfigViewStandard(backgroundColor: .red)
+        let myView: HightLightedCellView = .fromNib()
+        myView.imageView.image = #imageLiteral(resourceName: "check")
+        myView.countLabel.text = String(mediaCount)
+        return TDConfigViewCustom.init(view: myView)
     }
     
     
@@ -69,12 +73,31 @@ class Theme3: ThemeConfig{
     }
     
     override func getVideoThumbOverlay() -> TDConfigView {
+        let myView: VideoThumbCellView = .fromNib()
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getSelectedThumbnailView() -> TDConfigView {
+        let myView: HightLightedCellView = .fromNib()
+        myView.countLabel.isHidden = true
+        return TDConfigViewCustom.init(view: myView)
+    }
+    
+    override func getPreviewThumbnailAddView() -> TDConfigView {
         let myView: HightLightedCellView = .fromNib()
         myView.backgroundColor = .clear
         myView.countLabel.isHidden = true
-        myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
+        myView.imageView.image = #imageLiteral(resourceName: "add")
         return TDConfigViewCustom.init(view: myView)
     }
+    
+    override func getFetchResultsForAlbumScreen() -> [PHFetchResult<PHAssetCollection>] {
+        let types: [PHAssetCollectionType] = [.smartAlbum, .album]
+        return types.map {
+            return PHAssetCollection.fetchAssetCollections(with: $0, subtype: .any, options: nil)
+        }
+    }
+    
 }
 
 

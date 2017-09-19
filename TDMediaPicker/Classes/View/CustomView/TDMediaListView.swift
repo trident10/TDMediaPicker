@@ -68,10 +68,10 @@ class TDMediaListView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     
     // MARK: - Public Method(s)
     func viewDidTransition(){
-        if UIDevice.current.orientation.isLandscape {
-            columns = landscapeColumns
-        }else{
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
             columns = portraitColumns
+        }else{
+            columns = landscapeColumns
         }
         collectionView.reloadData()
     }

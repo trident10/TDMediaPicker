@@ -9,6 +9,8 @@
 
 import UIKit
 import TDMediaPicker
+import Photos
+
 
 class ThemeConfig {
     func getMaxNumberOfSelection()->Int{
@@ -56,6 +58,18 @@ class ThemeConfig {
     }
     
     func getVideoThumbOverlay()->TDConfigView{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getSelectedThumbnailView()->TDConfigView{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getPreviewThumbnailAddView()->TDConfigView{
+        fatalError("Concrete class must provide data")
+    }
+    
+    func getFetchResultsForAlbumScreen()->[PHFetchResult<PHAssetCollection>]{
         fatalError("Concrete class must provide data")
     }
     

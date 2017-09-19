@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="VideoThumbCellView" customClass="VideoThumbCellView" customModule="TDMediaPicker_Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="114" height="112"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dk-fk-gpP">
+                    <rect key="frame" x="0.0" y="83.5" width="114" height="28.5"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="video_white" translatesAutoresizingMaskIntoConstraints="NO" id="oKC-OG-NkY">
+                            <rect key="frame" x="3" y="3" width="22.5" height="22.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="oKC-OG-NkY" secondAttribute="height" multiplier="1:1" id="2ix-wd-eFK"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.849609375" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="oKC-OG-NkY" firstAttribute="top" secondItem="1Dk-fk-gpP" secondAttribute="top" constant="3" id="Etk-nk-Hhx"/>
+                        <constraint firstAttribute="width" secondItem="1Dk-fk-gpP" secondAttribute="height" multiplier="4:1" id="Qd8-SD-BvZ"/>
+                        <constraint firstItem="oKC-OG-NkY" firstAttribute="leading" secondItem="1Dk-fk-gpP" secondAttribute="leading" constant="3" id="XlU-mU-WDL"/>
+                        <constraint firstAttribute="bottom" secondItem="oKC-OG-NkY" secondAttribute="bottom" constant="3" id="d6q-uu-ewR"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="1Dk-fk-gpP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WT2-Ov-0MW"/>
+                <constraint firstAttribute="trailing" secondItem="1Dk-fk-gpP" secondAttribute="trailing" id="aAL-Rc-3jr"/>
+                <constraint firstAttribute="bottom" secondItem="1Dk-fk-gpP" secondAttribute="bottom" id="oLE-b5-CZV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bottomView" destination="1Dk-fk-gpP" id="e0T-hU-PqD"/>
+                <outlet property="imageView" destination="oKC-OG-NkY" id="50i-1g-7QM"/>
+            </connections>
+            <point key="canvasLocation" x="-84" y="-227"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="video_white" width="32" height="32"/>
+    </resources>
+</document>

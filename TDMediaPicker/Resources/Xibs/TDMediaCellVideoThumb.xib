@@ -21,9 +21,8 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xa5-kg-0Mt">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="105"/>
                     </imageView>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W2c-jc-mos">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W2c-jc-mos">
                         <rect key="frame" x="0.0" y="0.0" width="104" height="105"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDX-YC-ApF">
@@ -48,9 +47,13 @@
                 <constraint firstItem="ZDX-YC-ApF" firstAttribute="top" secondItem="7Ia-Jm-5Dy" secondAttribute="top" id="20c-vO-ya1"/>
                 <constraint firstItem="ZDX-YC-ApF" firstAttribute="leading" secondItem="7Ia-Jm-5Dy" secondAttribute="leading" id="5Uk-IO-q7i"/>
                 <constraint firstItem="Xa5-kg-0Mt" firstAttribute="top" secondItem="7Ia-Jm-5Dy" secondAttribute="top" id="6Ze-cv-byz"/>
+                <constraint firstItem="W2c-jc-mos" firstAttribute="top" secondItem="7Ia-Jm-5Dy" secondAttribute="top" id="7hV-bH-b2d"/>
+                <constraint firstItem="W2c-jc-mos" firstAttribute="leading" secondItem="7Ia-Jm-5Dy" secondAttribute="leading" id="SjK-Tq-lf9"/>
                 <constraint firstAttribute="bottom" secondItem="Xa5-kg-0Mt" secondAttribute="bottom" id="U0R-Ei-R0y"/>
+                <constraint firstAttribute="bottom" secondItem="W2c-jc-mos" secondAttribute="bottom" id="UE6-F6-Vyc"/>
                 <constraint firstAttribute="trailing" secondItem="ZDX-YC-ApF" secondAttribute="trailing" id="aHN-Jn-vv5"/>
                 <constraint firstAttribute="trailing" secondItem="Xa5-kg-0Mt" secondAttribute="trailing" id="otT-sI-gi7"/>
+                <constraint firstAttribute="trailing" secondItem="W2c-jc-mos" secondAttribute="trailing" id="pD8-V1-pdI"/>
                 <constraint firstItem="Xa5-kg-0Mt" firstAttribute="leading" secondItem="7Ia-Jm-5Dy" secondAttribute="leading" id="tfM-vv-pk2"/>
                 <constraint firstAttribute="bottom" secondItem="ZDX-YC-ApF" secondAttribute="bottom" id="yHT-C7-eD7"/>
             </constraints>
