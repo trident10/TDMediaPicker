@@ -69,11 +69,11 @@ class Theme1: ThemeConfig{
     }
     
     override func getIsHideCaptionView() -> Bool {
-        return true
+        return false
     }
     
     override func getMaxNumberOfSelection() -> Int {
-        return 10
+        return 1
     }
     
     override func getVideoThumbOverlay() -> TDConfigView {

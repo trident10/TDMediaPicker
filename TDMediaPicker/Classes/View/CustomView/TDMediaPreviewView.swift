@@ -28,6 +28,7 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     private var currentSelectedIndex: Int = -1
     private var currentMedia: TDMediaPreviewViewModel?
+    private var isSinglePhoto = false
     
     @IBOutlet var previewView: TDMediaPreviewMainView!
     @IBOutlet var bottomView: TDMediaPreviewThumbView!
@@ -52,13 +53,21 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     
     // MARK: - Public Method(s)
     
-    func reload(media: TDMediaPreviewViewModel, shouldDisplayAddMoreOption: Bool){
+    func reload(media: TDMediaPreviewViewModel, shouldDisplayAddMoreOption: Bool, shouldDisplayBottomBar: Bool){
         
         bottomView.reload(media: media, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
         previewView.reload(media: media)
         
         currentSelectedIndex = bottomView.getCurrentSelectedIndex()
         currentMedia = media
+        if !shouldDisplayBottomBar{
+            isSinglePhoto = true
+            bottomView.heightPortraitConstraint.constant = 0
+            bottomView.heightLandscapeConstraint.constant = 0
+            previewView.bottomSpace = 0
+            deleteButton.isHidden = true
+            self.layoutIfNeeded()
+        }
     }
     
     func purgeData(){
@@ -86,6 +95,11 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
     // MARK: - Action Method(s)
     
     @IBAction func closedTapped(sender: UIButton){
+        if isSinglePhoto{
+            let media = currentMedia?.previewMedia[currentSelectedIndex]
+            self.delegate?.previewView(self, didUpdateOperation: .delete, media: media!)
+            return
+        }
         self.delegate?.previewView(self, didUpdateOperation: .close, media: nil)
     }
     

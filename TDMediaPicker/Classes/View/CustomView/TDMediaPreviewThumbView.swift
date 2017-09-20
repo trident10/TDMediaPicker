@@ -30,6 +30,8 @@ class TDMediaPreviewThumbView: UIView, UICollectionViewDelegate, UICollectionVie
     private let rows: CGFloat = 1
     private let cellSpacing: CGFloat = 2
     
+    @IBOutlet weak var heightPortraitConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightLandscapeConstraint: NSLayoutConstraint!
     @IBOutlet var collectionView:  UICollectionView!
 
     

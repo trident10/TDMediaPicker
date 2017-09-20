@@ -142,6 +142,9 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
                 return
             }
             serviceManager.updateCart(mediaDataModel!, updateType: .add)
+            if serviceManager.getConfig() == 1{
+                self.delegate?.mediaControllerDidTapDone(self)
+            }
         }
     }
     

@@ -164,11 +164,11 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
     
     // MARK: - Service Manager Deleage Method(s)
     
-    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool) {
+    func mediaPreviewServiceManager(_ manager: TDMediaPreviewServiceManager, didUpdateCart cart: TDCart, updateType: TDCart.UpdateType, shouldDisplayAddMoreOption: Bool, shouldDisplayBottomBar: Bool) {
         
         let mediaViewModels = mapMediaViewModels(mediaList: cart.media)
         let previewView = self.view as! TDMediaPreviewView
-        previewView.reload(media: mediaViewModels, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption)
+        previewView.reload(media: mediaViewModels, shouldDisplayAddMoreOption: shouldDisplayAddMoreOption, shouldDisplayBottomBar: shouldDisplayBottomBar)
     }
 }
 

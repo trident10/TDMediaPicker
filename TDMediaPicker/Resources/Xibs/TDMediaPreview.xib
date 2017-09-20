@@ -256,6 +256,8 @@
                     </variation>
                     <connections>
                         <outlet property="collectionView" destination="sOL-eJ-3D5" id="2Cw-kQ-jHe"/>
+                        <outlet property="heightLandscapeConstraint" destination="Lte-QV-hzk" id="9bd-kb-vVV"/>
+                        <outlet property="heightPortraitConstraint" destination="COf-q0-dm2" id="8fy-ng-AQS"/>
                     </connections>
                 </view>
             </subviews>
