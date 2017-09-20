@@ -79,7 +79,6 @@ class TDMediaVideoView: UIView {
                 self.avPlayer = AVPlayer(playerItem: playerItem!)
                 NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemDidPlayToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
                 self.avPlayerLayer = AVPlayerLayer(player: self.avPlayer)
-                self.avPlayerLayer?.backgroundColor = UIColor.green.cgColor
                 self.avPlayerLayer!.frame = self.bounds
                 self.avPlayerLayer?.videoGravity = AVLayerVideoGravityResizeAspect
                 self.layer.addSublayer(self.avPlayerLayer!)

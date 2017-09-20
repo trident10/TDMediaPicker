@@ -12,8 +12,8 @@ import Photos
 open class TDMedia{
     var albumId: String
     var id: String
-    var caption: String = ""
-    let asset: PHAsset
+    open var caption: String = ""
+    open let asset: PHAsset
     // MARK: - Initialization
     
     init(albumID: String, asset: PHAsset, caption:String) {

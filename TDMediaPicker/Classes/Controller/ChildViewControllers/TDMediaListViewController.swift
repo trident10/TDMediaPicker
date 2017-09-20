@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TDMediaListViewControllerDataSource: class {
-    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView
+    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView?
     func mediaControllerVideoThumbOverlay(_ view: TDMediaListViewController)-> TDConfigView?
 }
 

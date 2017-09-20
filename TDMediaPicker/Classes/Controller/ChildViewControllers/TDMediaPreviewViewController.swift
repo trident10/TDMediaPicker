@@ -8,8 +8,8 @@
 
 import UIKit
 protocol TDMediaPreviewControllerDataSource: class {
-    func previewControllerSelectedThumbnailView(_ controller: TDMediaPreviewViewController)-> TDConfigView
-    func previewControllerThumbnailAddView(_ controller: TDMediaPreviewViewController)-> TDConfigView
+    func previewControllerSelectedThumbnailView(_ controller: TDMediaPreviewViewController)-> TDConfigView?
+    func previewControllerThumbnailAddView(_ controller: TDMediaPreviewViewController)-> TDConfigView?
     func previewControllerHideCaptionView(_ controller: TDMediaPreviewViewController)-> Bool?
     func previewControllerVideoThumbOverlay(_ controller: TDMediaPreviewViewController) -> TDConfigView?
 }

@@ -42,8 +42,8 @@ extension TDMediaPicker: TDAlbumListViewControllerDataSource{
         return getSelectedAlbumAtInitialLoad(albums: albums)
     }
     
-    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
-        return getAlbumText(album: album, mediaCount: mediaCount)!
+    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText?{
+        return getAlbumText(album: album, mediaCount: mediaCount)
     }
     
 }
