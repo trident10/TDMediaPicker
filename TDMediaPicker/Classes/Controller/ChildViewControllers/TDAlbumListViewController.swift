@@ -11,7 +11,7 @@ import Photos
 
 protocol TDAlbumListViewControllerDataSource: class{
     func albumController(_ controller: TDAlbumListViewController, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
-    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
+    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText?
 }
 
 protocol TDAlbumListViewControllerDelegate: class{

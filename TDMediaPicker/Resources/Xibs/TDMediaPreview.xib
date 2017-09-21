@@ -145,10 +145,11 @@
                         </collectionView>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ztN-9p-hOT">
                             <rect key="frame" x="15" y="498" width="345" height="30"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.7049175941780822" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="6gR-oZ-aza"/>
                             </constraints>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                             <userDefinedRuntimeAttributes>
@@ -255,6 +256,8 @@
                     </variation>
                     <connections>
                         <outlet property="collectionView" destination="sOL-eJ-3D5" id="2Cw-kQ-jHe"/>
+                        <outlet property="heightLandscapeConstraint" destination="Lte-QV-hzk" id="9bd-kb-vVV"/>
+                        <outlet property="heightPortraitConstraint" destination="COf-q0-dm2" id="8fy-ng-AQS"/>
                     </connections>
                 </view>
             </subviews>

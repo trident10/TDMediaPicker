@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TDMediaListViewControllerDataSource: class {
-    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView
+    func mediaController(_ view: TDMediaListViewController, countForMedia mediaCount: Int)-> TDConfigView?
     func mediaControllerVideoThumbOverlay(_ view: TDMediaListViewController)-> TDConfigView?
 }
 
@@ -142,6 +142,9 @@ class TDMediaListViewController: UIViewController, TDMediaListViewDelegate, TDMe
                 return
             }
             serviceManager.updateCart(mediaDataModel!, updateType: .add)
+            if serviceManager.getConfig() == 1{
+                self.delegate?.mediaControllerDidTapDone(self)
+            }
         }
     }
     

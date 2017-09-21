@@ -114,6 +114,8 @@ class TDAlbumListView: UIView, UITableViewDelegate, UITableViewDataSource{
         
         if let configText = self.dataSource?.albumListView(self, textForAlbum: album){
             TDMediaUtil.setupLabel(cell.titleLabel, config: configText)
+        }else{
+            cell.titleLabel.text = String(format: "%@ (%@)",album.title,album.countTitle)
         }
         
         if imageSize != nil{

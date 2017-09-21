@@ -24,6 +24,8 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     weak var delegate: TDMediaPreviewMainViewDelegate?
     weak var dataSource: TDMediaPreviewMainViewDataSource?
     
+    var bottomSpace:CGFloat = 65
+    
     fileprivate var mediaItems: [TDPreviewViewModel] = []
     fileprivate var selectedIndex: Int = 0
     
@@ -329,11 +331,13 @@ extension TDMediaPreviewMainView{
                 duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0.3
             }
             UIView.animate(withDuration: duration) {
-                var bottomSpace:CGFloat = 65
+                var captionBottomspace:CGFloat = self.bottomSpace - 5
                 if UIApplication.shared.statusBarOrientation.isLandscape{
-                    bottomSpace = 25
+                    if captionBottomspace > 0{
+                        captionBottomspace -= 40
+                    }
                 }
-                self.captionTextViewBottomConstraint.constant = height-bottomSpace
+                self.captionTextViewBottomConstraint.constant = height-captionBottomspace
                 self.layoutIfNeeded()
             }
         }

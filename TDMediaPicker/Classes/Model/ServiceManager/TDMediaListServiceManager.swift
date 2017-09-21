@@ -62,7 +62,9 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
     func getMediaScreenConfig()-> TDConfigMediaScreen{
         return configServiceManager.mediaScreenConfig
     }
-    
+    func getConfig()-> Int{
+        return self.cartServiceManager.getConfig()
+    }
     // MARK: ... Cart Method(s)
     
     func updateCart(_ media: TDMedia, updateType: TDCart.UpdateType){

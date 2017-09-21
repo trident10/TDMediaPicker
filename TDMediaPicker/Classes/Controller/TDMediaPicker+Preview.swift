@@ -34,15 +34,15 @@ extension TDMediaPicker: TDMediaPreviewControllerDataSource{
         return getMediaPickerVideoThumbOverlay(self)
     }
 
-    func previewControllerSelectedThumbnailView(_ controller: TDMediaPreviewViewController)-> TDConfigView{
-        return getMediaPickerPreviewSelectedThumbnailView(self)!
+    func previewControllerSelectedThumbnailView(_ controller: TDMediaPreviewViewController)-> TDConfigView?{
+        return getMediaPickerPreviewSelectedThumbnailView(self)
     }
     
-    func previewControllerThumbnailAddView(_ controller: TDMediaPreviewViewController)-> TDConfigView{
-        return getMediaPickerPreviewAddThumbnailView(self)!
+    func previewControllerThumbnailAddView(_ controller: TDMediaPreviewViewController)-> TDConfigView?{
+        return getMediaPickerPreviewAddThumbnailView(self)
     }
     
     func previewControllerHideCaptionView(_ controller: TDMediaPreviewViewController)-> Bool?{
-        return getMediaPickerPreviewHideCaptionView(self)!
+        return getMediaPickerPreviewHideCaptionView(self)
     }
 }
