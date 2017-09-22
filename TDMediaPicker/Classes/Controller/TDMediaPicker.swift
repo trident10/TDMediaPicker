@@ -15,9 +15,11 @@ public protocol TDMediaPickerDelegate: class{
 }
 
 @objc public protocol TDMediaPickerDataSource{
-    
     //Max Selection
     @objc optional func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int
+    
+    //Filter Specific Media Type
+    @objc optional func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType
     
     //THEME
     @objc optional func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard

@@ -19,6 +19,11 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getMaxNumberOfSelection()
     }
     
+    //MARK:- Filter Specific Media
+//    func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType{
+//        return PHAssetMediaType.video
+//    }
+    
     //MARK:- Navigation Bar Theme
     
     func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
