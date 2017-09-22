@@ -59,8 +59,6 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
         setupNavigationTheme()
         setupConfig()
         serviceManager.fetchAlbums(getAlbumFetchResults()) { (albums) in
-            
-            
             self.handleFetchedAlbums(albums)
         }
     }

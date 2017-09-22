@@ -71,6 +71,9 @@ extension TDMediaPicker{
         if let size = dataSource?.mediaPickerImageSizeForAlbum?(self){
             albumConfig.imageSize = size
         }
+        if let mediaType = dataSource?.mediaPickerFilterMediaTpye?(self){
+            albumConfig.mediaType = mediaType
+        }
         serviceManager.setupConfig(albumScreen: albumConfig)
     }
     

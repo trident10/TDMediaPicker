@@ -25,7 +25,7 @@ open class TDAlbum: NSObject{
     
     // MARK: - Public Method(s)
     
-    func reload() {
+    func reload(filteredMediaType:PHAssetMediaType?) {
         
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -34,6 +34,10 @@ open class TDAlbum: NSObject{
         itemsCount = itemsFetchResult.count
         
         if itemsFetchResult.count > 0{
+            if filteredMediaType != nil && filteredMediaType != itemsFetchResult.firstObject?.mediaType{
+                itemsCount = 0
+                return
+            }
             albumMedia = TDMedia(albumID: self.id, asset: itemsFetchResult[0], caption: "")
 
         }

@@ -78,7 +78,7 @@ class TDAlbumListServiceManager {
         for result in albumsFetchResults {
             result.enumerateObjects({ (collection, _, _) in
                 let album = TDAlbum(collection: collection)
-                album.reload()
+                album.reload(filteredMediaType: self.configServiceManager.albumScreenConfig.mediaType)
                 if album.itemsCount > 0 {
                     self.albums.append(album)
                 }

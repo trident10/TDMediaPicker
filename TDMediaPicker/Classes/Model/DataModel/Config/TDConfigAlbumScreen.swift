@@ -16,5 +16,6 @@ class TDConfigAlbumScreen: NSObject{
     var collectionType: TDMediaPicker.AlbumCollectionType?
     var imageSize: CGSize?
     var selectedInitialAlbum: TDAlbum?
+    var mediaType: PHAssetMediaType?
     
 }
