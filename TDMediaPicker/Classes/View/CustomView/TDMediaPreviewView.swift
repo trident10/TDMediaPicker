@@ -92,6 +92,14 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         TDMediaUtil.setupButton(deleteButton, buttonConfig: config)
     }
     
+    func setupCaptionView(_ config: TDConfigCaptionView){
+//        TDMediaUtil.setupButton(deleteButton, buttonConfig: config)
+    }
+    
+    func setCaptionCount(_ count: Int){
+        previewView.captionCount = count
+    }
+    
     // MARK: - Action Method(s)
     
     @IBAction func closedTapped(sender: UIButton){
