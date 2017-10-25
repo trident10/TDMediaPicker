@@ -27,28 +27,28 @@ extension TDMediaPicker{
     }
     //MARK: ...Album Config Method(s)
     func getSelectedAlbumAtInitialLoad(albums: [TDAlbum]) -> TDAlbum? {
-        return self.dataSource?.mediaPicker?(self, selectedAlbumAtInitialLoad: albums)
+        return self.dataSource?.mediaPicker(self, selectedAlbumAtInitialLoad: albums)
     }
     
     func getAlbumText(album: TDAlbum, mediaCount: Int) -> TDConfigText? {
-        return self.dataSource?.mediaPicker?(self, textFormatForAlbum: album, mediaCount: mediaCount)
+        return self.dataSource?.mediaPicker(self, textFormatForAlbum: album, mediaCount: mediaCount)
     }
     
     //MARK: ...Media Config Method(s)
     func getMediaHighlightedView(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView?{
-        return self.dataSource?.mediaPicker?(self, countForMedia: mediaCount)
+        return self.dataSource?.mediaPicker(self, countForMedia: mediaCount)
     }
     
     //MARK: ...Preview Config Method(s)
     func getMediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView?{
-        return self.dataSource?.mediaPickerPreviewSelectedThumbnailView?(self)
+        return self.dataSource?.mediaPickerPreviewSelectedThumbnailView(self)
     }
     
     func getMediaPickerPreviewAddThumbnailView(_ picker: TDMediaPicker)-> TDConfigView?{
-        return self.dataSource?.mediaPickerPreviewThumbnailAddView?(self)
+        return self.dataSource?.mediaPickerPreviewThumbnailAddView(self)
     }
     func getMediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool? {
-        return self.dataSource?.mediaPickerPreviewHideCaptionView?(self)
+        return self.dataSource?.mediaPickerPreviewHideCaptionView(self)
     }
     
     //MARK: - Private Method(s)

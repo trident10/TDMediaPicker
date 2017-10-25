@@ -11,10 +11,6 @@ import UIKit
 import TDMediaPicker
 import Photos
 
-extension ViewController: TDMediaPickerDataSource1{
-    
-}
-
 extension ViewController: TDMediaPickerDataSource{
 
     
