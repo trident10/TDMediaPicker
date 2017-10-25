@@ -9,12 +9,12 @@
 import Foundation
 import Photos
 
-open class TDAlbum: NSObject{
+public struct TDAlbum{
     
-    open let collection: PHAssetCollection
-    open private(set) var itemsCount: Int = 0
-    open private(set) var albumMedia: TDMedia?
-    open private(set) var id: String
+    public let collection: PHAssetCollection
+    public private(set) var itemsCount: Int = 0
+    public private(set) var albumMedia: TDMedia?
+    public private(set) var id: String
     
     // MARK: - Initialization
     
@@ -25,7 +25,7 @@ open class TDAlbum: NSObject{
     
     // MARK: - Public Method(s)
     
-    func reload(filteredMediaType:PHAssetMediaType?) {
+    mutating func reload(filteredMediaType:PHAssetMediaType?) {
         
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]

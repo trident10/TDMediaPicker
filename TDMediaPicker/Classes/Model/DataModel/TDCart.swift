@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TDCart{
+struct TDCart{
     
     enum UpdateType {
         case add

@@ -9,6 +9,16 @@
 import UIKit
 import Photos
 
+/*
+ To Do -
+ Separate Files
+ 1. TDMediaPickerDatasource
+ 2. TDMediaPickerDelegate
+ 3. TDMediaPickerConfiguration - Singleton holding default values
+ 
+ Freeze default configuration theme
+ */
+
 public protocol TDMediaPickerDelegate: class{
     func mediaPicker(_ picker: TDMediaPicker, didSelectMedia media:[TDMedia])
     func mediaPickerDidCancel(_ picker: TDMediaPicker)

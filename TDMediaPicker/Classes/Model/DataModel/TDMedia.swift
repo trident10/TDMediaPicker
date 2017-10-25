@@ -9,11 +9,11 @@
 import Foundation
 import Photos
 
-open class TDMedia{
+public struct TDMedia{
     var albumId: String
     var id: String
-    open var caption: String = ""
-    open let asset: PHAsset
+    public var caption: String = ""
+    public let asset: PHAsset
     // MARK: - Initialization
     
     init(albumID: String, asset: PHAsset, caption:String) {

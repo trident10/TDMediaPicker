@@ -139,8 +139,9 @@ class TDMediaPreviewViewController: UIViewController, TDMediaPreviewViewDelegate
             if mediaDataModel == nil{
                 return
             }
-            mediaDataModel?.caption = media.caption!
-            self.serviceManager.updateCart(mediaDataModel!, updateType: .edit)
+            var dataModel = mediaDataModel
+            dataModel?.caption = media.caption!
+            self.serviceManager.updateCart(dataModel!, updateType: .edit)
         }
     }
     
