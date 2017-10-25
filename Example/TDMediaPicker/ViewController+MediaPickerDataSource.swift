@@ -11,7 +11,12 @@ import UIKit
 import TDMediaPicker
 import Photos
 
+extension ViewController: TDMediaPickerDataSource1{
+    
+}
+
 extension ViewController: TDMediaPickerDataSource{
+
     
     //MARK:- Max Selection
     func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
@@ -26,10 +31,10 @@ extension ViewController: TDMediaPickerDataSource{
     
     //MARK:- Navigation Bar Theme
     
-    func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
-        let themeConfig = getThemeConfig()
-        return themeConfig.getNavigationThemeConfig()
-    }
+//    func mediaPickerNavigationTheme(_ picker: TDMediaPicker) -> TDConfigViewStandard {
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getNavigationThemeConfig()
+//    }
     
     func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
         let themeConfig = getThemeConfig()

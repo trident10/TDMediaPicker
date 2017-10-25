@@ -14,47 +14,92 @@ public protocol TDMediaPickerDelegate: class{
     func mediaPickerDidCancel(_ picker: TDMediaPicker)
 }
 
-@objc public protocol TDMediaPickerDataSource{
+public protocol TDMediaPickerDataSource: class{
     //Max Selection
-    @objc optional func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int
+    func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int
     
     //Filter Specific Media Type
-    @objc optional func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType
+    func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType
     
     //THEME
-    @objc optional func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard
-    @objc optional func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView
     
     //Permission Screen
-    @objc optional func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
+    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
     
     //Album List Screen
-    @objc optional func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
-    @objc optional func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]
-    @objc optional func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType
-    @objc optional func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize
-    @objc optional func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
-    @objc optional func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
+    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]
+    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType
+    func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
+    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
     
     //Media List Screen
-    @objc optional func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
-    @objc optional func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int
-    @objc optional func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int
-    @objc optional func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView
+    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int
+    func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView
     
     //Preview Screen
-    @objc optional func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
-    @objc optional func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView
-    @objc optional func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView
-    @objc optional func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool
+    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool
     
 }
+
+public extension TDMediaPickerDataSource{
+    //Max Selection
+    func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
+        return 30
+    }
+    
+    //Filter Specific Media Type
+    //FIXME:- NEED TO CHECK ITS IMPLEMENTATION
+    func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType{
+        return .video
+    }
+    
+    //THEME
+    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard{
+        return TDConfigViewStandard.init(backgroundColor: .white)
+    }
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
+        
+    }
+    
+    //Permission Screen
+    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
+    
+    //Album List Screen
+    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]
+    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType
+    func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
+    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
+    
+    //Media List Screen
+    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int
+    func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView
+    
+    //Preview Screen
+    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool
+}
+
 
 open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     
     // MARK: - Variable(s)
     
-    @objc public enum AlbumCollectionType: Int {
+    public enum AlbumCollectionType: Int {
         case Grid = 1, List = 2
     }
     
@@ -64,8 +109,6 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     
     open weak var delegate:  TDMediaPickerDelegate?
     open weak var dataSource:  TDMediaPickerDataSource?
-    
-    var maxSelections = 300
     
     var permissionVC: TDMediaPermissionViewController?
     var albumListVC: TDAlbumListViewController?
@@ -79,9 +122,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     
     public required init() {
         super.init(nibName: nil, bundle: nil)
-        
         serviceManager.delegate = self
-        serviceManager.setupConfig(maxSelections: maxSelections)
     }
     
     deinit {
@@ -98,11 +139,6 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         
         setupNavigationController()
         
-        if let maxSel = self.dataSource?.mediaPickerMaxSelections?(self){
-            maxSelections = maxSel
-            serviceManager.setupConfig(maxSelections: maxSelections)
-        }
-        
         if TDMediaUtil.hasPermission(accessType: .Gallery){
             showPickerScreen()
             return
@@ -114,12 +150,12 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         setupInitialConfiguration()
     }
     
-    override open func viewWillDisappear(_ animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         cleanupScreen(.All)
         resetPicker()
     }
     
-    override open func viewDidDisappear(_ animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         
     }
     
@@ -174,38 +210,22 @@ extension TDMediaPicker{
         switch screenType {
             
         case .Permission:
-            if permissionVC != nil{
-                permissionVC = nil
-            }
+            permissionVC = nil
             
         case .Album:
-            if albumListVC != nil{
-                albumListVC = nil
-            }
+            albumListVC = nil
             
         case .Media:
-            if mediaListVC != nil{
-                mediaListVC = nil
-            }
+            mediaListVC = nil
             
         case .Preview:
-            if previewVC != nil{
-                previewVC = nil
-            }
+            previewVC = nil
             
         case .All:
-            if permissionVC != nil{
-                permissionVC = nil
-            }
-            if albumListVC != nil{
-                albumListVC = nil
-            }
-            if mediaListVC != nil{
-                mediaListVC = nil
-            }
-            if previewVC != nil{
-                previewVC = nil
-            }
+            permissionVC = nil
+            albumListVC = nil
+            mediaListVC = nil
+            previewVC = nil
         }
     }
     

@@ -20,7 +20,7 @@ class TDCartServiceManager{
     static let sharedInstance = TDCartServiceManager()
     
     private var cart: TDCart = TDCart()
-    private var maxSelection = 0
+    private var maxSelection = 50
     
     var delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
     
