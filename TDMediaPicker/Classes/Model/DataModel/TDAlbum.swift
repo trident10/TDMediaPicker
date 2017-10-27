@@ -29,16 +29,24 @@ public struct TDAlbum{
         
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
         let itemsFetchResult = PHAsset.fetchAssets(in: collection, options: options)
         itemsCount = itemsFetchResult.count
         
         if itemsFetchResult.count > 0{
-            if filteredMediaType != nil && filteredMediaType != itemsFetchResult.firstObject?.mediaType{
-                itemsCount = 0
+            if filteredMediaType == nil{
+                albumMedia = TDMedia(albumID: self.id, asset: itemsFetchResult[0], caption: "")
                 return
             }
-            albumMedia = TDMedia(albumID: self.id, asset: itemsFetchResult[0], caption: "")
+            itemsFetchResult.enumerateObjects({ (object, count, stop) in
+                stop = false
+                if filteredMediaType != itemsFetchResult.firstObject?.mediaType{
+                    albumMedia = TDMedia(albumID: self?.id, asset: object, caption: "")
+                }
+                stop = true
+            })
+            
+             && filteredMediaType != itemsFetchResult.firstObject?.mediaType
+            
 
         }
     }

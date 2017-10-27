@@ -20,7 +20,7 @@ class TDCartServiceManager{
     static let sharedInstance = TDCartServiceManager()
     
     private var cart: TDCart = TDCart()
-    private var maxSelection = 50
+    private var maxSelection = TDMediaPickerConfig.maxDefaultSelection
     
     var delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
     

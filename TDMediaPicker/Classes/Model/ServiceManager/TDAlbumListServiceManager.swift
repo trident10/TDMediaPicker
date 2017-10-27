@@ -66,6 +66,7 @@ class TDAlbumListServiceManager {
             albumsFetchResults = fetchResults!
         }
         else{
+            //FIXME:- Make Datasource for album type
             let types: [PHAssetCollectionType] = [.smartAlbum, .album]
             
             albumsFetchResults = types.map {

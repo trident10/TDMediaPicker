@@ -21,7 +21,7 @@ extension ViewController: TDMediaPickerDataSource{
     }
     
     //MARK:- Filter Specific Media
-//    func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType{
+//    func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType?{
 //        return PHAssetMediaType.video
 //    }
     

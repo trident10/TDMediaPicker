@@ -45,6 +45,8 @@
 		6884ABFBF11AB0AE2F75C29596417E55 /* TDConfigPreviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7869E607F14B928992ECB57924EA316F /* TDConfigPreviewScreen.swift */; };
 		69958727741CC99BD68A2A9190935ACB /* TDCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071E7F44484F528C6791C785535E628A /* TDCart.swift */; };
 		6BA062162EACF1C46B78D306726F90BD /* TDConfigPermissionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3B9294F32C0CF21A5DF825DCD00B04 /* TDConfigPermissionScreen.swift */; };
+		6F3181581FA39FC900946A94 /* TDMediaPickerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3181571FA39FC900946A94 /* TDMediaPickerConfig.swift */; };
+		6F7DDE701FA39A9200826B23 /* TDMediaPickerDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7DDE6E1FA39A9200826B23 /* TDMediaPickerDatasource.swift */; };
 		8365AA9DD3EB8C80538B3AAC948B3653 /* TDAlbumListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887C01A8FE548091C8CFED5B4370F58 /* TDAlbumListView.swift */; };
 		84857AB50FAB2C936E31D0BD49264F85 /* TDMediaPicker-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C85FD74BC204E9F48D09B23320FAE97 /* TDMediaPicker-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84B22B394FD5D6F18AB909651604A7B4 /* TDMediaPickerPNG.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9C2CE0455961E975D89AAC11801F2949 /* TDMediaPickerPNG.bundle */; };
@@ -146,10 +148,10 @@
 		2E3B9294F32C0CF21A5DF825DCD00B04 /* TDConfigPermissionScreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDConfigPermissionScreen.swift; sourceTree = "<group>"; };
 		2F619429ABECBD30A87EE43E9F99CC99 /* TDMediaCellVideo.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = TDMediaCellVideo.xib; sourceTree = "<group>"; };
 		3214F13F7B443A7D2C42C94F58C3E638 /* TDMediaUtil+Bundle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaUtil+Bundle.swift"; sourceTree = "<group>"; };
-		38537439579B2C4867631E7193E26C2E /* TDMediaPickerPDF.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TDMediaPickerPDF.bundle; path = TDMediaPickerPDF.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		38537439579B2C4867631E7193E26C2E /* TDMediaPickerPDF.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TDMediaPickerPDF.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		3911D572FA645D01BBB1C995D034B715 /* TDConfigNavigationBar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDConfigNavigationBar.swift; sourceTree = "<group>"; };
 		39CC302DDEECF49C6071D29C2C3D9BEF /* TDMediaUtil+Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaUtil+Constraint.swift"; sourceTree = "<group>"; };
-		3A89C315FDFC60C9767F6B1CB0348AED /* ic_play@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; path = "ic_play@2x.png"; sourceTree = "<group>"; };
+		3A89C315FDFC60C9767F6B1CB0348AED /* ic_play@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "ic_play@2x.png"; sourceTree = "<group>"; };
 		3DF1CA43B923413BE8B4CE30664A8B29 /* TDMediaPicker+MediaList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaPicker+MediaList.swift"; sourceTree = "<group>"; };
 		3FE5B13F509C999F07FEB46B7AB7D303 /* Pods-TDMediaPicker_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TDMediaPicker_Example-dummy.m"; sourceTree = "<group>"; };
 		4035955CED73C7B852EF860AF715E0AC /* TDMediaListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaListViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +162,7 @@
 		4E513D0CB829F06F8F67CD45B26AAD5D /* TDMediaPicker+AlbumList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaPicker+AlbumList.swift"; sourceTree = "<group>"; };
 		4EA6CA639C06D2D2AE9729A67EE3441D /* Pods-TDMediaPicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TDMediaPicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		51CD349C6EE5162B00DDEA6A3585C5C1 /* ResourceBundle-TDMediaPickerPDF-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-TDMediaPickerPDF-Info.plist"; sourceTree = "<group>"; };
-		554C549AA3E963542D0BDA4213D3545A /* Pods_TDMediaPicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TDMediaPicker_Tests.framework; path = "Pods-TDMediaPicker_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		554C549AA3E963542D0BDA4213D3545A /* Pods_TDMediaPicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TDMediaPicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		587AB98C7811A61F9FD321B59384C7D7 /* TDAlbumList.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = TDAlbumList.xib; sourceTree = "<group>"; };
 		5C85FD74BC204E9F48D09B23320FAE97 /* TDMediaPicker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TDMediaPicker-umbrella.h"; sourceTree = "<group>"; };
 		5DB9FC31A52D787F862690B10325249E /* Pods-TDMediaPicker_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TDMediaPicker_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -175,8 +177,10 @@
 		6B376B00CEE2B16637EBE3F8DEF9880E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DF6E8D8C399626B5BC6F3FD505D8D3C /* TDMediaListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaListView.swift; sourceTree = "<group>"; };
 		6E076908F61EDE6041297F2319A2A5C0 /* TDMediaUtil+Button.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaUtil+Button.swift"; sourceTree = "<group>"; };
+		6F3181571FA39FC900946A94 /* TDMediaPickerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDMediaPickerConfig.swift; sourceTree = "<group>"; };
+		6F7DDE6E1FA39A9200826B23 /* TDMediaPickerDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDMediaPickerDatasource.swift; sourceTree = "<group>"; };
 		70A4A52274755850EF29BD7A4C33BC32 /* TDMedia.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMedia.swift; sourceTree = "<group>"; };
-		736E8117B54A15F1E8934B74032DEEE1 /* TDMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TDMediaPicker.framework; path = TDMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		736E8117B54A15F1E8934B74032DEEE1 /* TDMediaPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TDMediaPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		767312F2A443B0BA2D2251DAFBB4DA79 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7869E607F14B928992ECB57924EA316F /* TDConfigPreviewScreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDConfigPreviewScreen.swift; sourceTree = "<group>"; };
 		7EC2CA9A051BF24E6963A69BCC0EB653 /* TDMediaUtil+View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaUtil+View.swift"; sourceTree = "<group>"; };
@@ -188,14 +192,14 @@
 		8D536B72D71F8AEDFD83CB1C55A2282E /* TDMediaVideoView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaVideoView.swift; sourceTree = "<group>"; };
 		8E978F5D1587FD2B27E0CD5B4579D724 /* TDMediaPreviewMainView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaPreviewMainView.swift; sourceTree = "<group>"; };
 		8EE2B3A132D332E3A12AB3C461E8C017 /* TDMediaPicker-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TDMediaPicker-dummy.m"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		97D033F1D362086AEDDD699261FEAD54 /* TDMediaPermissionViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaPermissionViewController.swift; sourceTree = "<group>"; };
-		9C2CE0455961E975D89AAC11801F2949 /* TDMediaPickerPNG.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TDMediaPickerPNG.bundle; path = TDMediaPickerPNG.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		9EB615F4738E923A42D229AE9EC40588 /* TDMediaPicker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = TDMediaPicker.modulemap; sourceTree = "<group>"; };
+		9C2CE0455961E975D89AAC11801F2949 /* TDMediaPickerPNG.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TDMediaPickerPNG.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EB615F4738E923A42D229AE9EC40588 /* TDMediaPicker.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = TDMediaPicker.modulemap; sourceTree = "<group>"; };
 		A0ACFCC1E85203B94A5EA13C921F9668 /* ResourceBundle-TDMediaPickerPNG-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-TDMediaPickerPNG-Info.plist"; sourceTree = "<group>"; };
 		A39B5C1D5B5006E47351220963108EEA /* TDMediaCellImage.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = TDMediaCellImage.xib; sourceTree = "<group>"; };
 		A4A60282C012C4E2038FE07EC3CC3CD5 /* TDConfigText.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDConfigText.swift; sourceTree = "<group>"; };
-		A972FA550BEF2A3D37F97DEA747FEF78 /* Pods-TDMediaPicker_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TDMediaPicker_Tests.modulemap"; sourceTree = "<group>"; };
+		A972FA550BEF2A3D37F97DEA747FEF78 /* Pods-TDMediaPicker_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TDMediaPicker_Tests.modulemap"; sourceTree = "<group>"; };
 		ADCFC17369A6D2CBA9D0A72480C6C877 /* TDMediaPreviewViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaPreviewViewModel.swift; sourceTree = "<group>"; };
 		AE342196CDBD30A976E4F7002D631F40 /* TDAddOptionCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = TDAddOptionCell.xib; sourceTree = "<group>"; };
 		B07A3C6E33467C3F01914D3D35DD68B6 /* TDMediaUtil+PHAsset.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaUtil+PHAsset.swift"; sourceTree = "<group>"; };
@@ -210,13 +214,13 @@
 		C7025AF06E8D3515D0F3653CED032097 /* TDMediaUtil.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaUtil.swift; sourceTree = "<group>"; };
 		C751E9DEB5C26507713076E1AD9CF6E1 /* TDMediaPreviewView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaPreviewView.swift; sourceTree = "<group>"; };
 		C7FD87CA889869019AFFB87E07CC50AC /* TDMediaPreview.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = TDMediaPreview.xib; sourceTree = "<group>"; };
-		CA2AD22DD4901B40759A67534B2A07D9 /* Pods-TDMediaPicker_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-TDMediaPicker_Example.modulemap"; sourceTree = "<group>"; };
+		CA2AD22DD4901B40759A67534B2A07D9 /* Pods-TDMediaPicker_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-TDMediaPicker_Example.modulemap"; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CE621B53CA8918E2C27224AC8FF8B679 /* TDConfigAlbumScreen.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDConfigAlbumScreen.swift; sourceTree = "<group>"; };
 		CF545A42A3899590DC25CF79513B7F06 /* TDMediaList.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = TDMediaList.xib; sourceTree = "<group>"; };
 		D4B2CA0E9EC5E00E6B1E5515EAC314DA /* TDMediaUtil+MediaPermission.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaUtil+MediaPermission.swift"; sourceTree = "<group>"; };
 		D888CC46248A273B36A1FC9761FB0EE2 /* Pods-TDMediaPicker_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TDMediaPicker_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		DD7B2053486B293F109D2599127C4048 /* TDMediaPickerXIB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = TDMediaPickerXIB.bundle; path = TDMediaPickerXIB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD7B2053486B293F109D2599127C4048 /* TDMediaPickerXIB.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TDMediaPickerXIB.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		E00C9E6B5534D81803B1A45409F169D2 /* TDAlbumListServiceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDAlbumListServiceManager.swift; sourceTree = "<group>"; };
 		E0A13197DB5FD09CCFC63B34BE414CD8 /* TDMediaCellVideoThumb.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaCellVideoThumb.swift; sourceTree = "<group>"; };
 		E8B49ABD7D54F7DF048AEB09D4B0370F /* TDPermissionServiceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDPermissionServiceManager.swift; sourceTree = "<group>"; };
@@ -225,7 +229,7 @@
 		F10B1AFC5A5CB6D2EB825B5151F64DE1 /* Pods-TDMediaPicker_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TDMediaPicker_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		F706F299F24E79C42B96C3A748CEFDAA /* TDMediaPicker+Configurations.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TDMediaPicker+Configurations.swift"; sourceTree = "<group>"; };
 		FA14543CF5E162BD2FCC488CC463E384 /* TDAlbumListViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDAlbumListViewController.swift; sourceTree = "<group>"; };
-		FBCCB5C2A5808C69C8070012937B5DF6 /* Pods_TDMediaPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_TDMediaPicker_Example.framework; path = "Pods-TDMediaPicker_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBCCB5C2A5808C69C8070012937B5DF6 /* Pods_TDMediaPicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TDMediaPicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE50E7E6A4D62FCE8D7C96785C9E3011 /* TDMediaListViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TDMediaListViewModel.swift; sourceTree = "<group>"; };
 		FECC9D589214AD7F16A25FFBAA3DB441 /* Pods-TDMediaPicker_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TDMediaPicker_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -293,7 +297,6 @@
 				272C03132063F5A9DFF786F9234A0F60 /* TDMediaPermission.xib */,
 				C7FD87CA889869019AFFB87E07CC50AC /* TDMediaPreview.xib */,
 			);
-			name = Xibs;
 			path = Xibs;
 			sourceTree = "<group>";
 		};
@@ -319,7 +322,6 @@
 				A4A60282C012C4E2038FE07EC3CC3CD5 /* TDConfigText.swift */,
 				B4AAFC648F637639C4200333D4D6BDD4 /* TDConfigView.swift */,
 			);
-			name = Config;
 			path = Config;
 			sourceTree = "<group>";
 		};
@@ -363,7 +365,6 @@
 			children = (
 				F0638C6DE770D76974FBBDECB4FDBE9B /* Classes */,
 			);
-			name = TDMediaPicker;
 			path = TDMediaPicker;
 			sourceTree = "<group>";
 		};
@@ -374,7 +375,6 @@
 				FE50E7E6A4D62FCE8D7C96785C9E3011 /* TDMediaListViewModel.swift */,
 				ADCFC17369A6D2CBA9D0A72480C6C877 /* TDMediaPreviewViewModel.swift */,
 			);
-			name = ViewModel;
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
@@ -383,7 +383,6 @@
 			children = (
 				D1DC828F632EFA071B378D2C450F3C90 /* TDMediaUtil */,
 			);
-			name = Utils;
 			path = Utils;
 			sourceTree = "<group>";
 		};
@@ -392,7 +391,6 @@
 			children = (
 				A6A5B84932B49B320180BC356975A446 /* Resources */,
 			);
-			name = TDMediaPicker;
 			path = TDMediaPicker;
 			sourceTree = "<group>";
 		};
@@ -407,7 +405,6 @@
 				F019517D809E4EF731B20BF641A59D52 /* TDMediaCellVideo.swift */,
 				E0A13197DB5FD09CCFC63B34BE414CD8 /* TDMediaCellVideoThumb.swift */,
 			);
-			name = CustomCell;
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
@@ -430,7 +427,6 @@
 				97D033F1D362086AEDDD699261FEAD54 /* TDMediaPermissionViewController.swift */,
 				241F9F2422945F36E2C81F907C174332 /* TDMediaPreviewViewController.swift */,
 			);
-			name = ChildViewControllers;
 			path = ChildViewControllers;
 			sourceTree = "<group>";
 		};
@@ -457,7 +453,6 @@
 			children = (
 				3A89C315FDFC60C9767F6B1CB0348AED /* ic_play@2x.png */,
 			);
-			name = Icons;
 			path = Icons;
 			sourceTree = "<group>";
 		};
@@ -496,7 +491,6 @@
 				CD3B32FB1F5052582A650E1F269205A3 /* CustomView */,
 				4CA99722271B5D186A3FC821F67E8AEB /* ViewModel */,
 			);
-			name = View;
 			path = View;
 			sourceTree = "<group>";
 		};
@@ -506,7 +500,6 @@
 				6F3458F923F5578BFFEF0A10036B9FAD /* Icons */,
 				1348462B230A4D183EDAF52119704774 /* Xibs */,
 			);
-			name = Resources;
 			path = Resources;
 			sourceTree = "<group>";
 		};
@@ -521,12 +514,12 @@
 		C335D9FC760560E52A63170DAC342C72 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				6F3181571FA39FC900946A94 /* TDMediaPickerConfig.swift */,
 				C53961C79A5C7D1F794231512C853015 /* TDAlbum.swift */,
 				071E7F44484F528C6791C785535E628A /* TDCart.swift */,
 				70A4A52274755850EF29BD7A4C33BC32 /* TDMedia.swift */,
 				26ECE861696ABEA3411A00E016E26ABC /* Config */,
 			);
-			name = DataModel;
 			path = DataModel;
 			sourceTree = "<group>";
 		};
@@ -536,7 +529,6 @@
 				C335D9FC760560E52A63170DAC342C72 /* DataModel */,
 				DC6BDC010FEB53DDF6C2976408C07D14 /* ServiceManager */,
 			);
-			name = Model;
 			path = Model;
 			sourceTree = "<group>";
 		};
@@ -552,7 +544,6 @@
 				C751E9DEB5C26507713076E1AD9CF6E1 /* TDMediaPreviewView.swift */,
 				8D536B72D71F8AEDFD83CB1C55A2282E /* TDMediaVideoView.swift */,
 			);
-			name = CustomView;
 			path = CustomView;
 			sourceTree = "<group>";
 		};
@@ -570,7 +561,6 @@
 				17F6EF4BEB0FACA21016A58DE2C041CB /* TDMediaUtil+UIViewController.swift */,
 				7EC2CA9A051BF24E6963A69BCC0EB653 /* TDMediaUtil+View.swift */,
 			);
-			name = TDMediaUtil;
 			path = TDMediaUtil;
 			sourceTree = "<group>";
 		};
@@ -578,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				BB43C0C10AF4E4087AA2196F3A36DD7E /* TDMediaPicker.swift */,
+				6F7DDE6E1FA39A9200826B23 /* TDMediaPickerDatasource.swift */,
 				4E513D0CB829F06F8F67CD45B26AAD5D /* TDMediaPicker+AlbumList.swift */,
 				F706F299F24E79C42B96C3A748CEFDAA /* TDMediaPicker+Configurations.swift */,
 				3DF1CA43B923413BE8B4CE30664A8B29 /* TDMediaPicker+MediaList.swift */,
@@ -585,7 +576,6 @@
 				4980CFB095536ABECA2533A3A292D2AB /* TDMediaPicker+Preview.swift */,
 				674AFE367574B96A0B1D0BFC07227604 /* ChildViewControllers */,
 			);
-			name = Controller;
 			path = Controller;
 			sourceTree = "<group>";
 		};
@@ -600,7 +590,6 @@
 				133F61DDDD109632F9BA1AAC93D34DE9 /* TDMediaPreviewServiceManager.swift */,
 				E8B49ABD7D54F7DF048AEB09D4B0370F /* TDPermissionServiceManager.swift */,
 			);
-			name = ServiceManager;
 			path = ServiceManager;
 			sourceTree = "<group>";
 		};
@@ -612,7 +601,6 @@
 				4E71DFE5E47D5F22AF3A3C1E81294D59 /* Utils */,
 				A01AD846800776A707E4C5801D46A0D7 /* View */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -781,7 +769,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
+				TargetAttributes = {
+					1F68DA8A107C982F570FB75AE20EC979 = {
+						LastSwiftMigration = 0900;
+					};
+					DC1F98D05290E1C91D869834C0D665F0 = {
+						LastSwiftMigration = 0900;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -878,6 +874,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A65AFDFF412D13C8FEF364DF9267D992 /* TDAddOptionCell.swift in Sources */,
+				6F7DDE701FA39A9200826B23 /* TDMediaPickerDatasource.swift in Sources */,
 				B91ACE7751DECBAAD27A4AE3B345E53D /* TDAlbum.swift in Sources */,
 				3D3DD943B58854B350E2D07FABBD69A2 /* TDAlbumCell.swift in Sources */,
 				AF0472D0A9A07224C17B1DBDE5F9BC75 /* TDAlbumListServiceManager.swift in Sources */,
@@ -903,6 +900,7 @@
 				53CA7B42D29612C92C6A3FF186E39FE6 /* TDMediaCellImageThumb.swift in Sources */,
 				36E809B188BC3079DA4227E6DB2F4F0D /* TDMediaCellVideo.swift in Sources */,
 				01DA055E3F71DCF10A95B8DAA9D41DBD /* TDMediaCellVideoThumb.swift in Sources */,
+				6F3181581FA39FC900946A94 /* TDMediaPickerConfig.swift in Sources */,
 				0C9AFB918A7FA8CB9782CD1FE40AC9B5 /* TDMediaListServiceManager.swift in Sources */,
 				8A0265E71B7CD2A6C6C16D98E3B03114 /* TDMediaListView.swift in Sources */,
 				1B643703903884AE626C53801C8F253E /* TDMediaListViewController.swift in Sources */,
@@ -993,20 +991,30 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -1071,7 +1079,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1152,6 +1161,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 697A80DAEDA06BB3BC39CF3A30EF466A /* Pods-TDMediaPicker_Example.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1178,6 +1188,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1226,7 +1238,8 @@
 				PRODUCT_NAME = TDMediaPicker;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1254,6 +1267,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2BA843E0ACC73C2E23F889ACD242F69B /* Pods-TDMediaPicker_Example.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1279,6 +1293,8 @@
 				PRODUCT_NAME = Pods_TDMediaPicker_Example;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1311,19 +1327,29 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -1337,6 +1363,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
