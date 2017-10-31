@@ -76,11 +76,11 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
         
         if updateType == .reload || updateType == .delete{
             mediaItems = cart.media
-            if cartServiceManager.getConfig() == 1{
+            if cartServiceManager.maxSelection == 1{
                 self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart, updateType: updateType, shouldDisplayAddMoreOption: true, shouldDisplayBottomBar: false)
                 return
             }
-            if cartServiceManager.getConfig() > cart.media.count{
+            if cartServiceManager.maxSelection > cart.media.count{
                 self.delegate?.mediaPreviewServiceManager(self, didUpdateCart: cart, updateType: updateType, shouldDisplayAddMoreOption: true, shouldDisplayBottomBar: true)
                 return
             }

@@ -56,12 +56,16 @@ extension TDMediaPicker{
     private func setupMediaMaxSelectionConfig(){
         if let maxSel = self.dataSource?.mediaPickerMaxSelections(self){
             serviceManager.setupConfig(maxSelections: maxSel)
+        }else{
+            serviceManager.setupConfig(maxSelections: TDMediaPickerConfig.defaultMaxSelection)
         }
     }
     
     private func setupNavigationThemeConfig(){
         if let viewConfig = dataSource?.mediaPickerNavigationTheme(self){
             serviceManager.setupConfig(navigationTheme: viewConfig)
+        }else{
+            serviceManager.setupConfig(navigationTheme: TDMediaPickerConfig.defaultNavigationTheme)
         }
     }
     

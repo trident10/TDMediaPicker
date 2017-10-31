@@ -63,7 +63,7 @@ class TDMediaListServiceManager: TDCartServiceManagerDelegate {
         return configServiceManager.mediaScreenConfig
     }
     func getConfig()-> Int{
-        return self.cartServiceManager.getConfig()
+        return self.cartServiceManager.maxSelection
     }
     // MARK: ... Cart Method(s)
     

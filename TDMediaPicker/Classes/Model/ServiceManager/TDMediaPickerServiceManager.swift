@@ -41,7 +41,7 @@ class TDMediaPickerServiceManager{
 extension TDMediaPickerServiceManager{
     
     func setupConfig(maxSelections:Int){
-        cartServiceManager.setupConfig(maxSelection: maxSelections)
+        cartServiceManager.maxSelection = maxSelections
     }
     
     func setupConfig(navigationTheme: TDConfigViewStandard){

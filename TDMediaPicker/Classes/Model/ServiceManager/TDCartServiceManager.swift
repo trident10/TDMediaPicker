@@ -20,7 +20,7 @@ class TDCartServiceManager{
     static let sharedInstance = TDCartServiceManager()
     
     private var cart: TDCart = TDCart()
-    private var maxSelection = TDMediaPickerConfig.maxDefaultSelection
+    var maxSelection = TDMediaPickerConfig.defaultMaxSelection
     
     var delegates: NSHashTable<AnyObject> = NSHashTable.weakObjects()
     
@@ -35,14 +35,6 @@ class TDCartServiceManager{
     
     func remove(delegate: TDCartServiceManagerDelegate) {
         delegates.remove(delegate)
-    }
-    
-    func setupConfig(maxSelection: Int){
-        self.maxSelection = maxSelection
-    }
-    
-    func getConfig()-> Int{
-        return self.maxSelection
     }
     
     func getSelectedMedia() -> [TDMedia]{

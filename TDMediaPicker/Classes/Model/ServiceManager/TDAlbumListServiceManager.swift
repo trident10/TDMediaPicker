@@ -32,10 +32,10 @@ class TDAlbumListServiceManager {
     }
     
     func fetchAlbums(_ fetchResults: [PHFetchResult<PHAssetCollection>]?, completion: @escaping ([TDAlbum]) -> Void){
-        DispatchQueue.global().async {
-            self.fetchAlbumsFromLibrary(fetchResults)
-            DispatchQueue.main.async {
-                completion(self.albums)
+        DispatchQueue.global().async { [weak self] in
+            self?.fetchAlbumsFromLibrary(fetchResults)
+            DispatchQueue.main.async {[weak self] in
+                completion((self?.albums)!)
             }
         }
     }
@@ -66,7 +66,6 @@ class TDAlbumListServiceManager {
             albumsFetchResults = fetchResults!
         }
         else{
-            //FIXME:- Make Datasource for album type
             let types: [PHAssetCollectionType] = [.smartAlbum, .album]
             
             albumsFetchResults = types.map {

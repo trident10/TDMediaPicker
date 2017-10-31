@@ -47,18 +47,18 @@ public protocol TDMediaPickerDataSource: class{
 public extension TDMediaPickerDataSource{
     //Max Selection
     func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
-        return TDMediaPickerConfig.maxDefaultSelection
+        return TDMediaPickerConfig.defaultMaxSelection
     }
     
     //Filter Specific Media Type
     //FIXME:- NEED TO CHECK ITS IMPLEMENTATION
     func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType?{
-        return .image
+        return nil
     }
     
     //THEME
     func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard{
-        return TDConfigViewStandard.init(backgroundColor: .white)
+        return TDMediaPickerConfig.defaultNavigationTheme
     }
     //FIXME:- NEED TO ADD ITS XIB in Library
     func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{

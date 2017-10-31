@@ -37,17 +37,14 @@ public struct TDAlbum{
                 albumMedia = TDMedia(albumID: self.id, asset: itemsFetchResult[0], caption: "")
                 return
             }
-            itemsFetchResult.enumerateObjects({ (object, count, stop) in
-                stop = false
-                if filteredMediaType != itemsFetchResult.firstObject?.mediaType{
-                    albumMedia = TDMedia(albumID: self?.id, asset: object, caption: "")
+            var copy = self
+            itemsFetchResult.enumerateObjects({ (asset, index, stop) in
+                if asset.mediaType == filteredMediaType{
+                    stop.pointee = true
+                    copy.albumMedia = TDMedia(albumID: copy.id, asset: asset, caption: "")
                 }
-                stop = true
             })
-            
-             && filteredMediaType != itemsFetchResult.firstObject?.mediaType
-            
-
+            self = copy
         }
     }
 }
