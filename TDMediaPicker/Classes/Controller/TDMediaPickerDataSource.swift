@@ -16,25 +16,25 @@ public protocol TDMediaPickerDataSource: class{
     func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType?
     
     //THEME
-    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard
-    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDViewConfigStandard
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDViewConfig
     
     //Permission Screen
-    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen
+    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDPermissionScreenConfig
     
     //Album List Screen
-    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDNavigationBarConfig
     func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]
     func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPickerConfig.AlbumCollectionType
     func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize
-    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDTextConfig
     func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
     
     //Media List Screen
-    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
+    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDNavigationBarConfig
     func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int
     func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int
-    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDViewConfig
     
     //Preview Screen
     func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar

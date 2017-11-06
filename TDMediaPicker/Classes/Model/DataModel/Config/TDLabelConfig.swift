@@ -8,9 +8,9 @@
 
 import UIKit
 
-open class TDConfigLabel: TDConfig{
+open struct TDLabelConfig{
     
-    var textConfig: TDConfigText?
+    var textConfig: TDTextConfig?
     var backgroundColor: UIColor?
     var textAlignment: NSTextAlignment?
     var lineBreakMode: NSLineBreakMode?

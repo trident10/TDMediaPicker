@@ -24,4 +24,8 @@ extension ViewController: TDMediaPickerDelegate{
             self.setupMediaPicker()
         }
     }
+    
+    func mediaPicker(_ picker: TDMediaPicker, didFinish media: [TDMedia]) {
+        
+    }
 }

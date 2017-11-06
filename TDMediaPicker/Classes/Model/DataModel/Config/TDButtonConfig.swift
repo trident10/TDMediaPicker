@@ -9,15 +9,12 @@
 import Foundation
 
 
-open class TDConfigButton: TDConfig{
-    open var size: CGSize?
-    open var cornerRadius: CGFloat?
-    public override init() {
-        super.init()
-    }
+open protocol TDButtonConfig{
+    var size: CGSize? {get set}
+    var cornerRadius: CGFloat? {get set}
 }
 
-open class TDConfigButtonText: TDConfigButton{
+open struct TDButtonConfigText: TDButtonConfig{
     
     open var normalColor: UIColor?
     open var highlightedColor: UIColor?
@@ -44,7 +41,7 @@ open class TDConfigButtonText: TDConfigButton{
     }
 }
 
-open class TDConfigButtonImage: TDConfigButton{
+open struct TDButtonImageConfig: TDButtonConfig{
     
     open var normalImage: UIImage?
     open var highlightImage: UIImage?

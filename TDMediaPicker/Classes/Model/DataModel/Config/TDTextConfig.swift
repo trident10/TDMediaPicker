@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class TDConfigText: TDConfig{
+open struct TDTextConfig{
     
     open var textColor: UIColor?
     open var text: String = ""

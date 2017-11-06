@@ -7,13 +7,13 @@
 //
 import Foundation
 
-open class TDConfigNavigationBar: NSObject{
+open struct TDNavigationBarConfig{
     
-    open var navigationBarView: TDConfigViewStandard?
-    open var screenTitle: TDConfigLabel?
-    open var backButton: TDConfigButton?
-    open var nextButton: TDConfigButton?
-    open var otherButton: TDConfigButton?
+    open var navigationBarView: TDViewConfigStandard?
+    open var screenTitle: TDLabelConfig?
+    open var backButton: TDButtonConfig?
+    open var nextButton: TDButtonConfig?
+    open var otherButton: TDButtonConfig?
     
     public init(navigationBarView: TDConfigViewStandard? = nil, screenTitle: TDConfigLabel? = nil, backButton: TDConfigButton? = nil, nextButton: TDConfigButton? = nil, otherButton: TDConfigButton? = nil){
         super.init()

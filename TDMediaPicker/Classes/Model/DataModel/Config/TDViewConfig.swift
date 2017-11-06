@@ -8,13 +8,10 @@
 
 import Foundation
 
-open class TDConfigView: TDConfig{
-    public override init() {
-        super.init()
-    }
+protocol TDViewConfig{
 }
 
-open class TDConfigViewStandard: TDConfigView{
+open struct TDViewConfigStandard: TDViewConfig{
     
     open var backgroundColor: UIColor
     
@@ -23,7 +20,7 @@ open class TDConfigViewStandard: TDConfigView{
     }
 }
 
-open class TDConfigViewCustom: TDConfigView{
+open struct TDViewConfigCustom: TDViewConfig{
     
     open var view: UIView = UIView.init()
     

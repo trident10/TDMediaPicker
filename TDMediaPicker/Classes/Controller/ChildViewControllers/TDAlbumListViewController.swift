@@ -11,7 +11,7 @@ import Photos
 
 protocol TDAlbumListViewControllerDataSource: class{
     func albumController(_ controller: TDAlbumListViewController, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?
-    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText?
+    func albumController(_ picker: TDAlbumListViewController, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDTextConfig?
 }
 
 protocol TDAlbumListViewControllerDelegate: class{
@@ -113,7 +113,7 @@ class TDAlbumListViewController: UIViewController, TDAlbumListViewDelegate, TDAl
     
     //MARK: - Album View Datasource Method(s)
     
-    func albumListView(_ view: TDAlbumListView, textForAlbum album: TDAlbumViewModel)->TDConfigText?{
+    func albumListView(_ view: TDAlbumListView, textForAlbum album: TDAlbumViewModel)->TDTextConfig?{
         let albums = serviceManager.fetchAlbum(album.id)
         let selectedAlbum: TDAlbum?
         if albums.count > 0{

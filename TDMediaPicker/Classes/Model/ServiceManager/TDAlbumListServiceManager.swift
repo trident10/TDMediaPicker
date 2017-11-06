@@ -50,11 +50,11 @@ class TDAlbumListServiceManager {
         return cartServiceManager.getSelectedMedia(album)
     }
     
-    func getNavigationThemeConfig()-> TDConfigViewStandard{
+    func getNavigationThemeConfig()-> TDViewConfigStandard{
         return configServiceManager.navigationTheme
     }
     
-    func getAlbumScreenConfig()-> TDConfigAlbumScreen{
+    func getAlbumScreenConfig()-> TDAlbumScreenConfig{
         return configServiceManager.albumScreenConfig
     }
     

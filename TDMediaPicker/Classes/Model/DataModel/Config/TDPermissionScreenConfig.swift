@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class TDConfigPermissionScreen: NSObject{
+open struct TDPermissionScreenConfig{
     
     open var customView: TDConfigView?
     open var standardView: TDConfigView?

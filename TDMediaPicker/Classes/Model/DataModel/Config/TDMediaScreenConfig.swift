@@ -8,9 +8,8 @@
 
 import Foundation
 
-class TDConfigMediaScreen: NSObject{
-    
-    var navigationBar: TDConfigNavigationBar?
+open struct TDMediaScreenConfig{
+    var navigationBar: TDNavigationBarConfig?
     var portraitColumns: Int?
     var landscapeColumns: Int?    
 }
