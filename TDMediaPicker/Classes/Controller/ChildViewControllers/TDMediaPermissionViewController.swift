@@ -88,7 +88,7 @@ class TDMediaPermissionViewController: UIViewController, TDMediaPermissionViewDe
     }
     
     private func requestGalleryPermission(){
-        TDMediaUtil.requestForHardwareAccess(accessType: .Gallery) { (isGranted) in
+        TDMediaAccessServiceManager.requestForHardwareAccess(accessType: .Gallery) { (isGranted) in
             if isGranted{
                 self.delegate?.permissionControllerDidFinish(self)
             }

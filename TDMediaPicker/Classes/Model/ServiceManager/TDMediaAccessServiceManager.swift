@@ -1,15 +1,18 @@
 //
-//  TDMediaUtil+MediaPermission.swift
-//  ImagePicker
+//  TDMediaAccessServiceManager.swift
+//  Pods-TDMediaPicker_Example
 //
-//  Created by Abhimanu Jindal on 18/07/17.
-//  Copyright © 2017 Abhimanu Jindal. All rights reserved.
+//  Created by Abhimanyu on 06/11/17.
 //
 
 import Foundation
 import Photos
 
-extension (TDMediaUtil){
+struct TDMediaAccessServiceManager{
+    
+    enum MediaPermissionType{
+        case Microphone,Camera,Gallery
+    }
     
     static func hasPermission(accessType : MediaPermissionType) -> Bool
     {
@@ -83,4 +86,5 @@ extension (TDMediaUtil){
         
     }
     
+
 }

@@ -8,12 +8,16 @@
 import Foundation
 import Photos
 
-struct TDMediaPickerConfig{
+public struct TDMediaPickerConfig{
+    
+    public enum AlbumCollectionType: Int {
+        case Grid = 1, List = 2
+    }
     
     static var defaultMaxSelection = 30
     static var defaultNavigationTheme = navigationTheme()
     static var defaultAlbumFetchResult = albumFetchResult()
-    
+    static var defaultAlbumCollectionType = AlbumCollectionType.List
     
     
     //MARK:- Private Method(s)

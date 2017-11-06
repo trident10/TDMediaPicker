@@ -54,7 +54,7 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getFetchResultsForAlbumScreen()
     }
     
-    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPicker.AlbumCollectionType{
+    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPickerConfig.AlbumCollectionType{
         return .List
     }
     

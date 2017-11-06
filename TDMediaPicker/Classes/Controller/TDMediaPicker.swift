@@ -17,10 +17,6 @@ public protocol TDMediaPickerDelegate: class{
 open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
     
     // MARK: - Variable(s)
-    public enum AlbumCollectionType: Int {
-        case Grid = 1, List = 2
-    }
-    
     enum ScreenType{
         case Permission, Album, Media, Preview, All
     }
@@ -57,7 +53,7 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         
         setupNavigationController()
         
-        if TDMediaUtil.hasPermission(accessType: .Gallery){
+        if TDMediaAccessServiceManager.hasPermission(accessType: .Gallery){
             showPickerScreen()
             return
         }

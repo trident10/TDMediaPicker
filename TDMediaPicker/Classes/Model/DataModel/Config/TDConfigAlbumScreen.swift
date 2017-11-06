@@ -13,7 +13,7 @@ class TDConfigAlbumScreen: NSObject{
     
     var navigationBar: TDConfigNavigationBar?
     var fetchResults: [PHFetchResult<PHAssetCollection>]?
-    var collectionType: TDMediaPicker.AlbumCollectionType?
+    var collectionType: TDMediaPickerConfig.AlbumCollectionType?
     var imageSize: CGSize?
     var selectedInitialAlbum: TDAlbum?
     var mediaType: PHAssetMediaType?

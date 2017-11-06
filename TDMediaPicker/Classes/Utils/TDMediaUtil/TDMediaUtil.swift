@@ -10,8 +10,4 @@ import Foundation
 
 class TDMediaUtil{
     
-    enum MediaPermissionType{
-        case Microphone,Camera,Gallery
-    }
-    
 }
