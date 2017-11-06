@@ -37,9 +37,9 @@ public protocol TDMediaPickerDataSource: class{
     func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDViewConfig
     
     //Preview Screen
-    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar
-    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView
-    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView
+    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDNavigationBarConfig
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDViewConfig
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDViewConfig
     func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool
     
 }
@@ -57,32 +57,32 @@ public extension TDMediaPickerDataSource{
     }
     
     //THEME
-    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard{
+    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDViewConfigStandard{
         return TDMediaPickerConfig.defaultNavigationTheme
     }
     //FIXME:- NEED TO ADD ITS XIB in Library
-    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
-        return TDConfigView()
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDViewConfig{
+        return TDViewConfigStandard(backgroundColor: .white)
     }
     
     //Permission Screen
-    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen{
-        return TDConfigPermissionScreen()
+    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDPermissionScreenConfig{
+        return TDPermissionScreenConfig.init()
         
         //init(standardView: TDConfigViewStandard.init(backgroundColor: .white), caption: TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Please allow to access your photos", textColor: .black, textFont: UIFont.systemFont(ofSize: 12, weight: 12)), textAlignment: .center), settingButton: TDConfigButtonText.init( normalTextConfig: TDConfigText.init(text: "Settings", textColor: .blue, textFont: UIFont.systemFont(ofSize: 12, weight: 12))), cancelButton: TDConfigButtonText.init( normalTextConfig: TDConfigText.init(text: "Cancel", textColor: .blue, textFont: UIFont.systemFont(ofSize: 12, weight: 12))))
     }
     
     //Album List Screen
-    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        let configNavBar = TDConfigNavigationBar()
-        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
-        configNavBar.nextButton = nextButton
-        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
-        return configNavBar
+    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDNavigationBarConfig{
+//        let configNavBar = TDConfigNavigationBar()
+//        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
+//        configNavBar.nextButton = nextButton
+//        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
+//        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        return TDNavigationBarConfig()
     }
     
     func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
@@ -100,8 +100,8 @@ public extension TDMediaPickerDataSource{
         return CGSize(width: 90, height: 90)
     }
     
-    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
-        return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.systemFont(ofSize: 16))
+    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDTextConfig{
+        return TDTextConfig.init(text: "")
     }
     
     func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
@@ -115,16 +115,16 @@ public extension TDMediaPickerDataSource{
     }
     
     //Media List Screen
-    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        let configNavBar = TDConfigNavigationBar()
-        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
-        configNavBar.nextButton = nextButton
-        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
-        return configNavBar
+    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDNavigationBarConfig{
+//        let configNavBar = TDNavigationBarConfig()
+//        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDTextConfig.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        configNavBar.otherButton = TDButtonTextConfig.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        let nextButton = TDButtonTextConfig.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        nextButton.disabledTextConfig = TDTextConfig.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
+//        configNavBar.nextButton = nextButton
+//        configNavBar.screenTitle = TDLabelConfig.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
+//        configNavBar.navigationBarView = TDViewStandardConfig.init(backgroundColor: .lightGray)
+        return TDNavigationBarConfig()
     }
     
     func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int{
@@ -135,29 +135,29 @@ public extension TDMediaPickerDataSource{
         return 10
     }
     
-    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDConfigView{
-        return TDConfigView()
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int)-> TDViewConfig{
+        return TDViewConfigStandard(backgroundColor: .white)
     }
     
     //Preview Screen
-    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        let configNavBar = TDConfigNavigationBar()
-        configNavBar.backButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        configNavBar.otherButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
-        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
-        configNavBar.nextButton = nextButton
-        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
-        return configNavBar
+    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDNavigationBarConfig{
+//        let configNavBar = TDConfigNavigationBar()
+//        configNavBar.backButton = TDButtonTextConfig.init(normalColor: .clear, normalTextConfig: TDTextConfig.init(text: "Back", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        configNavBar.otherButton = TDButtonTextConfig.init(normalColor: .clear, normalTextConfig: TDTextConfig.init(text: "Delete", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        let nextButton = TDConfigButtonText.init(normalColor: .clear, normalTextConfig: TDConfigText.init(text: "Next", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)), cornerRadius: 6.0)
+//        nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
+//        configNavBar.nextButton = nextButton
+//        configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
+//        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        return TDNavigationBarConfig()
     }
     
-    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView{
-        return TDConfigView()
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDViewConfig{
+        return TDViewConfigStandard(backgroundColor: .white)
     }
     
-    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView{
-        return TDConfigView()
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDViewConfig{
+        return TDViewConfigStandard(backgroundColor: .white)
     }
     
     func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool{

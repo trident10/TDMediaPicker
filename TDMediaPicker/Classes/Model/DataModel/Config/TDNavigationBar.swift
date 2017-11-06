@@ -15,6 +15,10 @@ open struct TDNavigationBarConfig{
     open var nextButton: TDButtonConfig?
     open var otherButton: TDButtonConfig?
     
+    public init() {
+        super.init()
+    }
+    
     public init(navigationBarView: TDConfigViewStandard? = nil, screenTitle: TDConfigLabel? = nil, backButton: TDConfigButton? = nil, nextButton: TDConfigButton? = nil, otherButton: TDConfigButton? = nil){
         super.init()
         self.navigationBarView = navigationBarView

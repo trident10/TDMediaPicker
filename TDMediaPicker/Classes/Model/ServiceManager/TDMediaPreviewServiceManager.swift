@@ -62,11 +62,11 @@ class TDMediaPreviewServiceManager: TDCartServiceManagerDelegate{
         }
     }
 
-    func getNavigationThemeConfig()-> TDConfigViewStandard{
+    func getNavigationThemeConfig()-> TDViewConfigStandard{
         return configServiceManager.navigationTheme
     }
     
-    func getPreviewScreenConfig()-> TDConfigPreviewScreen{
+    func getPreviewScreenConfig()-> TDPreviewScreenConfig{
         return configServiceManager.previewScreenConfig
     }
     // MARK: - CartService Manager Delegate Method(s)

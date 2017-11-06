@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TDViewConfig{
+open protocol TDViewConfig{
 }
 
 open struct TDViewConfigStandard: TDViewConfig{

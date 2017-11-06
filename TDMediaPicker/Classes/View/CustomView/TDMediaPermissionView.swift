@@ -31,27 +31,27 @@ class TDMediaPermissionView: TDMediaPickerView{
     
     //MARK: - Public Method(s)
     
-    func setupCustomView(view: TDConfigView){
+    func setupCustomView(view: TDViewConfig){
         let tempViewConfig = view as! TDConfigViewCustom
         let tempView = tempViewConfig.view
         tempView.frame = CGRect.init(x: 0, y: 0, width: tempView.frame.width, height: tempView.frame.height)
         self.addSubview(tempView)
     }
     
-    func setupStandardView(view: TDConfigView){
+    func setupStandardView(view: TDViewConfig){
         let tempViewConfig = view as! TDConfigViewStandard
         self.backgroundColor = tempViewConfig.backgroundColor
     }
     
-    func setupSettingsButton(buttonConfig: TDConfigButton){
+    func setupSettingsButton(buttonConfig: TDButtonConfig){
         TDMediaUtil.setupButton(btnSettings, buttonConfig: buttonConfig)
     }
     
-    func setupCancelButton(buttonConfig: TDConfigButton){
+    func setupCancelButton(buttonConfig: TDButtonConfig){
         TDMediaUtil.setupButton(btnCancel, buttonConfig: buttonConfig)
     }
     
-    func setupCaptionLabel(_ config: TDConfigLabel){
+    func setupCaptionLabel(_ config: TDLabelConfig){
         TDMediaUtil.setupLabel(lblCaption, config: config)
     }
     
