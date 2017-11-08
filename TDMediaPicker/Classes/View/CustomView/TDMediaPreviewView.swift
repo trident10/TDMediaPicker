@@ -9,10 +9,10 @@
 import UIKit
 
 protocol TDMediaPreviewViewDataSource: class {
-    func previewViewSelectedThumbnailView(_ view: TDMediaPreviewView)-> TDConfigView?
-    func previewViewThumbnailAddView(_ view: TDMediaPreviewView)-> TDConfigView?
+    func previewViewSelectedThumbnailView(_ view: TDMediaPreviewView)-> TDViewConfig?
+    func previewViewThumbnailAddView(_ view: TDMediaPreviewView)-> TDViewConfig?
     func previewViewHideCaptionView(_ view: TDMediaPreviewView)-> Bool?
-    func previewViewVideoThumbOverlay(_ view: TDMediaPreviewView) -> TDConfigView?
+    func previewViewVideoThumbOverlay(_ view: TDMediaPreviewView) -> TDViewConfig?
 }
 
 protocol TDMediaPreviewViewDelegate: class {
@@ -80,15 +80,15 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         navigationBar.backgroundColor = color
     }
     
-    func setupBackButton(_ config: TDConfigButton){
+    func setupBackButton(_ config: TDButtonConfig){
         TDMediaUtil.setupButton(backButton, buttonConfig: config)
     }
     
-    func setupNextButton(_ config: TDConfigButton){
+    func setupNextButton(_ config: TDButtonConfig){
         TDMediaUtil.setupButton(doneButton, buttonConfig: config)
     }
     
-    func setupDeleteButton(_ config: TDConfigButton){
+    func setupDeleteButton(_ config: TDButtonConfig){
         TDMediaUtil.setupButton(deleteButton, buttonConfig: config)
     }
     

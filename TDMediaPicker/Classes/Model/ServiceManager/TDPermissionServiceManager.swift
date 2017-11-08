@@ -15,7 +15,7 @@ class TDPermissionServiceManager {
     
     // MARK:- Public Method(s)
     
-    func navigationTheme()-> TDConfigViewStandard{
+    func navigationTheme()-> TDViewConfigStandard{
         return configServiceManager.navigationTheme
     }
     

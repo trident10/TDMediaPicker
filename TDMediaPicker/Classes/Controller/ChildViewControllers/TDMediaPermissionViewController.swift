@@ -11,7 +11,7 @@ import UIKit
 protocol TDMediaPermissionViewControllerDelegate:class{
     func permissionControllerDidFinish(_ controller: TDMediaPermissionViewController)
     func permissionControllerDidTapClose(_ controller: TDMediaPermissionViewController)
-    func permissionControllerDidRequestForConfig(_ controller: TDMediaPermissionViewController)-> TDConfigPermissionScreen?
+    func permissionControllerDidRequestForConfig(_ controller: TDMediaPermissionViewController)-> TDPermissionScreenConfig?
 
 }
 

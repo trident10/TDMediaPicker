@@ -25,7 +25,7 @@ class ThemeConfig {
         fatalError("Concrete class must provide data")
     }
     
-    func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
+    func getMediaHighlightedCellView(mediaCount: Int)->TDViewConfig{
         fatalError("Concrete class must provide data")
     }
     
@@ -57,15 +57,15 @@ class ThemeConfig {
         fatalError("Concrete class must provide data")
     }
     
-    func getVideoThumbOverlay()->TDConfigView{
+    func getVideoThumbOverlay()->TDViewConfig{
         fatalError("Concrete class must provide data")
     }
     
-    func getSelectedThumbnailView()->TDConfigView{
+    func getSelectedThumbnailView()->TDViewConfig{
         fatalError("Concrete class must provide data")
     }
     
-    func getPreviewThumbnailAddView()->TDConfigView{
+    func getPreviewThumbnailAddView()->TDViewConfig{
         fatalError("Concrete class must provide data")
     }
     
