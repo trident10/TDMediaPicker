@@ -64,7 +64,7 @@ class Theme1: ThemeConfig{
         return TDConfigText.init(text: String(format: "%@\n\n%d",album.collection.localizedTitle!,mediaCount), textColor: .black, textFont: UIFont.systemFont(ofSize: 16))
     }
     
-    override func getMediaHighlightedCellView(mediaCount: Int)->TDViewConfig{
+    override func getMediaHighlightedCellView(mediaCount: Int)->TDConfigView{
         return TDConfigViewStandard(backgroundColor: .red)
     }
     
@@ -76,20 +76,20 @@ class Theme1: ThemeConfig{
         return 1
     }
     
-    override func getVideoThumbOverlay() -> TDViewConfig {
+    override func getVideoThumbOverlay() -> TDConfigView {
         let myView: VideoThumbCellView = .fromNib()
         myView.imageView.image = #imageLiteral(resourceName: "video_thumb")
         myView.bottomView.backgroundColor = .init(white: 1, alpha: 0.8)
         return TDConfigViewCustom.init(view: myView)
     }
     
-    override func getSelectedThumbnailView() -> TDViewConfig {
+    override func getSelectedThumbnailView() -> TDConfigView {
         let myView: HightLightedCellView = .fromNib()
         myView.countLabel.isHidden = true
         return TDConfigViewCustom.init(view: myView)
     }
     
-    override func getPreviewThumbnailAddView() -> TDViewConfig {
+    override func getPreviewThumbnailAddView() -> TDConfigView {
         let myView: HightLightedCellView = .fromNib()
         myView.backgroundColor = .clear
         myView.countLabel.isHidden = true

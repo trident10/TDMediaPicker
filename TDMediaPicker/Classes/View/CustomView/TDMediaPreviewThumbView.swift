@@ -8,9 +8,9 @@
 
 import UIKit
 protocol TDMediaPreviewThumbViewDataSource: class {
-    func previewThumbViewSelectedThumbnailView(_ view: TDMediaPreviewThumbView)-> TDViewConfig?
-    func previewThumbViewThumbnailAddView(_ view: TDMediaPreviewThumbView)-> TDViewConfig?
-    func previewThumbViewVideoThumbOverlay(_ view: TDMediaPreviewThumbView)-> TDViewConfig?
+    func previewThumbViewSelectedThumbnailView(_ view: TDMediaPreviewThumbView)-> TDConfigView?
+    func previewThumbViewThumbnailAddView(_ view: TDMediaPreviewThumbView)-> TDConfigView?
+    func previewThumbViewVideoThumbOverlay(_ view: TDMediaPreviewThumbView)-> TDConfigView?
 }
 protocol TDMediaPreviewThumbViewDelegate: class {
     func previewThumbView(_ view: TDMediaPreviewThumbView, didTapMediaToIndex index: Int)

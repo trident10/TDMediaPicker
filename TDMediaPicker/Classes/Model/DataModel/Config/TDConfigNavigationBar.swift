@@ -16,7 +16,6 @@ public struct TDConfigNavigationBar{
     public var otherButton: TDConfigButton?
     
     public init() {
-        super.init()
     }
     
     public init(navigationBarView: TDConfigViewStandard? = nil, screenTitle: TDConfigLabel? = nil, backButton: TDConfigButton? = nil, nextButton: TDConfigButton? = nil, otherButton: TDConfigButton? = nil){

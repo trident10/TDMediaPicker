@@ -32,7 +32,7 @@ extension ViewController: TDMediaPickerDataSource{
 //        return themeConfig.getNavigationThemeConfig()
 //    }
     
-    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDViewConfig{
+    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
         let themeConfig = getThemeConfig()
         return themeConfig.getVideoThumbOverlay()
     }
@@ -89,7 +89,7 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getNumberOfColumnInLandscape()
     }
     
-    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDViewConfig {
+    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDConfigView {
         let themeConfig = getThemeConfig()
         return themeConfig.getMediaHighlightedCellView(mediaCount: mediaCount)
     }
@@ -99,12 +99,12 @@ extension ViewController: TDMediaPickerDataSource{
         let themeConfig = getThemeConfig()
         return themeConfig.getAlbumNavBarConfig()
     }
-    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDViewConfig {
+    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDConfigView {
         let themeConfig = getThemeConfig()
         return themeConfig.getSelectedThumbnailView()
     }
     
-    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDViewConfig {
+    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {
         let themeConfig = getThemeConfig()
         return themeConfig.getPreviewThumbnailAddView()
     }

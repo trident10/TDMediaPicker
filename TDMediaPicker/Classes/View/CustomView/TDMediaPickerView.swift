@@ -10,7 +10,7 @@ import UIKit
 
 class TDMediaPickerView: UIView{
     
-    var navigationTheme: TDViewConfigStandard?
+    var navigationTheme: TDConfigViewStandard?
     
     override func awakeFromNib() {
         
