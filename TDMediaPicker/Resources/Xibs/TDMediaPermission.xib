@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,33 +21,33 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Na1-mw-wDH">
-                    <rect key="frame" x="20" y="35" width="56" height="34"/>
+                    <rect key="frame" x="15" y="40" width="56" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="I1B-JI-rVl"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="qc6-LQ-1Wy"/>
                     </constraints>
                     <state key="normal" title="Cancel">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="closeButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="tr7-f3-UYM"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow TDMedia Picker to access your photos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqz-ei-HJ9">
-                    <rect key="frame" x="20" y="329" width="335" height="41"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change permissions in your device's app settings. Give access to photos." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqz-ei-HJ9">
+                    <rect key="frame" x="20" y="281" width="335" height="41"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" red="0.50307642487046633" green="0.50307642487046633" blue="0.50307642487046633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Foe-hS-Jni">
-                    <rect key="frame" x="129.5" y="400" width="116" height="34"/>
+                    <rect key="frame" x="154" y="352" width="67" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="67" id="BKM-9U-mMe"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="laI-Tt-AfD"/>
                     </constraints>
-                    <state key="normal" title="Open Settings">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Settings">
+                        <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="settingsButtonTapped" destination="iN0-l3-epB" eventType="touchUpInside" id="S5x-nc-GHH"/>
@@ -57,12 +57,12 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Nqz-ei-HJ9" secondAttribute="trailing" constant="20" id="6eb-hm-E61"/>
-                <constraint firstItem="Foe-hS-Jni" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.1" constant="50" id="KqO-WD-jar"/>
+                <constraint firstItem="Foe-hS-Jni" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.1" constant="2.1499999999999773" id="KqO-WD-jar"/>
                 <constraint firstItem="Nqz-ei-HJ9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="OBY-7h-mQh"/>
                 <constraint firstItem="Nqz-ei-HJ9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="PoU-Jv-Mh5"/>
-                <constraint firstItem="Na1-mw-wDH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="QD3-00-0hx"/>
+                <constraint firstItem="Na1-mw-wDH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="QD3-00-0hx"/>
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aYX-tc-mbP"/>
-                <constraint firstItem="Na1-mw-wDH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="cGo-wa-vUq"/>
+                <constraint firstItem="Na1-mw-wDH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="cGo-wa-vUq"/>
                 <constraint firstItem="Foe-hS-Jni" firstAttribute="top" secondItem="Nqz-ei-HJ9" secondAttribute="bottom" constant="30" id="cuZ-en-zzf"/>
             </constraints>
             <connections>

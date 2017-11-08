@@ -14,9 +14,9 @@ public protocol TDMediaPickerDataSource: class{
     
     //Filter Specific Media Type
     func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType?
-    
+
     //THEME
-    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard
+    func mediaPickerDefaultNavigationTheme(_ picker: TDMediaPicker)-> UIColor
     func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView
     
     //Permission Screen
@@ -57,9 +57,10 @@ public extension TDMediaPickerDataSource{
     }
     
     //THEME
-    func mediaPickerNavigationTheme(_ picker: TDMediaPicker)-> TDConfigViewStandard{
-        return TDMediaPickerConfig.defaultNavigationTheme
+    func mediaPickerDefaultNavigationTheme(_ picker: TDMediaPicker)-> UIColor{
+        return TDMediaPickerConfig.defaultNavigationColor
     }
+    
     //FIXME:- NEED TO ADD ITS XIB in Library
     public func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
         return TDConfigViewStandard(backgroundColor: .white)
@@ -67,9 +68,7 @@ public extension TDMediaPickerDataSource{
     
     //Permission Screen
     func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker)-> TDConfigPermissionScreen{
-        return TDConfigPermissionScreen()
-        
-        //init(standardView: TDConfigViewStandard.init(backgroundColor: .white), caption: TDConfigLabel.init(backgroundColor: .clear, textConfig: TDConfigText.init(text: "Please allow to access your photos", textColor: .black, textFont: UIFont.systemFont(ofSize: 12, weight: 12)), textAlignment: .center), settingButton: TDConfigButtonText.init( normalTextConfig: TDConfigText.init(text: "Settings", textColor: .blue, textFont: UIFont.systemFont(ofSize: 12, weight: 12))), cancelButton: TDConfigButtonText.init( normalTextConfig: TDConfigText.init(text: "Cancel", textColor: .blue, textFont: UIFont.systemFont(ofSize: 12, weight: 12))))
+        return TDMediaPickerConfig.TDConfigPermissionScreenTheme
     }
     
     //Album List Screen

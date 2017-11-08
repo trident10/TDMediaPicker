@@ -10,8 +10,8 @@ import Foundation
 
 public struct TDConfigPermissionScreen{
     
-    public var customView: TDConfigView?
-    public var standardView: TDConfigView?
+    public var customView: TDConfigViewCustom?
+    public var standardView: TDConfigViewStandard?
     public var caption: TDConfigLabel?
     public var settingButton: TDConfigButton?
     public var cancelButton: TDConfigButton?

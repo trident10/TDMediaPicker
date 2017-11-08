@@ -11,11 +11,13 @@ import Foundation
 extension TDMediaPicker{
     
     func showPickerScreen(){
+        navVC.setNavigationBarHidden(false, animated: false)
         setupScreen(.Album)
         navVC.setViewControllers([albumListVC!], animated: false)
     }
     
     func showPermissionScreen(){
+        navVC.setNavigationBarHidden(true, animated: false)
         setupScreen(.Permission)
         navVC.setViewControllers([permissionVC!], animated: false)
     }

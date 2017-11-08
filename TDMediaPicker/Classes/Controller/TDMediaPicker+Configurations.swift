@@ -62,10 +62,10 @@ extension TDMediaPicker{
     }
     
     private func setupNavigationThemeConfig(){
-        if let viewConfig = dataSource?.mediaPickerNavigationTheme(self){
-            serviceManager.setupConfig(navigationTheme: viewConfig)
+        if let color = dataSource?.mediaPickerDefaultNavigationTheme(self){
+            navVC.navigationBar.barTintColor = color
         }else{
-            serviceManager.setupConfig(navigationTheme: TDMediaPickerConfig.defaultNavigationTheme)
+            navVC.navigationBar.barTintColor = TDMediaPickerConfig.defaultNavigationColor
         }
     }
     

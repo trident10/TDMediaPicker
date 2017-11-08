@@ -15,10 +15,10 @@ extension ViewController: TDMediaPickerDataSource{
 
     
     //MARK:- Max Selection
-    func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getMaxNumberOfSelection()
-    }
+//    func mediaPickerMaxSelections(_ picker: TDMediaPicker)-> Int{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getMaxNumberOfSelection()
+//    }
     
     //MARK:- Filter Specific Media
 //    func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType?{
@@ -32,87 +32,87 @@ extension ViewController: TDMediaPickerDataSource{
 //        return themeConfig.getNavigationThemeConfig()
 //    }
     
-    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getVideoThumbOverlay()
-    }
+//    func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getVideoThumbOverlay()
+//    }
     
     //MARK:-  Permission Screen
-    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker) -> TDConfigPermissionScreen {
-        let themeConfig = getThemeConfig()
-        return themeConfig.getPermissionScreenConfig()
-    }
+//    func mediaPickerPermissionScreenConfig(_ picker: TDMediaPicker) -> TDConfigPermissionScreen {
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getPermissionScreenConfig()
+//    }
     
     //MARK:- Album Screen
-    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getAlbumNavBarConfig()
-    }
+//    func mediaPickerAlbumNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getAlbumNavBarConfig()
+//    }
     
-    func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getFetchResultsForAlbumScreen()
-    }
+//    func mediaPickerFetchResultsForAlbumScreen(_ picker: TDMediaPicker)-> [PHFetchResult<PHAssetCollection>]{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getFetchResultsForAlbumScreen()
+//    }
     
-    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPickerConfig.AlbumCollectionType{
-        return .List
-    }
+//    func mediaPickerCollectionTypeForAlbumScreen(_ picker: TDMediaPicker)-> TDMediaPickerConfig.AlbumCollectionType{
+//        return .List
+//    }
     
-    func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getImageSizeForAlbum()
-    }
+//    func mediaPickerImageSizeForAlbum(_ picker: TDMediaPicker)-> CGSize{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getImageSizeForAlbum()
+//    }
     
-    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getTextFormatForAlbum(album: album, mediaCount: mediaCount)
-    }     
+//    func mediaPicker(_ picker: TDMediaPicker, textFormatForAlbum album: TDAlbum, mediaCount: Int)-> TDConfigText{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getTextFormatForAlbum(album: album, mediaCount: mediaCount)
+//    }
     
-    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
-    }
+//    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
+//    }
     
     //MARK:- Media Screen
-    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getAlbumNavBarConfig()
-    }
+//    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getAlbumNavBarConfig()
+//    }
     
-    func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getNumberOfColumnInPortrait()
-    }
+//    func mediaPickerMediaListNumberOfColumnInPortrait(_ picker: TDMediaPicker)-> Int{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getNumberOfColumnInPortrait()
+//    }
     
-    func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getNumberOfColumnInLandscape()
-    }
+//    func mediaPickerMediaListNumberOfColumnInLandscape(_ picker: TDMediaPicker)-> Int{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getNumberOfColumnInLandscape()
+//    }
     
-    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDConfigView {
-        let themeConfig = getThemeConfig()
-        return themeConfig.getMediaHighlightedCellView(mediaCount: mediaCount)
-    }
+//    func mediaPicker(_ picker: TDMediaPicker, countForMedia mediaCount: Int) -> TDConfigView {
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getMediaHighlightedCellView(mediaCount: mediaCount)
+//    }
     
-    //MARK:- Preview Screen
-    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
-        let themeConfig = getThemeConfig()
-        return themeConfig.getAlbumNavBarConfig()
-    }
-    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDConfigView {
-        let themeConfig = getThemeConfig()
-        return themeConfig.getSelectedThumbnailView()
-    }
-    
-    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {
-        let themeConfig = getThemeConfig()
-        return themeConfig.getPreviewThumbnailAddView()
-    }
-    
-    func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool {
-        let themeConfig = getThemeConfig()
-        return themeConfig.getIsHideCaptionView()
-    }
+//    //MARK:- Preview Screen
+//    func mediaPickerPreviewNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getAlbumNavBarConfig()
+//    }
+//    func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker) -> TDConfigView {
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getSelectedThumbnailView()
+//    }
+//    
+//    func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker) -> TDConfigView {
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getPreviewThumbnailAddView()
+//    }
+//    
+//    func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker) -> Bool {
+//        let themeConfig = getThemeConfig()
+//        return themeConfig.getIsHideCaptionView()
+//    }
     
 }
 
