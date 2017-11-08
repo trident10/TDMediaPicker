@@ -8,21 +8,19 @@
 
 import Foundation
 
-open struct TDPermissionScreenConfig{
+public struct TDConfigPermissionScreen{
     
-    open var customView: TDConfigView?
-    open var standardView: TDConfigView?
-    open var caption: TDConfigLabel?
-    open var settingButton: TDConfigButton?
-    open var cancelButton: TDConfigButton?
+    public var customView: TDConfigView?
+    public var standardView: TDConfigView?
+    public var caption: TDConfigLabel?
+    public var settingButton: TDConfigButton?
+    public var cancelButton: TDConfigButton?
     
     public init(customView: TDConfigViewCustom){
-        super.init()
         self.customView = customView
     }
     
     public init(standardView: TDConfigViewStandard? = nil, caption: TDConfigLabel? = nil, settingButton: TDConfigButton? = nil, cancelButton: TDConfigButton? = nil){
-        super.init()
         self.standardView = standardView
         self.caption = caption
         self.settingButton = settingButton

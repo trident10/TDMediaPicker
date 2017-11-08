@@ -9,9 +9,9 @@
 import Foundation
 import Photos
 
-struct TDAlbumScreenConfig{
+struct TDConfigAlbumScreen{
     
-    var navigationBar: TDNavigationBarConfig?
+    var navigationBar: TDConfigNavigationBar?
     var fetchResults: [PHFetchResult<PHAssetCollection>]?
     var collectionType: TDMediaPickerConfig.AlbumCollectionType?
     var imageSize: CGSize?

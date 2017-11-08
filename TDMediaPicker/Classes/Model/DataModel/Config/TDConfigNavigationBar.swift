@@ -7,16 +7,15 @@
 //
 import Foundation
 
-open struct TDNavigationBarConfig{
+public struct TDConfigNavigationBar{
     
-    open var navigationBarView: TDViewConfigStandard?
-    open var screenTitle: TDLabelConfig?
-    open var backButton: TDButtonConfig?
-    open var nextButton: TDButtonConfig?
-    open var otherButton: TDButtonConfig?
+    public var navigationBarView: TDConfigViewStandard?
+    public var screenTitle: TDConfigLabel?
+    public var backButton: TDConfigButton?
+    public var nextButton: TDConfigButton?
+    public var otherButton: TDConfigButton?
     
     public init(navigationBarView: TDConfigViewStandard? = nil, screenTitle: TDConfigLabel? = nil, backButton: TDConfigButton? = nil, nextButton: TDConfigButton? = nil, otherButton: TDConfigButton? = nil){
-        super.init()
         self.navigationBarView = navigationBarView
         self.screenTitle = screenTitle
         self.backButton = backButton

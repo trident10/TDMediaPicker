@@ -15,7 +15,7 @@ class Theme6: ThemeConfig{
     
     override func getPermissionScreenConfig() -> TDConfigPermissionScreen {
         let configView = TDConfigViewStandard(backgroundColor: UIColor(rgb: 0x6C7A89))
-        let permissionConfig = TDConfigPermissionScreen(standardView: configView)
+        var permissionConfig = TDConfigPermissionScreen(standardView: configView)
         
         permissionConfig.settingButton = TDConfigButtonText.init(normalColor: UIColor(rgb: 0x19B5FE), normalTextConfig: TDConfigText.init(text: "Open Settings", textColor: .white, textFont: UIFont.init(name: "Palatino-Bold", size: 15)), cornerRadius: 6.0)
         permissionConfig.cancelButton = TDConfigButtonText.init(normalColor: UIColor(rgb: 0x19B5FE), normalTextConfig: TDConfigText.init(text: "Close", textColor: .white, textFont: UIFont.init(name: "Palatino-Bold", size: 15)), cornerRadius: 6.0)

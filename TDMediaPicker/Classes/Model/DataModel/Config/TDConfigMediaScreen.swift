@@ -8,8 +8,8 @@
 
 import Foundation
 
-open struct TDMediaScreenConfig{
-    var navigationBar: TDNavigationBarConfig?
+public struct TDConfigMediaScreen{
+    var navigationBar: TDConfigNavigationBar?
     var portraitColumns: Int?
     var landscapeColumns: Int?    
 }

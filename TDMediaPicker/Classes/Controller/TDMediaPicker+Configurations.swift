@@ -72,7 +72,7 @@ extension TDMediaPicker{
     //MARK: ...Album Config Method(s)
 
     private func setupAlbumScreenConfig(){
-        let albumConfig = TDConfigAlbumScreen()
+        var albumConfig = TDConfigAlbumScreen()
         if let navBarConfig = dataSource?.mediaPickerAlbumNavBarConfig(self){
             albumConfig.navigationBar = navBarConfig
         }
@@ -94,7 +94,7 @@ extension TDMediaPicker{
     //MARK: ...Media Config Method(s)
     
     private func setupMediaScreenConfig(){
-        let mediaConfig = TDConfigMediaScreen()
+        var mediaConfig = TDConfigMediaScreen()
         if let navBarConfig = dataSource?.mediaPickerMediaNavBarConfig(self){
             mediaConfig.navigationBar = navBarConfig
         }
@@ -110,7 +110,7 @@ extension TDMediaPicker{
     //MARK: ...Preview Config Method(s)
     
     private func setupPreviewScreenConfig(){
-        let previewConfig = TDConfigPreviewScreen()
+        var previewConfig = TDConfigPreviewScreen()
         if let navBarConfig = dataSource?.mediaPickerPreviewNavBarConfig(self){
             previewConfig.navigationBar = navBarConfig
         }

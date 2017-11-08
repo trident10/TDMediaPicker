@@ -8,24 +8,23 @@
 
 import Foundation
 
-protocol TDViewConfig{
+public protocol TDConfigView{
 }
 
-open struct TDViewConfigStandard: TDViewConfig{
+public struct TDConfigViewStandard: TDConfigView{
     
-    open var backgroundColor: UIColor
+    public var backgroundColor: UIColor
     
     public init(backgroundColor: UIColor) {
         self.backgroundColor = backgroundColor
     }
 }
 
-open struct TDViewConfigCustom: TDViewConfig{
+public struct TDConfigViewCustom: TDConfigView{
     
-    open var view: UIView = UIView.init()
+    public var view: UIView = UIView.init()
     
     public init(view: UIView) {
-        super.init()
         self.view = view
     }
 }

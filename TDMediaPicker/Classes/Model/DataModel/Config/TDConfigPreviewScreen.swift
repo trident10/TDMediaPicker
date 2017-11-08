@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TDPreviewScreenConfig{
-    var navigationBar: TDNavigationBarConfig?
-    var videoThumbOverlay: TDViewConfig?
+struct TDConfigPreviewScreen{
+    var navigationBar: TDConfigNavigationBar?
+    var videoThumbOverlay: TDConfigView?
 }

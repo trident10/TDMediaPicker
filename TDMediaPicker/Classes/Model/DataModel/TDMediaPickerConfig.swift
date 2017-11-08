@@ -36,8 +36,4 @@ public struct TDMediaPickerConfig{
         return TDConfigViewStandard.init(backgroundColor: .white)
     }
     
-    static private func navigationTheme()->TDConfigPermissionScreen{
-        return TDConfigViewStandard.init(backgroundColor: .white)
-    }
-    
 }

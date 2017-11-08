@@ -14,7 +14,7 @@ import Photos
 class Theme7: ThemeConfig{
     
     override func getPermissionScreenConfig() -> TDConfigPermissionScreen {
-        let permissionConfig = TDConfigPermissionScreen()
+        var permissionConfig = TDConfigPermissionScreen()
         permissionConfig.settingButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "scan_qr_button"), customSize: CGSize.init(width: 32, height: 32))
         permissionConfig.cancelButton = TDConfigButtonImage.init(normalImage: UIImage.init(named: "close"), customSize: CGSize.init(width: 16, height: 16))
         

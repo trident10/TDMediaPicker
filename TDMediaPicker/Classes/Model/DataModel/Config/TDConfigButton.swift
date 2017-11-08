@@ -9,25 +9,28 @@
 import Foundation
 
 
-open protocol TDButtonConfig{
+public protocol TDConfigButton{
     var size: CGSize? {get set}
     var cornerRadius: CGFloat? {get set}
 }
 
-open struct TDButtonConfigText: TDButtonConfig{
+public struct TDConfigButtonText: TDConfigButton{
+    public var size: CGSize?
     
-    open var normalColor: UIColor?
-    open var highlightedColor: UIColor?
-    open var selectedColor: UIColor?
-    open var disabledColor: UIColor?
+    public var cornerRadius: CGFloat?
     
-    open var normalTextConfig: TDConfigText?
-    open var highlightTextConfig: TDConfigText?
-    open var selectedTextConfig: TDConfigText?
-    open var disabledTextConfig: TDConfigText?
+    
+    public var normalColor: UIColor?
+    public var highlightedColor: UIColor?
+    public var selectedColor: UIColor?
+    public var disabledColor: UIColor?
+    
+    public var normalTextConfig: TDConfigText?
+    public var highlightTextConfig: TDConfigText?
+    public var selectedTextConfig: TDConfigText?
+    public var disabledTextConfig: TDConfigText?
     
     public init(normalColor: UIColor? = nil, highlightedColor: UIColor? = nil, selectedColor: UIColor? = nil, normalTextConfig: TDConfigText? = nil, highlightTextConfig: TDConfigText? = nil, selectedTextConfig: TDConfigText? = nil, customSize: CGSize? = nil, cornerRadius: CGFloat? = nil) {
-        super.init()
         self.normalColor = normalColor
         self.highlightedColor = highlightedColor
         self.selectedColor = selectedColor
@@ -41,15 +44,18 @@ open struct TDButtonConfigText: TDButtonConfig{
     }
 }
 
-open struct TDButtonImageConfig: TDButtonConfig{
+public struct TDConfigButtonImage: TDConfigButton{
+    public var size: CGSize?
     
-    open var normalImage: UIImage?
-    open var highlightImage: UIImage?
-    open var selectedImage: UIImage?
-    open var disabledImage: UIImage?
+    public var cornerRadius: CGFloat?
+    
+    
+    public var normalImage: UIImage?
+    public var highlightImage: UIImage?
+    public var selectedImage: UIImage?
+    public var disabledImage: UIImage?
     
     public init(normalImage: UIImage? = nil, highlightImage: UIImage? = nil , selectedImage: UIImage? = nil, customSize: CGSize? = nil, cornerRadius: CGFloat? = nil) {
-        super.init()
         self.normalImage = normalImage
         self.highlightImage = highlightImage
         self.selectedImage = selectedImage
