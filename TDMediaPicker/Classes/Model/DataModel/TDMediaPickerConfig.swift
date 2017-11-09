@@ -18,7 +18,7 @@ public struct TDMediaPickerConfig{
     
     static var defaultMaxSelection = 30
     
-    static var defaultNavigationColor = navigationColor()
+    static var defaultNavigationTheme = navigationTheme()
     
     static var defaultAlbumFetchResult = albumFetchResult()
     static var defaultAlbumCollectionType = AlbumCollectionType.List
@@ -34,8 +34,11 @@ public struct TDMediaPickerConfig{
         }
     }
     
-    static private func navigationColor()->UIColor{
-        return .red
+    static private func navigationTheme()->TDConfigNavigationBar{
+        var configNavigationTheme = TDConfigNavigationBar()
+        configNavigationTheme.style = UIBarStyle.default
+        configNavigationTheme.color = .white
+        return configNavigationTheme
     }
     
     static private func permissionTheme()->TDConfigPermissionScreen{

@@ -47,7 +47,7 @@ class Theme1: ThemeConfig{
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
         configNavBar.nextButton = nextButton
         configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        //configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
         return configNavBar
     }
     

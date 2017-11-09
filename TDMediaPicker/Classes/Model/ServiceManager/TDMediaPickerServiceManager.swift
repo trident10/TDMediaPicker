@@ -44,10 +44,6 @@ extension TDMediaPickerServiceManager{
         cartServiceManager.maxSelection = maxSelections
     }
     
-    func setupConfig(navigationTheme: TDConfigViewStandard){
-        configServiceManager.navigationTheme = navigationTheme
-    }
-    
     func setupConfig(albumScreen: TDConfigAlbumScreen){
         configServiceManager.albumScreenConfig = albumScreen
     }

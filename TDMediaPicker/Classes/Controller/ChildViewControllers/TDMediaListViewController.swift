@@ -206,9 +206,9 @@ extension TDMediaListViewController{
         if let btnConfig = config.navigationBar?.nextButton{
             mediaView.setupNextButton(btnConfig)
         }
-        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
-            mediaView.setupNavigationTheme(color)
-        }
+//        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+//            mediaView.setupNavigationTheme(color)
+//        }
         if let column = config.portraitColumns{
             mediaView.setupMediaNumberOfColumnForPotrait(column)
         }

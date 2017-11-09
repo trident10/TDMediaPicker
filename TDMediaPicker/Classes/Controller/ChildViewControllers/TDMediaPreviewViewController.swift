@@ -195,9 +195,9 @@ extension TDMediaPreviewViewController{
         if let btnConfig = config.navigationBar?.nextButton{
             previewView.setupNextButton(btnConfig)
         }
-        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
-            previewView.setupNavigationTheme(color)
-        }
+//        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+//            previewView.setupNavigationTheme(color)
+//        }
     }
 }
 extension TDMediaPreviewViewController: TDMediaPreviewViewDataSource{

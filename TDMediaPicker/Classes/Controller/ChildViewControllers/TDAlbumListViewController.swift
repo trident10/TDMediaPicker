@@ -172,9 +172,9 @@ extension TDAlbumListViewController{
         if let btnConfig = config.navigationBar?.nextButton{
             albumView.setupNextButton(btnConfig)
         }
-        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
-            albumView.setupNavigationTheme(color)
-        }
+//        if let color = config.navigationBar?.navigationBarView?.backgroundColor{
+//            albumView.setupNavigationTheme(color)
+//        }
         if let size = config.imageSize{
             albumView.setupAlbumImageSize(size)
         }

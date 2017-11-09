@@ -16,7 +16,7 @@ public protocol TDMediaPickerDataSource: class{
     func mediaPickerFilterMediaTpye(_ picker: TDMediaPicker)-> PHAssetMediaType?
 
     //THEME
-    func mediaPickerDefaultNavigationTheme(_ picker: TDMediaPicker)-> UIColor
+    func mediaPickerNavigationBarTheme(_ picker: TDMediaPicker)-> TDConfigNavigationBar
     func mediaPickerVideoThumbOverlay(_ picker: TDMediaPicker)-> TDConfigView
     
     //Permission Screen
@@ -57,8 +57,8 @@ public extension TDMediaPickerDataSource{
     }
     
     //THEME
-    func mediaPickerDefaultNavigationTheme(_ picker: TDMediaPicker)-> UIColor{
-        return TDMediaPickerConfig.defaultNavigationColor
+    func mediaPickerNavigationBarTheme(_ picker: TDMediaPicker)-> TDConfigNavigationBar{
+        return TDMediaPickerConfig.defaultNavigationTheme
     }
     
     //FIXME:- NEED TO ADD ITS XIB in Library
@@ -80,7 +80,7 @@ public extension TDMediaPickerDataSource{
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
         configNavBar.nextButton = nextButton
         configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        //configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
         return configNavBar
     }
     
@@ -122,7 +122,7 @@ public extension TDMediaPickerDataSource{
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
         configNavBar.nextButton = nextButton
         configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        //configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
         return configNavBar
     }
     
@@ -147,7 +147,7 @@ public extension TDMediaPickerDataSource{
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .darkGray, textFont: UIFont.boldSystemFont(ofSize: 18))
         configNavBar.nextButton = nextButton
         configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: .white, textFont: UIFont.boldSystemFont(ofSize: 18)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
+        //configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: .lightGray)
         return configNavBar
     }
     

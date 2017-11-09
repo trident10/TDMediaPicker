@@ -9,7 +9,8 @@ import Foundation
 
 public struct TDConfigNavigationBar{
     
-    public var navigationBarView: TDConfigViewStandard?
+    public var color: UIColor?
+    public var style: UIBarStyle?
     public var screenTitle: TDConfigLabel?
     public var backButton: TDConfigButton?
     public var nextButton: TDConfigButton?
@@ -18,12 +19,5 @@ public struct TDConfigNavigationBar{
     public init() {
     }
     
-    public init(navigationBarView: TDConfigViewStandard? = nil, screenTitle: TDConfigLabel? = nil, backButton: TDConfigButton? = nil, nextButton: TDConfigButton? = nil, otherButton: TDConfigButton? = nil){
-        self.navigationBarView = navigationBarView
-        self.screenTitle = screenTitle
-        self.backButton = backButton
-        self.nextButton = nextButton
-        self.otherButton = otherButton
-    }
 }
 

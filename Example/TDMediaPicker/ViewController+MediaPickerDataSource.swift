@@ -68,10 +68,10 @@ extension ViewController: TDMediaPickerDataSource{
 //        return themeConfig.getTextFormatForAlbum(album: album, mediaCount: mediaCount)
 //    }
     
-//    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
-//        let themeConfig = getThemeConfig()
-//        return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
-//    }
+    func mediaPicker(_ picker: TDMediaPicker, selectedAlbumAtInitialLoad albums: [TDAlbum])-> TDAlbum?{
+        let themeConfig = getThemeConfig()
+        return themeConfig.getSelectedAlbumAtInitialLoad(albums: albums)
+    }
     
     //MARK:- Media Screen
 //    func mediaPickerMediaNavBarConfig(_ picker: TDMediaPicker)-> TDConfigNavigationBar{

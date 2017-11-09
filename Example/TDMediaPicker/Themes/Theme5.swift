@@ -72,7 +72,7 @@ class Theme5: ThemeConfig{
         nextButton.disabledTextConfig = TDConfigText.init(text: "Next", textColor: .lightGray, textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20))
         configNavBar.nextButton = nextButton
         configNavBar.screenTitle = TDConfigLabel.init(backgroundColor: nil, textConfig: TDConfigText.init(text: "Albums", textColor: UIColor(rgb: 0x003171), textFont: UIFont.init(name: "BradleyHandITCTT-Bold", size: 20)))
-        configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
+        //configNavBar.navigationBarView = TDConfigViewStandard.init(backgroundColor: UIColor(rgb: 0xF5D76E))
         return configNavBar
     }
     
