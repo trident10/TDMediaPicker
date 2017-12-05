@@ -25,6 +25,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     weak var dataSource: TDMediaPreviewMainViewDataSource?
     
     var bottomSpace:CGFloat = 65
+    var captionCount:Int = 1000
     
     fileprivate var mediaItems: [TDPreviewViewModel] = []
     fileprivate var selectedIndex: Int = 0
@@ -359,5 +360,10 @@ extension TDMediaPreviewMainView:UITextViewDelegate{
         self.updateTextViewFrame()
         mediaItems[selectedIndex].caption = textView.text
         self.delegate?.previewMainView(self, didRequestUpdateMedia : mediaItems[selectedIndex])
+    }
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let preText = textView.text else { return true }
+        let newLength = preText.characters.count + text.characters.count - range.length
+        return newLength <= captionCount
     }
 }

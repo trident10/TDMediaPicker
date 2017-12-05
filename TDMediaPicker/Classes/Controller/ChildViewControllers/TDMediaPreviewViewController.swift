@@ -197,6 +197,12 @@ extension TDMediaPreviewViewController{
         if let color = config.navigationBar?.navigationBarView?.backgroundColor{
             previewView.setupNavigationTheme(color)
         }
+        if let captionView = config.captionView{
+            previewView.setupCaptionView(captionView)
+        }
+        if let count = config.captionTextLimit{
+            previewView.setCaptionCount(count)
+        }
     }
 }
 extension TDMediaPreviewViewController: TDMediaPreviewViewDataSource{
