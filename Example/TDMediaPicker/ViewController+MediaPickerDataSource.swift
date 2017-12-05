@@ -113,6 +113,10 @@ extension ViewController: TDMediaPickerDataSource{
         return themeConfig.getIsHideCaptionView()
     }
     
+    func mediaPickerPreviewCaptionTextLimit(_ picker: TDMediaPicker) -> Int {
+        return 10
+    }
+    
 }
 
 extension ViewController{

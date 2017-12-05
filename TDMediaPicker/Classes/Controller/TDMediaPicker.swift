@@ -47,6 +47,8 @@ public protocol TDMediaPickerDelegate: class{
     @objc optional func mediaPickerPreviewSelectedThumbnailView(_ picker: TDMediaPicker)-> TDConfigView
     @objc optional func mediaPickerPreviewThumbnailAddView(_ picker: TDMediaPicker)-> TDConfigView
     @objc optional func mediaPickerPreviewHideCaptionView(_ picker: TDMediaPicker)-> Bool
+    @objc optional func mediaPickerPreviewCaptionTextLimit(_ picker: TDMediaPicker)-> Int
+    @objc optional func mediaPickerPreviewCaptionView(_ picker: TDMediaPicker)->TDConfigCaptionView
     
 }
 

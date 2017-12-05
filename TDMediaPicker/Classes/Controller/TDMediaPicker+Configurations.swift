@@ -100,8 +100,11 @@ extension TDMediaPicker{
         if let navBarConfig = dataSource?.mediaPickerPreviewNavBarConfig?(self){
             previewConfig.navigationBar = navBarConfig
         }
-        if let videoThumbOverLay = dataSource?.mediaPickerVideoThumbOverlay?(self){
-            previewConfig.videoThumbOverlay = videoThumbOverLay
+        if let textLimit = dataSource?.mediaPickerPreviewCaptionTextLimit?(self){
+            previewConfig.captionTextLimit = textLimit
+        }
+        if let captionView = dataSource?.mediaPickerPreviewCaptionView?(self){
+            previewConfig.captionView = captionView
         }
         serviceManager.setupConfig(previewScreen: previewConfig)
     }

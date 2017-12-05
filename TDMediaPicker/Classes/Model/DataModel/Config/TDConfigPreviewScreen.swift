@@ -10,6 +10,6 @@ import Foundation
 
 class TDConfigPreviewScreen: NSObject{
     var navigationBar: TDConfigNavigationBar?
-    var videoThumbOverlay: TDConfigView?
-    
+    var captionTextLimit: Int?
+    var captionView: TDConfigCaptionView?
 }
