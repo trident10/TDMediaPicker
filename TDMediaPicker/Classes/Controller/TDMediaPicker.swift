@@ -116,6 +116,11 @@ open class TDMediaPicker: UIViewController, TDMediaPickerServiceManagerDelegate{
         setupInitialConfiguration()
     }
     
+    override open func viewWillDisappear(_ animated: Bool) {
+        cleanupScreen(.All)
+        resetPicker()
+    }
+    
     override open func viewDidDisappear(_ animated: Bool) {
         
     }
