@@ -60,6 +60,7 @@ class TDMediaPreviewView: UIView, TDMediaPreviewMainViewDelegate, TDMediaPreview
         
         currentSelectedIndex = bottomView.getCurrentSelectedIndex()
         currentMedia = media
+        previewView.reload(toIndex: currentSelectedIndex)
         if !shouldDisplayBottomBar{
             isSinglePhoto = true
             bottomView.heightPortraitConstraint.constant = 0

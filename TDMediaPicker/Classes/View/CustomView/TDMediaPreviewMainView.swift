@@ -108,7 +108,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     
     func reload(toIndex: Int){
-        
+        if mediaItems.count <= toIndex{
+            return
+        }
         var shouldScrollAnimated = true
         if abs(selectedIndex - toIndex) > 3{
             shouldScrollAnimated = false
