@@ -108,7 +108,9 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
     
     
     func reload(toIndex: Int){
-        
+        if mediaItems.count <= toIndex{
+            return
+        }
         var shouldScrollAnimated = true
         if abs(selectedIndex - toIndex) > 3{
             shouldScrollAnimated = false
@@ -151,7 +153,7 @@ class TDMediaPreviewMainView: UIView, UICollectionViewDelegate, UICollectionView
         self.updateTextViewFrame()
     }
     
-    fileprivate func purgeVideoPlayer(_ completion: @escaping (Void) -> Void){
+    fileprivate func purgeVideoPlayer(_ completion: @escaping () -> Void){
         videoPlayerView?.removeFromSuperview()
         videoPlayerView?.purgeVideoPlayer {
             completion()
@@ -362,8 +364,12 @@ extension TDMediaPreviewMainView:UITextViewDelegate{
         self.delegate?.previewMainView(self, didRequestUpdateMedia : mediaItems[selectedIndex])
     }
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n"{
+            textView.resignFirstResponder()
+            return false
+        }
         guard let preText = textView.text else { return true }
-        let newLength = preText.characters.count + text.characters.count - range.length
+        let newLength = preText.count + text.count - range.length
         return newLength <= captionCount
     }
 }
